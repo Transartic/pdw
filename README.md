@@ -6,7 +6,7 @@ We offer dog owners a large slection of walkers with special premeium featuers.
 
 ## Tech Stack
 
-Dillinger uses a number of open source projects to work properly:
+Pucci uses a number of open source projects to work properly:
 
 - [node.js] - evented I/O for the backend
 - [Express] - HTML enhanced for web apps!
