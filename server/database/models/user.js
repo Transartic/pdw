@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const db = require('../index');
+const db = require('../connection');
 
-const User = db.define('User', {
+const User = db.define('user', {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -10,6 +10,21 @@ const User = db.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'first_name',
+  },
+  lastName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'last_name',
   },
   address1: {
     type: DataTypes.STRING,
@@ -33,7 +48,8 @@ const User = db.define('User', {
   },
   dogname: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
+    field: 'dog_name',
   },
   description: {
     type: DataTypes.STRING,

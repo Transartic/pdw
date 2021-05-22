@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('path');
 const morgan = require('morgan');
-const { db } = require('./database');
+const db = require('./database/connection');
 
 db.authenticate().then(() => console.log('Connected to PostgreSQL...'));
 
