@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line import/extensions
+import UserProfile from './UserProfile.jsx';
 
 class App extends Component {
   constructor() {
@@ -8,8 +10,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Pucci</h1>
+      <div className="app">
+        <UserProfile />
       </div>
     );
   }
