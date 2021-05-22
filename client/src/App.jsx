@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PostBidModal from './PostBidModal';
 
 class App extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div>
         <h1>Pucci</h1>
+        <PostBidModal/>
       </div>
     );
   }
