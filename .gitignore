@@ -102,8 +102,11 @@ typings/
 # TernJS port file
 .tern-port
 
+#bundle
 bundle.js
 bundle.js.map
+
+#bundle depedencies
 *.svg
-*.ttf
 *.eot
+*.ttf

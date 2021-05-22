@@ -16,7 +16,7 @@ Pucci uses a number of open source projects to work properly:
 
 ## Team
 - Alex Zinn
-- Cody Gonzales
+- Cody Gonzalez
 - Jake Nalls
 - Joseph McFatridge
 - Raju Gharti
