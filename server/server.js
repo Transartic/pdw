@@ -13,5 +13,6 @@ app.use('/', express.static(fs.resolve(__dirname, '../client', 'dist')));
 
 // ================ ROUTES ==========================
 app.use('/api/user', require('./routes/user'));
+app.use('/api/login', require('./routes/login'));
 
 module.exports = app;

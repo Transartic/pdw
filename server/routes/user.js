@@ -68,28 +68,4 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
   }
 });
 
-// login route
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ where: { username } });
-    // if username is not in the DB return 404
-    if (user === null) {
-      res.status(404).send('Username Not Found');
-      return;
-    }
-
-    // check that password is correct
-    if (await bcrypt.compare(password, user.password)) {
-      const accessToken = jwt.sign({ user_id: user.id }, process.env.ACCESS_TOKEN_SECRET);
-
-      res.json({ accessToken });
-    }
-
-    res.status(400).send('Username or Password incorrect');
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
 module.exports = router;
