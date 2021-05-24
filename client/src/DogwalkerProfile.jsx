@@ -37,16 +37,20 @@ class DogwalkerProfile extends Component {
           <span className="nudp-nav-select">Tier</span>
           <span className="nudp-nav-select">Rating</span>
           <Button onClick={this.handleOpen} className="nudp-nav-select">Leave a review</Button>
+          <div className='dimmer'>
          <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
         >
         <Modal.Header>Leave A Review</Modal.Header>
-        <Modal.Content>
+
+        <Modal.Content >
           <ReviewsForm/>
          </Modal.Content>
+
       </Modal>
+      </div>
       </div>
       <div className="nudp-meta-data">
           <span className="nudp-specifics">User specifics (name, description, location, qualifications)</span>

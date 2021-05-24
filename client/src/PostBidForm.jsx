@@ -9,6 +9,11 @@ import {
   TextArea,
 } from 'semantic-ui-react';
 
+
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 const options2 = [
   { text: '30 Min', value: '30' },
   { text: '1 Hour', value: '1' },
@@ -225,6 +230,8 @@ class PostBidForm extends Component {
         </Form.Group>
         <Form.Group>
           <Form.Field
+
+
             onChange={this.handleChange}
             name="date"
             control={Input}

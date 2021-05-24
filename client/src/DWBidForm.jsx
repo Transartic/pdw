@@ -6,6 +6,7 @@ import {
   Input,
 } from 'semantic-ui-react';
 
+
 class DWBidForm extends Component {
   constructor(props) {
     super(props);
