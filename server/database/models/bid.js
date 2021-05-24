@@ -3,13 +3,13 @@ const db = require('../connection');
 const { Post } = require('./post');
 
 const Bid = db.define('bid', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  //   unique: true,
+  //   primaryKey: true,
+  //   autoIncrement: true,
+  // },
   post_id: {
     type: DataTypes.INTEGER,
     allowNull: false,

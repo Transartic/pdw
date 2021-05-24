@@ -33,17 +33,17 @@ const checkNewReview = (req, res, next) => {
 router.post('/review', checkNewReview, async (req, res) => {
   try {
     await Review.create(req.body)
-      .then((user) => res.status(201).send(user));
+      .then((user) => res.status(201).send(user))
+      .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
 
 router.get('/review', (req, res) => {
-  User.hasMany(Review, { foreignKey: 'user_id' });
-  Review.belongsTo(User, { foreignKey: 'user_id' });
   try {
-    User.findAll()
-      .then((data) => res.send(data));
+    Review.findAll()
+      .then((data) => res.send(data))
+      .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });

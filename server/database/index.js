@@ -14,9 +14,12 @@ Post.belongsTo(User);
 Post.hasMany(WalkMeta);
 WalkMeta.belongsTo(Post);
 
+User.hasMany(Review, { foreignKey: 'reviewee_id' });
+Review.belongsTo(User, { foreignKey: 'id' });
+
 User.sync();
 Post.sync();
-WalkMeta.sync({ force: true });
+WalkMeta.sync();
 Review.sync();
 Bid.sync();
 
