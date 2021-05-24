@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import PostBidModal from './PostBidModal';
@@ -33,10 +34,7 @@ class App extends Component {
             <Route exact path="/DogwalkerProfile">
               <DogwalkerProfile />
             </Route>
-            <div className="app">
-              <h1>Pucci</h1>
-
-            </div>
+            <div className="app" />
           </Switch>
         </Router>
 
