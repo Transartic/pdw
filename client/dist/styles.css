@@ -228,6 +228,7 @@
   background-color: rgba(0, 0, 0, 0.192);
   margin: 0;
   width: 100%;
+  overflow: visible;
 }
 
 .landing-title {
