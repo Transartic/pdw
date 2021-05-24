@@ -164,12 +164,37 @@
   height: 200px;
   margin: 2px;
   text-align: center;
-  
+
 }
 
 .name {
   margin-bottom: 20px;
   font-weight: bold;
+}
+/* auction house css */
+.allposts{
+  flex: 3 0 100px;
+  border: solid;
+  border-color: black;
+}
+.singlepost{
+  flex: 3 0 100px;
+  margin-bottom: 10px;
+  border: solid;
+  border-color: black;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.aucpost{
+  /* display: flex; */
+    flex: 1 0 100px;
+    justify-content: space-between;
+    /* border: solid;
+    border-color: black; */
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+
 }
 
 .non-user-dogwalker-profile {
@@ -218,3 +243,4 @@
 .nudp-reviews {
   width: 900px;
 }
+
