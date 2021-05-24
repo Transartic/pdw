@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 // eslint-disable-next-line import/extensions
 import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
+import BidPost from './BidPost';
 
 class UserProfile extends Component {
   constructor() {
@@ -29,9 +30,9 @@ class UserProfile extends Component {
 
         <div className="posts-schedule-walks-container">
           <div className="auction-posts">
-            <div className="post">This is the post class</div>
-            <div className="post">This is the post class</div>
-            <div className="post">This is the post class</div>
+            <BidPost page="owner" />
+            <BidPost page="walker" />
+            <BidPost page="auction" />
           </div>
 
           <div className="schedule">
