@@ -4,8 +4,6 @@ const fs = require('path');
 const morgan = require('morgan');
 const db = require('./database/connection');
 
-db.authenticate().then(() => console.log('Connected to PostgreSQL...'));
-
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
@@ -22,5 +20,6 @@ app.get('/test', authenticateUser, (req, res) => {
 app.use('/api/user', require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/posts', require('./routes/posts'));
+app.use('/api/walkmeta', require('./routes/walkmeta'));
 
 module.exports = app;
