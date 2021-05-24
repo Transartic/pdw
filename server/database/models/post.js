@@ -19,10 +19,20 @@ const Post = db.define('post', {
     type: DataTypes.JSON,
     allowNull: true,
   },
+  maxPrice: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'max_price',
+  },
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
     allowNull: false,
+  },
+  assignedWalker: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    field: 'walker_id',
   },
 });
 
