@@ -32,9 +32,10 @@ class PostBidModal extends Component {
   render() {
 
     return (
-        <div>
+        <div className="profile-button-right">
 
-             <button onClick={this.handleOpen}>Request Walk</button>
+             <button onClick={this.handleOpen}
+              className="request-walk">Request Walk</button>
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}

@@ -1,7 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
-import PostBidModal from './PostBidModal';
 import UserProfile from './UserProfile';
 
 class App extends Component {
@@ -14,7 +13,6 @@ class App extends Component {
     return (
       <div className="app">
         <h1>Pucci</h1>
-        <PostBidModal />
         <UserProfile />
       </div>
     );
