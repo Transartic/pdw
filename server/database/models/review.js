@@ -1,24 +1,8 @@
 const { DataTypes, Deferrable } = require('sequelize');
-const sequelize = require('../index');
+const db = require('../connection');
+const { User } = require('./user');
 
-const User = sequelize.define('user', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  first_name: {
-    type: DataTypes.STRING,
-  },
-  last_name: {
-    type: DataTypes.STRING,
-  },
-
-});
-
-const Review = sequelize.define('review', {
+const Review = db.define('review', {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -28,6 +12,7 @@ const Review = sequelize.define('review', {
   },
   reviewer_id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: 'id',
@@ -36,6 +21,7 @@ const Review = sequelize.define('review', {
   },
   reviewee_id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: 'id',
@@ -44,30 +30,34 @@ const Review = sequelize.define('review', {
   },
   first_name: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   last_name: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
+    allowNull: false,
     unique: true,
   },
   date_time: {
     type: DataTypes.DATE,
+    allowNull: false,
   },
   rating: {
     type: DataTypes.INTEGER,
+    allowNull: false,
   },
   review: {
     type: DataTypes.TEXT,
+    allowNull: true,
   },
   recommend: {
     type: DataTypes.BOOLEAN,
+    allowNull: true,
   },
 
 });
 
-module.exports = {
-  Review,
-  User,
-};
+module.exports = Review;
