@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import PostBidModal from './PostBidModal';
 // eslint-disable-next-line import/extensions
 import UserProfile from './UserProfile.jsx';
+import Navbar from './Navbar.jsx';
+import AuctionHouse from './AuctionHouse.jsx';
+import Home from './Home.jsx';
 
 class App extends Component {
   constructor() {
@@ -11,11 +15,29 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <h1>Pucci</h1>
-        <PostBidModal/>
-        <UserProfile />
+      <div className="navbar">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/UserProfile">
+              <PostBidModal />
+              <UserProfile />
+            </Route>
+            <Route exact path="/AuctionHouse">
+              <AuctionHouse />
+            </Route>
+            <div className="app">
+              <h1>Pucci</h1>
+
+            </div>
+          </Switch>
+        </Router>
+
       </div>
+
     );
   }
 }
