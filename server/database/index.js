@@ -1,13 +1,16 @@
 const db = require('./connection');
 
 const User = require('./models/user');
-const Post = require('./models/post');
-
-User.hasMany(Post);
-Post.belongsTo(User);
+const Review = require('./models/review');
+const Bid = require('./models/bid');
 
 User.sync();
-Post.sync();
+Review.sync();
+Bid.sync();
 
-module.exports.User = User;
-module.exports.Post = Post;
+// module.exports.User = User;
+module.exports = {
+  User,
+  Review,
+  Bid,
+};
