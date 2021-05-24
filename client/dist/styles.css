@@ -311,3 +311,31 @@
   width: 900px;
 }
 
+/* LANDING PAGE  */
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.192);
+  margin: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+.landing-title {
+  font-family: 'Gilda Display', serif;
+  font-family: 'Tinos', serif;
+  font-size: 7rem;
+  color: whitesmoke;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.landing-sub-title {
+  font-family: 'Gilda Display', serif;
+  font-family: 'Tinos', serif;
+  font-size: 2rem;
+  color: whitesmoke;
+  margin: 0;
+}
