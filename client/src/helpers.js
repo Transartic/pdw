@@ -1,9 +1,6 @@
-/* eslint-disable max-len */
 const calendar = () => {
-  // eslint-disable-next-line no-shadow
   const calendar = document.querySelector('#calendar');
 
-  // eslint-disable-next-line no-plusplus
   for (let day = 1; day <= 7; day++) {
     const date = new Date(2021, 4, day);
     const options = { weekday: 'short' };
@@ -25,10 +22,8 @@ const calendar = () => {
     iterate through each day of the week
       iterate through each appointment in the array of appointments per user
         if the inner text is equal to the day of the appontment
-          // eslint-disable-next-line max-len
           insert adjacent HTML > a div with the {time} (div will have a click-handler to render modal with location, owner/walker name, dog name, duration of walk, and services)
     */
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export { calendar };
