@@ -21,6 +21,7 @@ app.get('/test', authenticateUser, (req, res) => {
 // ================ ROUTES ==========================
 app.use('/api/user', require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
-app.use(require('./routes/review'));
+app.use('/api', require('./routes/review'));
+app.use('/api', require('./routes/bid'));
 
 module.exports = app;

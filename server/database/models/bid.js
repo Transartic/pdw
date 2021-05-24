@@ -1,8 +1,8 @@
 const { DataTypes, Deferrable } = require('sequelize');
-const sequelize = require('../connection');
-const { User } = require('./user');
+const db = require('../connection');
+const { Post } = require('./post');
 
-const Bid = sequelize.define('bid', {
+const Bid = db.define('bid', {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -10,11 +10,11 @@ const Bid = sequelize.define('bid', {
     primaryKey: true,
     autoIncrement: true,
   },
-  user_id: {
+  post_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: User,
+      model: Post,
       key: 'id',
       deferrable: Deferrable.INITIALLY_IMMEDIATE,
     },
@@ -34,10 +34,6 @@ const Bid = sequelize.define('bid', {
   },
   bid: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  services: {
-    type: DataTypes.JSON,
     allowNull: false,
   },
 });
