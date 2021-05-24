@@ -16,7 +16,7 @@ WalkMeta.belongsTo(Post);
 
 User.sync();
 Post.sync();
-WalkMeta.sync({ force: true });
+WalkMeta.sync();
 Review.sync();
 Bid.sync();
 
