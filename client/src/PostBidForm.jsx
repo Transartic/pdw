@@ -8,6 +8,11 @@ import {
   Select,
   TextArea,
 } from 'semantic-ui-react';
+import { FaRegCalendarAlt } from 'react-icons/fa';
+
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const options2 = [
   { text: '30 Min', value: '30' },
@@ -71,8 +76,8 @@ class PostBidForm extends Component {
       dogAccupuncture: false,
       teethBrushing: false,
       dogSpa: false,
-      date: '',
-      price: '',
+      dateTime: new Date(),
+      maxPrice: '',
       city: '',
       state: '',
       time: '',
@@ -85,7 +90,19 @@ class PostBidForm extends Component {
     this.handleStateChange = this.handleStateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    // this.handleDateSelect = this.handleDateSelect.bind(this);
   }
+
+  handleDateChange(date) {
+    this.setState({
+      dateTime: date,
+    });
+  }
+
+  // handleDateSelect(date) {
+  //   console.log(date);
+  // }
 
   handlePost() {
     console.log(this.state);
@@ -123,7 +140,7 @@ class PostBidForm extends Component {
 
   render() {
     // console.log('formState', this.state);
-    // const { value } = this.state;
+    const { dateTime } = this.state;
 
     return (
       <Form>
@@ -206,7 +223,6 @@ class PostBidForm extends Component {
 
         <h4>Services</h4>
 
-
         <Form.Group>
 
           <input style={{ marginRight: '5px', marginLeft: '15px' }} type="radio" value="true" name="dogMassage" onChange={this.handleChange} />
@@ -223,14 +239,30 @@ class PostBidForm extends Component {
           Dog Spa
 
         </Form.Group>
+        <h5>Date</h5>
+        {/* <DatePicker
+          placeholder="Date"
+            // selected={date}
+          onSelect={this.handleDateSelect} // when day is clicked
+          onChange={this.handleDateChange}
+        /> */}
+        <DatePicker
+          selected={dateTime}
+          onChange={this.handleDateChange}
+          name="dateTime"
+          dateFormat="MM/dd/yyyy"
+        />
+        <FaRegCalendarAlt className="calendar" size={25} />
+        <br />
+        <br />
         <Form.Group>
-          <Form.Field
+          {/* <Form.Field
             onChange={this.handleChange}
             name="date"
             control={Input}
             label="Date"
             placeholder="MM/DD"
-          />
+          /> */}
 
           <Form.Field
             onChange={this.handleTimeChange}
@@ -244,7 +276,7 @@ class PostBidForm extends Component {
 
           <Form.Field
             onChange={this.handleChange}
-            name="price"
+            name="maxPrice"
             control={Input}
             label="Price"
             placeholder="Initial Price"
