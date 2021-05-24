@@ -1,12 +1,15 @@
 const calendar = () => {
     const calendar = document.querySelector("#calendar");
 
-    for (let day = 1; day <=7; day++) {
-    const date = new Date(2021,4,day);
-    const options = { weekday: "short" };
-    const dayName = new Intl.DateTimeFormat("en-US", options).format(date);
-    
-    calendar.insertAdjacentHTML("beforeend", `<div class="day"><div class="name">${dayName}</div></div>`);
+    for (let day = 0; day <=6; day++) {
+      var date = new Date();
+      
+      date.setDate(date.getDate() + day);
+      
+      const options = { weekday: "short" };
+      const dayName = new Intl.DateTimeFormat("en-US", options).format(date);
+      
+      calendar.insertAdjacentHTML("beforeend", `<div class="day"><div class="name">${dayName}</div></div>`);
     }
 
     // testing logic for how to dynamically render a dogwalker's scheduled walks

@@ -13,6 +13,9 @@ export default function Navbar() {
       <Link className="auctionhouse" to="/AuctionHouse">
         <h4>Auction House</h4>
       </Link>
+      <Link className="dogwalkerProfile" to="/DogwalkerProfile">
+        <h4>Dogwalker Profile</h4>
+      </Link>
 
     </div>
   );

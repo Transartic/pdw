@@ -6,6 +6,7 @@ import UserProfile from './UserProfile.jsx';
 import Navbar from './Navbar.jsx';
 import AuctionHouse from './AuctionHouse.jsx';
 import Home from './Home.jsx';
+import DogwalkerProfile from './DogwalkerProfile.jsx';
 
 class App extends Component {
   constructor() {
@@ -28,6 +29,9 @@ class App extends Component {
             </Route>
             <Route exact path="/AuctionHouse">
               <AuctionHouse />
+            </Route>
+            <Route exact path="/DogwalkerProfile">
+              <DogwalkerProfile />
             </Route>
             <div className="app">
               <h1>Pucci</h1>
