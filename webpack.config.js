@@ -35,6 +35,18 @@ module.exports = {
         test: /\.(jpg|png|gif|jpeg|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000',
       },
+      {
+        test: /\.mp4$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'video',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
