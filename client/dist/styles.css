@@ -152,3 +152,22 @@
   background-color: lightblue;
   }
   }
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 100%;
+}
+
+.day {
+  border: solid;
+  height: 200px;
+  margin: 2px;
+  text-align: center;
+  
+}
+
+.name {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
