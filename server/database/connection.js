@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const { Sequelize } = require('sequelize');
 
 const { DB_USER, DB_PASSWORD } = process.env;

@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import PostBidModal from './PostBidModal';
@@ -6,6 +9,7 @@ import UserProfile from './UserProfile.jsx';
 import Navbar from './Navbar.jsx';
 import AuctionHouse from './AuctionHouse.jsx';
 import Home from './Home.jsx';
+import DogwalkerProfile from './DogwalkerProfile.jsx';
 
 class App extends Component {
   constructor() {
@@ -23,16 +27,15 @@ class App extends Component {
               <Home />
             </Route>
             <Route exact path="/UserProfile">
-              <PostBidModal />
               <UserProfile />
             </Route>
             <Route exact path="/AuctionHouse">
               <AuctionHouse />
             </Route>
-            <div className="app">
-              <h1>Pucci</h1>
-
-            </div>
+            <Route exact path="/DogwalkerProfile">
+              <DogwalkerProfile />
+            </Route>
+            <div className="app" />
           </Switch>
         </Router>
 

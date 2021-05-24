@@ -110,3 +110,5 @@ bundle.js.map
 *.svg
 *.eot
 *.ttf
+
+package-lock.json

@@ -222,14 +222,6 @@ class PostBidForm extends Component {
           {' '}
           Dog Spa
 
-          {/* <Form.Field
-            control={Radio}
-            label='Dog Spa'
-            value='Dog Spa'
-           // checked={value === 'Dog Spa'}
-            onChange={this.handleChange}
-          /> */}
-
         </Form.Group>
         <Form.Group>
           <Form.Field
