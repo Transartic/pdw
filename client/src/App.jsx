@@ -1,7 +1,8 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
 import PostBidModal from './PostBidModal';
-// eslint-disable-next-line import/extensions
-import UserProfile from './UserProfile.jsx';
+import UserProfile from './UserProfile';
 
 class App extends Component {
   constructor() {
@@ -13,7 +14,7 @@ class App extends Component {
     return (
       <div className="app">
         <h1>Pucci</h1>
-        <PostBidModal/>
+        <PostBidModal />
         <UserProfile />
       </div>
     );
