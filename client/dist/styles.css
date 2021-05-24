@@ -212,4 +212,9 @@
   height: 300px;
   width: 300px;
   margin-top: 30px;
+  margin: 30px;
+}
+
+.nudp-reviews {
+  width: 600px;
 }

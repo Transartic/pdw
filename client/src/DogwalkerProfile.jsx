@@ -16,8 +16,8 @@ class DogwalkerProfile extends Component {
           <span className="nudp-nav-select">Leave a review</span>
       </div>
       <div className="nudp-meta-data">
-          <span className="nudp-specifics">User specifics</span>
-          <span className="nudp-reviews">Reviews</span>
+          <span className="nudp-specifics">User specifics (name, description, location, qualifications)</span>
+          <span className="nudp-reviews">Reviews will go here</span>
       </div>
     </div>
     );
