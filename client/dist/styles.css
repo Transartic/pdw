@@ -171,6 +171,7 @@
   margin-bottom: 20px;
   font-weight: bold;
 }
+<<<<<<< HEAD
 /* auction house css */
 .allposts{
   flex: 3 0 100px;
@@ -196,3 +197,52 @@
     margin-right: 1%;
 
 }
+=======
+
+.non-user-dogwalker-profile {
+  border: solid;
+}
+
+.nudp-profile-picture {
+  display: block;
+  margin: auto;
+  border: solid;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  line-height: 200px;
+  margin-bottom: 30px;
+  margin-top: 15px;
+}
+
+.nudp-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nudp-nav-select {
+  border: solid;
+  height: 30px;
+  width: 125px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.nudp-meta-data {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nudp-specifics, .nudp-reviews {
+  border: solid;
+  height: 300px;
+  width: 300px;
+  margin-top: 30px;
+  margin: 30px;
+}
+
+.nudp-reviews {
+  width: 900px;
+}
+>>>>>>> 75788b3a73a922c8d9415a5361a1c917f6d4c9c5
