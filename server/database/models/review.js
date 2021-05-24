@@ -3,13 +3,13 @@ const db = require('../connection');
 const { User } = require('./user');
 
 const Review = db.define('review', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  //   unique: true,
+  //   primaryKey: true,
+  //   autoIncrement: true,
+  // },
   reviewer_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -43,6 +43,7 @@ const Review = db.define('review', {
   },
   date_time: {
     type: DataTypes.DATE,
+    defaultValue: db.fn('now'),
     allowNull: false,
   },
   rating: {

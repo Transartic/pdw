@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'resolve-url-loader'],
+        use: ['style-loader', 'css-loader'],
         include: [
           path.join(__dirname, '../client', 'src'),
           /node_modules/,
