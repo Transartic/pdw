@@ -171,3 +171,45 @@
   margin-bottom: 20px;
   font-weight: bold;
 }
+
+.non-user-dogwalker-profile {
+  border: solid;
+}
+
+.nudp-profile-picture {
+  display: block;
+  margin: auto;
+  border: solid;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  line-height: 200px;
+  margin-bottom: 30px;
+  margin-top: 15px;
+}
+
+.nudp-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nudp-nav-select {
+  border: solid;
+  height: 30px;
+  width: 125px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.nudp-meta-data {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nudp-specifics, .nudp-reviews {
+  border: solid;
+  height: 300px;
+  width: 300px;
+  margin-top: 30px;
+}

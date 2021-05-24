@@ -8,9 +8,18 @@ class DogwalkerProfile extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Dogwalker Profile goes here</h1>
+    <div className="non-user-dogwalker-profile">
+      <div className="nudp-profile-picture">Profile picture</div>
+      <div className="nudp-nav">
+          <span className="nudp-nav-select">Tier</span>
+          <span className="nudp-nav-select">Rating</span>
+          <span className="nudp-nav-select">Leave a review</span>
       </div>
+      <div className="nudp-meta-data">
+          <span className="nudp-specifics">User specifics</span>
+          <span className="nudp-reviews">Reviews</span>
+      </div>
+    </div>
     );
   }
 }
