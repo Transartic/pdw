@@ -1,4 +1,6 @@
 /* eslint-disable import/extensions */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import PostBidModal from './PostBidModal';
@@ -25,7 +27,6 @@ class App extends Component {
               <Home />
             </Route>
             <Route exact path="/UserProfile">
-              <PostBidModal />
               <UserProfile />
             </Route>
             <Route exact path="/AuctionHouse">
