@@ -358,3 +358,9 @@
   color: whitesmoke;
   margin: 0;
 }
+
+.landing-sign-in-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

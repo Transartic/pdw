@@ -7,11 +7,12 @@ const { User } = require('../database');
 
 // Add a new user to the DB
 const checkNewUserInput = (req, res, next) => {
-  const { body } = req;
+  req = req.body.data;
+  console.log(req);
   const manditoryField = ['username', 'email', 'first_name', 'last_name', 'password', 'address1', 'city', 'state', 'zipcode', 'user_type'];
   let hasAllRequiredFields = true;
   manditoryField.forEach((field) => {
-    if (body[field] === undefined) {
+    if (req[field] === undefined) {
       hasAllRequiredFields = false;
     }
   });
@@ -39,8 +40,7 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
     user_type,
     services,
     certifications,
-  } = req.body;
-
+  } = req.body.data;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     User.create({
@@ -61,7 +61,10 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
       certifications,
     })
       .then((user) => res.status(201).send(user))
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => {
+        console.log('err in user create', err);
+        res.status(500).send(err);
+      });
   } catch (err) {
     res.status(500).send(err);
   }
