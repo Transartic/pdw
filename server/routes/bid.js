@@ -1,6 +1,7 @@
 /* jshint esversion: 8 */
 /* eslint-disable camelcase */
 const express = require('express');
+const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
 const { Bid, Post } = require('../database/index');
@@ -8,12 +9,9 @@ const { Bid, Post } = require('../database/index');
 const checkNewBid = (req, res, next) => {
   const { body } = req;
   const requiredFields = [
-    'user_id',
-    'first_name',
-    'last_name',
-    'email',
+    'post_id',
+    'bidder_id',
     'bid',
-    'services',
   ];
 
   let hasAllRequiredFields = true;
@@ -32,25 +30,41 @@ const checkNewBid = (req, res, next) => {
   res.status(400).send('Missing required field');
 };
 
-router.post('/bid', checkNewBid, async (req, res) => {
+router.post('/', authenticateUser, checkNewBid, async (req, res) => {
+  const {
+    post_id,
+    bid,
+  } = req.body;
+
+  const { userId: bidder_id } = req;
   try {
-    await Bid.create(req.body)
+    await Bid.create({
+      post_id,
+      bidder_id,
+      bid,
+    })
       .then((data) => res.status(201).send(data))
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
 
-router.get('/bid', (req, res) => {
-  Post.hasMany(Bid, { foreignKey: 'post_id' });
-  Bid.belongsTo(Post, { foreignKey: 'post_id' });
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
   try {
     Bid.findAll({
+      where: {
+        bidder_id: id,
+      },
       include: [{
         model: Post,
+        where: {
+          userId: id,
+        },
       }],
     })
-      .then((data) => res.send(data));
+      .then((data) => res.send(data))
+      .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
