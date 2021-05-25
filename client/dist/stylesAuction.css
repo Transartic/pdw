@@ -1,0 +1,39 @@
+/* auction house css */
+.auction-posts-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  float: left;
+}
+.auction-profile-container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin-right: 5%;
+  float: left;
+  height: 70%;
+}
+.allposts{
+  flex: 3 0 100px;
+  border: solid;
+  border-color: black;
+}
+.singlepost{
+  flex: 3 0 100px;
+  margin-bottom: 10px;
+  border: solid;
+  border-color: black;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.aucpost{
+  /* display: flex; */
+    flex: 1 0 100px;
+    justify-content: space-between;
+    /* border: solid;
+    border-color: black; */
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+
+}
