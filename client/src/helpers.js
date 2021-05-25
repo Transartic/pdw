@@ -12,21 +12,34 @@ const calendar = () => {
     calendar.insertAdjacentHTML("beforeend", `<div class="day"><div class="name">${dayName}</div></div>`);
   }
 
-  // testing logic for how to dynamically render a dogwalker's scheduled walks
-
-  // const test = document.getElementsByClassName("day");
-  // for (var j = 0; j < test.length; j++) {
-  // if (test[j].innerText === "Sat") {
-  //     test[j].insertAdjacentHTML("beforeend", `<div>2:00pm</div>`)
-  // }
-  // }
-
-  /*
-  iterate through each day of the week
-    iterate through each appointment in the array of appointments per user
-      if the inner text is equal to the day of the appontment
-        insert adjacent HTML > a div with the {time} (div will have a click-handler to render modal with location, owner/walker name, dog name, duration of walk, and services)
-  */
 };
 
-export {calendar}
+var dummyData = [{
+  duration: 60,
+  dateTime: "2021-05-26T12:15:50.283Z",
+  maxPrice: 30,
+  comments: "stuff stuff stuff",
+  services: {
+    acupuncture: false,
+    spa: true,
+    dental: false
+  },
+  ownerName: "billy",
+  dogName: "greg",
+  ownerAddress: "123 main st, LA 90210"
+}, {
+  duration: 60,
+  dateTime: "2021-05-27T18:15:50.283Z",
+  maxPrice: 30,
+  comments: "stuff stuff stuff",
+  services: {
+    acupuncture: false,
+    spa: true,
+    dental: false
+  },
+  ownerName: "billy",
+  dogName: "greg",
+  ownerAddress: "123 main st, LA 90210"
+}]
+
+export {calendar, dummyData}

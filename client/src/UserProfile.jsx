@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 // eslint-disable-next-line import/extensions
-import { calendar } from './helpers.js';
+import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 
@@ -10,10 +10,32 @@ class UserProfile extends Component {
   constructor() {
     super();
     this.state = {};
+    this.updateCalendar = this.updateCalendar.bind(this);
   }
 
   componentDidMount() {
     calendar();
+    this.updateCalendar();
+  }
+
+  updateCalendar() {
+    var days = document.getElementsByClassName("day");
+    for (var i = 0; i < days.length; i++) {
+      for (var j = 0; j < dummyData.length; j++) {
+        var dataString = dummyData[j].dateTime;
+        var stringToDate = new Date(dataString);
+    
+        const options = { weekday: "short" };
+        const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
+    
+        var dataTime = stringToDate.toLocaleTimeString("en-US");
+    
+        if (days[i].innerText === dataDay) {
+          days[i].insertAdjacentHTML("beforeend", `<div>${dataTime}</div>`)
+        }
+      }
+    }
+
   }
 
   render() {
