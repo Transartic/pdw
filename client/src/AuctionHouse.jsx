@@ -75,13 +75,13 @@ class AuctionHouse extends Component {
         <div>
           <h1>Pucci</h1>
 
-          <div className="profile-container">
+          <div className="auction-profile-container">
             <FaPaw size={70} />
             <div><h3>Auction House</h3></div>
             <div className="profile-info">Calender</div>
           </div>
 
-          <div className="posts-schedule-walks-container">
+          <div className="auction-posts-container">
             <div className="auction-posts">
               <div className="aucpost">
                 Date

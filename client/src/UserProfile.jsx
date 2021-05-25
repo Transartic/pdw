@@ -48,10 +48,10 @@ class UserProfile extends Component {
           var current = dummyData[j];
           var dataString = dummyData[j].dateTime;
           var stringToDate = new Date(dataString);
-      
+
           const options = { weekday: "short" };
           const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-      
+
           var dataTime = stringToDate.toLocaleTimeString("en-US");
 
           var services = [];
@@ -62,7 +62,7 @@ class UserProfile extends Component {
             }
           }
           var servicesString = services.join(', ');
-      
+
           if (days[i].innerText === dataDay) {
             days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
             <div>Dog: ${current.dogName}</div>
@@ -72,18 +72,18 @@ class UserProfile extends Component {
         }
       }
     } else {
-      //owner logic 
-      //axios request here, will update dummy data with ^ 
+      //owner logic
+      //axios request here, will update dummy data with ^
       var days = document.getElementsByClassName("day");
       for (var i = 0; i < days.length; i++) {
         for (var j = 0; j < dummyData.length; j++) {
           var current = dummyData[j];
           var dataString = dummyData[j].dateTime;
           var stringToDate = new Date(dataString);
-      
+
           const options = { weekday: "short" };
           const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-      
+
           var dataTime = stringToDate.toLocaleTimeString("en-US");
 
           var services = [];
@@ -94,7 +94,7 @@ class UserProfile extends Component {
             }
           }
           var servicesString = services.join(', ');
-      
+
           if (days[i].innerText === dataDay) {
             days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
             <div>Walker: ${current.dogwalkerName}</div>
@@ -141,35 +141,40 @@ class UserProfile extends Component {
           </h1>
         </div>
 
-        <div className="profile-container">
-          <div className="profile-picture">This is the profile-picture class</div>
-          <div className="username">{this.state.username}</div>
-          <PostBidModal />
-          {profileInfo}
+        <div className="page-container">
+
+          <div className="top-container">
+            <div className="profile-container">
+              <div className="profile-picture">This is the profile-picture class</div>
+              <div className="username">{this.state.username}</div>
+              <PostBidModal />
+              {profileInfo}
+            </div>
+
+            <div className="posts-schedule-walks-container">
+              <div className="auction-posts">
+                {
+                  this.state.bids.map((bid, k) => {
+                    return <BidPost key={k} bid={bid} page={this.state.walker} />
+                  })
+                }
+              </div>
+
+              <div className="schedule">
+                This is the schedule class
+                <div id="calendar" />
+              </div>
+
+              <div className="walks-container">
+                <div className="next-walk">This is the next-walk class</div>
+                <div className="checklist">This is the checklist class</div>
+                <div className="previous-walk">This is the previous-walk class</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="area-map">This is the area-map class</div>
         </div>
-
-        <div className="posts-schedule-walks-container">
-          <div className="auction-posts">
-            {
-              this.state.bids.map((bid, k) => {
-                return <BidPost key={k} bid={bid} page={this.state.walker} />
-              })
-            }
-          </div>
-
-          <div className="schedule">
-            This is the schedule class
-            <div id="calendar" />
-          </div>
-
-          <div className="walks-container">
-            <div className="next-walk">This is the next-walk class</div>
-            <div className="checklist">This is the checklist class</div>
-            <div className="previous-walk">This is the previous-walk class</div>
-          </div>
-        </div>
-
-        <div className="area-map">This is the area-map class</div>
       </div>
     );
   }
