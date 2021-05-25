@@ -245,6 +245,7 @@
   height: 200px;
   margin: 2px;
   text-align: center;
+  overflow: scroll;
 }
 
 .name {
@@ -357,8 +358,15 @@
   color: whitesmoke;
   margin: 0;
 }
+<<<<<<< HEAD
 .nav{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
+=======
+
+.calendar-time {
+  font-weight: bold;
+}
+>>>>>>> 1c663244709a58dedf29d2cbe9905493044cf5c3
