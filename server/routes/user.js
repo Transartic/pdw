@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 const { User } = require('../database');
+const authenticateUser = require('../middleware/authenticateToken');
 
 // Add a new user to the DB
 const checkNewUserInput = (req, res, next) => {
@@ -23,6 +25,7 @@ const checkNewUserInput = (req, res, next) => {
   }
   res.status(400).send('missing required field');
 };
+
 router.post('/signup', checkNewUserInput, async (req, res) => {
   const {
     username,
@@ -60,13 +63,29 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
       services,
       certifications,
     })
-      .then((user) => res.status(201).send(user))
-      .catch((err) => {
-        console.log('err in user create', err);
-        res.status(500).send(err);
-      });
+      .then((user) => {
+        const accessToken = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60),
+          user_id: user.id,
+        }, process.env.ACCESS_TOKEN_SECRET);
+        res.json({ accessToken });
+      })
+      .catch((err) => res.status(500).send(err));
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+router.get('/', authenticateUser, async (req, res) => {
+  const { userId } = req;
+  try {
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: ['username', 'email', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zipcode', 'dog_name', 'description', 'user_type', 'services', 'certifications'],
+    });
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).end();
   }
 });
 

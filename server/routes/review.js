@@ -1,17 +1,15 @@
 /* jshint esversion: 8 */
 const express = require('express');
+const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
-const { Review, User} = require('../database/index');
+const { Review, User } = require('../database/index');
+
 
 const checkNewReview = (req, res, next) => {
   const { body } = req;
   const requiredFields = [
-    'reviewer_id',
     'reviewee_id',
-    'first_name',
-    'last_name',
-    'email',
     'rating',
   ];
 
@@ -30,19 +28,48 @@ const checkNewReview = (req, res, next) => {
   res.status(400).send('Missing required field');
 };
 
-router.post('/review', checkNewReview, async (req, res) => {
+router.post('/', authenticateUser, checkNewReview, async (req, res) => {
+  const {
+    reviewee_id,
+    rating,
+    review,
+    recommend,
+  } = req.body;
+
+  const { userId: reviewer_id } = req;
+
   try {
-    await Review.create(req.body)
+    await Review.create({
+      reviewer_id,
+      reviewee_id,
+      rating,
+      review,
+      recommend,
+    })
       .then((user) => res.status(201).send(user))
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
 
-router.get('/review', (req, res) => {
+router.get('/:id', authenticateUser, (req, res) => {
+  const { id } = req.params;
+  const replyObj = {};
+
   try {
-    Review.findAll()
-      .then((data) => res.send(data))
+    Review.findAll({
+      where: {
+        reviewee_id: id,
+      },
+      include: [{
+        model: User,
+        as: 'reviewer',
+        attributes: ['first_name', 'last_name'] }],
+    })
+      .then((reviews) => {
+        res.send(reviews);
+        replyObj.reviews = reviews;
+      })
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }

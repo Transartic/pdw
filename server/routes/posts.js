@@ -1,4 +1,6 @@
 const express = require('express');
+const moment = require('moment');
+const { Op } = require('sequelize');
 const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
@@ -21,18 +23,34 @@ const checkNewPostInput = (req, res, next) => {
   res.status(400).send('missing required field');
 };
 
-// get all active posts for owner
 router.get('/', authenticateUser, (req, res) => {
   const { userId } = req;
   Post.findAll({
     where: {
-      userId,
+      [Op.or]: [{ userId }, { assignedWalker: userId }],
       status: true,
+      dateTime: {
+        [Op.gte]: moment().toDate(),
+      },
     },
-    include: User,
+    include: {
+      model: User,
+      attributes: ['firstName', 'dogname', 'address1'],
+    }
   })
     .then((userPosts) => res.send(userPosts))
     .catch((err) => res.status(500).send(err));
+});
+
+router.get('/all', authenticateUser, (req, res) => {
+  Post.findAll({
+    where: {
+      dateTime: {
+        [Op.gte]: moment().toDate(),
+      },
+    },
+  })
+    .then((posts) => res.send(posts));
 });
 
 router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
@@ -56,7 +74,5 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
     .then(() => res.status(201).send())
     .catch((err) => res.status(500).send(err));
 });
-
-// need to make seperate route for walker and owner
 
 module.exports = router;

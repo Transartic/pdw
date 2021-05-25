@@ -16,7 +16,10 @@ router.post('/', async (req, res) => {
     }
     // check that password is correct
     if (await bcrypt.compare(password, user.password)) {
-      const accessToken = jwt.sign({ user_id: user.id }, process.env.ACCESS_TOKEN_SECRET);
+      const accessToken = jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        user_id: user.id,
+      }, process.env.ACCESS_TOKEN_SECRET);
       res.json({ accessToken });
     }
     res.status(400).send('Username or Password incorrect');

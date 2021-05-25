@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../connection');
 
+
 const Post = db.define('post', {
   duration: {
     type: DataTypes.STRING,
