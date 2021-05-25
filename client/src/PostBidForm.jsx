@@ -173,7 +173,7 @@ class PostBidForm extends Component {
   render() {
     // console.log('formState', this.state);
     const { dateTime } = this.state;
-    console.log(this.state);
+
 
     return (
       <Form>
