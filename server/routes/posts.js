@@ -36,10 +36,13 @@ router.get('/', authenticateUser, (req, res) => {
     include: {
       model: User,
       attributes: ['firstName', 'dogname', 'address1'],
-    }
+    },
   })
     .then((userPosts) => res.send(userPosts))
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err)
+    });
 });
 
 router.get('/all', authenticateUser, (req, res) => {
@@ -48,6 +51,10 @@ router.get('/all', authenticateUser, (req, res) => {
       dateTime: {
         [Op.gte]: moment().toDate(),
       },
+    },
+    include: {
+      model: User,
+      attributes: ['firstName', 'dogname', 'address1'],
     },
   })
     .then((posts) => res.send(posts));
