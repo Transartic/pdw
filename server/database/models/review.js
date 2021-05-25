@@ -20,7 +20,6 @@ const Review = db.define('review', {
     references: {
       model: User,
       key: 'id',
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
     },
   },
   rating: {

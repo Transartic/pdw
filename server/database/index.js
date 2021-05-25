@@ -21,9 +21,8 @@ User.sync();
 Post.sync();
 WalkMeta.sync();
 Review.sync();
-// Bid.sync();
+Bid.sync();
 
-// module.exports.User = User;
 module.exports = {
   User,
   Review,
