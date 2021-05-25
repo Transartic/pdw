@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
   }
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
     if (err) return res.sendStatus(403);
-    console.log('JWT: ', data);
     req.userId = data.user_id;
     next();
   });
