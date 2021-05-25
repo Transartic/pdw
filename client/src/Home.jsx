@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { FaPaw } from 'react-icons/fa';
 import background from '../dist/video/background.mp4';
-import OwnerSignUpModal from './Widgets/OwnerSignUpModal';
+import OwnerSignUpModal from './Widgets/OwnerSignupModal.jsx';
 
 class Home extends Component {
   constructor() {
