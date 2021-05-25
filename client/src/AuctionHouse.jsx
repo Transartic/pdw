@@ -47,7 +47,7 @@ class AuctionHouse extends Component {
 
     today = `${mm}/${dd}/${yyyy}`;
 
-    var oneBid =   <div className="singlepost">
+    var oneBid =  <div className="singlepost">
      Date:
       <br />
       Time:

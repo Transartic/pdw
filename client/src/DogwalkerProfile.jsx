@@ -30,6 +30,7 @@ class DogwalkerProfile extends Component {
 
 
   render() {
+
     return (
     <div className="non-user-dogwalker-profile">
       <div className="nudp-profile-picture">Profile picture</div>
@@ -46,7 +47,7 @@ class DogwalkerProfile extends Component {
         <Modal.Header>Leave A Review</Modal.Header>
 
         <Modal.Content >
-          <ReviewsForm/>
+          <ReviewsForm />
          </Modal.Content>
 
       </Modal>

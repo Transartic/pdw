@@ -15,10 +15,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const options2 = [
-  { text: '30 Min', value: '30' },
-  { text: '1 Hour', value: '1' },
-  { text: '1 Hr 30 Min', value: '130' },
-  { text: '2 Hour', value: '2' },
+  { text: '30 Min', value: '30 Min' },
+  { text: '1 Hour', value: '1 Hour' },
+  { text: '1 Hr 30 Min', value: '1 Hr 30 Min' },
+  { text: '2 Hour', value: '2 Hour' },
 ];
 const options3 = [
   { text: 'Califonia', value: 'California' },
@@ -65,21 +65,21 @@ class PostBidForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      dogName: '',
+      // firstName: '',
+      // lastName: '',
+      // dogName: '',
       duration: '',
-      streetAddress: '',
-      apt: '',
-      zipeCode: '',
+      // streetAddress: '',
+      // apt: '',
+      // zipeCode: '',
       dogMassage: false,
       dogAccupuncture: false,
       teethBrushing: false,
       dogSpa: false,
       dateTime: new Date(),
       maxPrice: '',
-      city: '',
-      state: '',
+      // city: '',
+      // state: '',
       time: '',
 
     };
@@ -145,7 +145,7 @@ class PostBidForm extends Component {
     return (
       <Form>
 
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Field
             onChange={this.handleChange}
             control={Input}
@@ -167,18 +167,18 @@ class PostBidForm extends Component {
             label="Dog Name"
             placeholder="Dog Name"
           />
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group>
           <Form.Field
             onChange={this.handleWalkChange}
             control={Select}
             name="duration"
-            label="Walk"
+            label="Duration Of Walk"
             options={options2}
             placeholder="Duration Of Walk"
           />
         </Form.Group>
-        <Form.Group>
+        {/* <Form.Group>
 
           <Form.Field
             onChange={this.handleChange}
@@ -194,8 +194,8 @@ class PostBidForm extends Component {
             label="Apt"
             placeholder="Apt."
           />
-        </Form.Group>
-        <Form.Group>
+        </Form.Group> */}
+        {/* <Form.Group>
 
           <Form.Field
             onChange={this.handleStateChange}
@@ -219,7 +219,7 @@ class PostBidForm extends Component {
             label="Zip Code"
             placeholder="Zipe Code"
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <h4>Services</h4>
 

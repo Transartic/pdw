@@ -358,3 +358,8 @@
   color: whitesmoke;
   margin: 0;
 }
+.nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
