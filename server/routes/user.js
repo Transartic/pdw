@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 const { User } = require('../database');
@@ -60,7 +61,13 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
       services,
       certifications,
     })
-      .then((user) => res.status(201).send(user))
+      .then((user) => {
+        const accessToken = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60),
+          user_id: user.id,
+        }, process.env.ACCESS_TOKEN_SECRET);
+        res.json({ accessToken });
+      })
       .catch((err) => res.status(500).send(err));
   } catch (err) {
     res.status(500).send(err);

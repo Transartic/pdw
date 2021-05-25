@@ -22,7 +22,7 @@ const checkNewPostInput = (req, res, next) => {
 };
 
 // get all active posts for owner
-router.get('/', authenticateUser, (req, res) => {
+router.get('/owner', authenticateUser, (req, res) => {
   const { userId } = req;
   Post.findAll({
     where: {
@@ -34,6 +34,11 @@ router.get('/', authenticateUser, (req, res) => {
     .then((userPosts) => res.send(userPosts))
     .catch((err) => res.status(500).send(err));
 });
+
+router.get('/walker', authenticateUser, (req, res) => {
+  Post.findAll({})
+    .then((posts) => res.send(posts));
+})
 
 router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
   const { userId } = req;
