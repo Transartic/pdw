@@ -11,6 +11,7 @@ class UserProfile extends Component {
     super();
     this.state = {};
     this.updateCalendar = this.updateCalendar.bind(this);
+
   }
 
   componentDidMount() {
@@ -19,24 +20,44 @@ class UserProfile extends Component {
   }
 
   updateCalendar() {
-    var days = document.getElementsByClassName("day");
-    for (var i = 0; i < days.length; i++) {
-      for (var j = 0; j < dummyData.length; j++) {
-        var dataString = dummyData[j].dateTime;
-        var stringToDate = new Date(dataString);
-    
-        const options = { weekday: "short" };
-        const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-    
-        var dataTime = stringToDate.toLocaleTimeString("en-US");
-    
-        if (days[i].innerText === dataDay) {
-          days[i].insertAdjacentHTML("beforeend", `<div>${dataTime}</div>`)
+    //if (this.state.walker) {
+      var days = document.getElementsByClassName("day");
+      for (var i = 0; i < days.length; i++) {
+        for (var j = 0; j < dummyData.length; j++) {
+          var current = dummyData[j];
+          var dataString = dummyData[j].dateTime;
+          var stringToDate = new Date(dataString);
+      
+          const options = { weekday: "short" };
+          const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
+      
+          var dataTime = stringToDate.toLocaleTimeString("en-US");
+
+          //parse out services
+          var services = [];
+          var servicesObj = current.services;
+          for (var key in servicesObj) {
+            if (servicesObj[key] === true) {
+              services.push(key);
+            }
+          }
+          var servicesString = services.join(' ');
+      
+          if (days[i].innerText === dataDay) {
+            days[i].insertAdjacentHTML("beforeend", `<div>${dataTime}</div>
+            <div>Duration: ${current.duration} min</div>
+            <div>Services: ${servicesString}</div>`)
+          }
         }
       }
-    }
+    //} else {
+      //owner (not walker)
+    //}
+
 
   }
+
+
 
   render() {
     return (

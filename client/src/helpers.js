@@ -20,7 +20,7 @@ var dummyData = [{
   maxPrice: 30,
   comments: "stuff stuff stuff",
   services: {
-    acupuncture: false,
+    acupuncture: true,
     spa: true,
     dental: false
   },
