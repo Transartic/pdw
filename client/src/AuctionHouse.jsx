@@ -4,6 +4,8 @@ import { FaPaw, FaSearch } from 'react-icons/fa';
 import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
+import axios from 'axios'
+
 
 import DWBidForm from './DWBidForm.jsx';
 
@@ -21,6 +23,11 @@ class AuctionHouse extends Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
+  componentDidMount(){
+
+  }
+
+
   handleReset() {
     location.reload();
   }
@@ -36,6 +43,7 @@ class AuctionHouse extends Component {
         active: false
     });
 };
+
 
 
 
