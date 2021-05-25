@@ -28,6 +28,7 @@ router.get('/', authenticateUser, (req, res) => {
   Post.findAll({
     where: {
       [Op.or]: [{ userId }, { assignedWalker: userId }],
+      status: true,
       dateTime: {
         [Op.gte]: moment().toDate(),
       },
