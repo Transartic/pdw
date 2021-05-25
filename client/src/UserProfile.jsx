@@ -32,7 +32,10 @@ class UserProfile extends Component {
           <div className="auction-posts">
             <BidPost page="owner" />
             <BidPost page="walker" />
-            <BidPost page="auction" />
+            <BidPost page="owner" />
+            <BidPost page="walker" />
+            <BidPost page="owner" />
+            <BidPost page="walker" />
           </div>
 
           <div className="schedule">
