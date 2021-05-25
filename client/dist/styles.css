@@ -242,6 +242,7 @@
   height: 200px;
   margin: 2px;
   text-align: center;
+  overflow: scroll;
 }
 
 .name {
@@ -353,4 +354,8 @@
   font-size: 2rem;
   color: whitesmoke;
   margin: 0;
+}
+
+.calendar-time {
+  font-weight: bold;
 }
