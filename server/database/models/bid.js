@@ -6,6 +6,10 @@ const Bid = db.define('bid', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  bidder_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   bid: {
     type: DataTypes.INTEGER,
     allowNull: false,

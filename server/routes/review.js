@@ -1,10 +1,10 @@
 /* jshint esversion: 8 */
 const express = require('express');
+const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
 const { Review, User } = require('../database/index');
 
-const authenticateUser = require('../middleware/authenticateToken');
 
 const checkNewReview = (req, res, next) => {
   const { body } = req;
@@ -52,29 +52,24 @@ router.post('/', authenticateUser, checkNewReview, async (req, res) => {
   catch (err) { res.status(500).send(err); }
 });
 
-router.get('/:walkerId', authenticateUser, (req, res) => {
-  const { walkerId } = req.params;
+router.get('/:id', authenticateUser, (req, res) => {
+  const { id } = req.params;
   const replyObj = {};
 
   try {
     Review.findAll({
       where: {
-        reviewee_id: walkerId,
+        reviewee_id: id,
       },
-      include: User
+      include: [{
+        model: User,
+        as: 'reviewer',
+        attributes: ['first_name', 'last_name'] }],
     })
       .then((reviews) => {
+        res.send(reviews);
         replyObj.reviews = reviews;
       })
-      .then(() => {
-        const getNames = [];
-        replyObj.reviews.forEach((review) => {
-          getNames.push(User.findByPk(review.reviewer_id));
-        });
-        return getNames;
-      })
-      // .then((arrNames) => Promise.all(arrNames).then(((users) => )))
-      .then(() => res.send(replyObj))
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
