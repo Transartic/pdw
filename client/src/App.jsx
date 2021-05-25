@@ -14,10 +14,23 @@ import DogwalkerProfile from './DogwalkerProfile.jsx';
 class App extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      token: null,
+    };
+    this.updateToken = this.updateToken.bind(this);
+  }
+
+  updateToken(string) {
+    this.setState({ token: string });
   }
 
   render() {
+    let page;
+    if (!this.state.token) {
+      page = (<Home updateToken={this.updateToken} />);
+    } else {
+      page = (<UserProfile token={this.state.token} />);
+    }
     return (
       <div className="navbar">
         <Router>

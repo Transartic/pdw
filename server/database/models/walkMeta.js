@@ -18,7 +18,6 @@ const WalkMeta = db.define('walk', {
   // don't forget to enable timestamps!
   timestamps: true,
   createdAt: 'timestamp',
-
   updatedAt: false,
 });
 
