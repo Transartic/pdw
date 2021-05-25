@@ -72,7 +72,7 @@ class UserProfile extends Component {
       }
     } else {
       //owner logic 
-      //axios request here, will update dummy data with ^
+      //axios request here, will update dummy data with ^ 
       var days = document.getElementsByClassName("day");
       for (var i = 0; i < days.length; i++) {
         for (var j = 0; j < dummyData.length; j++) {
