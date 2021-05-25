@@ -14,11 +14,13 @@ import DatePicker from 'react-datepicker';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
+import axios from 'axios';
+
 const options2 = [
-  { text: '30 Min', value: '30' },
-  { text: '1 Hour', value: '1' },
-  { text: '1 Hr 30 Min', value: '130' },
-  { text: '2 Hour', value: '2' },
+  { text: '30 Min', value: '30 Min' },
+  { text: '1 Hour', value: '1 Hour' },
+  { text: '1 Hr 30 Min', value: '1 Hr 30 Min' },
+  { text: '2 Hour', value: '2 Hour' },
 ];
 const options3 = [
   { text: 'Califonia', value: 'California' },
@@ -65,22 +67,22 @@ class PostBidForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      dogName: '',
+      // firstName: '',
+      // lastName: '',
+      // dogName: '',
       duration: '',
-      streetAddress: '',
-      apt: '',
-      zipeCode: '',
+      // streetAddress: '',
+      // apt: '',
+      // zipeCode: '',
       dogMassage: false,
       dogAccupuncture: false,
       teethBrushing: false,
       dogSpa: false,
       dateTime: new Date(),
       maxPrice: '',
-      city: '',
-      state: '',
-      time: '',
+      // city: '',
+      // state: '',
+      comments: '',
 
     };
 
@@ -91,6 +93,7 @@ class PostBidForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    // this.setHours = this.setHours.bind(this);
     // this.handleDateSelect = this.handleDateSelect.bind(this);
   }
 
@@ -105,7 +108,32 @@ class PostBidForm extends Component {
   // }
 
   handlePost() {
-    console.log(this.state);
+    const dogServices = {};
+    if (this.state.dogMassage === 'true') {
+      dogServices.dogMassage = 'dogMassage';
+    }
+    if (this.state.dogAccupuncture === 'true') {
+      dogServices.dogAccupuncture = 'dogAccupuncture';
+    }
+    if (this.state.teethBrushing === 'true') {
+      dogServices.teethBrushing = 'teethBrushing';
+    }
+    if (this.state.dogSpa === 'true') {
+      dogServices.dogSpa = 'dogSpa';
+    }
+    const send = {
+      duration: this.state.duration,
+      dateTime: this.state.dateTime,
+      services: dogServices,
+      maxPrice: this.state.maxPrice,
+
+    };
+    //need user Id
+    console.log('send', send);
+    // axios.post('/api/posts/', send)
+    //   .then((response) => {
+    //     console.log(('res', response));
+    //   });
   }
 
   handleChange(e) {
@@ -138,14 +166,19 @@ class PostBidForm extends Component {
     });
   }
 
+  // setHours(e, { value }) {
+
+  // }
+
   render() {
     // console.log('formState', this.state);
     const { dateTime } = this.state;
 
+
     return (
       <Form>
 
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Field
             onChange={this.handleChange}
             control={Input}
@@ -167,18 +200,18 @@ class PostBidForm extends Component {
             label="Dog Name"
             placeholder="Dog Name"
           />
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group>
           <Form.Field
             onChange={this.handleWalkChange}
             control={Select}
             name="duration"
-            label="Walk"
+            label="Duration Of Walk"
             options={options2}
             placeholder="Duration Of Walk"
           />
         </Form.Group>
-        <Form.Group>
+        {/* <Form.Group>
 
           <Form.Field
             onChange={this.handleChange}
@@ -194,8 +227,8 @@ class PostBidForm extends Component {
             label="Apt"
             placeholder="Apt."
           />
-        </Form.Group>
-        <Form.Group>
+        </Form.Group> */}
+        {/* <Form.Group>
 
           <Form.Field
             onChange={this.handleStateChange}
@@ -219,7 +252,7 @@ class PostBidForm extends Component {
             label="Zip Code"
             placeholder="Zipe Code"
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <h4>Services</h4>
 
@@ -250,7 +283,8 @@ class PostBidForm extends Component {
           selected={dateTime}
           onChange={this.handleDateChange}
           name="dateTime"
-          dateFormat="MM/dd/yyyy"
+          showTimeSelect
+          dateFormat="MMMM d, yyyy h:mm aa"
         />
         <FaRegCalendarAlt className="calendar" size={25} />
         <br />
@@ -265,11 +299,11 @@ class PostBidForm extends Component {
           /> */}
 
           <Form.Field
-            onChange={this.handleTimeChange}
-            control={Select}
-            label="Time"
-            options={options5}
-            placeholder="Time"
+            onChange={this.handleChange}
+            name="comments"
+            control={TextArea}
+            label="Comments"
+            placeholder="Comments"
           />
         </Form.Group>
         <Form.Group>
