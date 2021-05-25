@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
+import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
 import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
@@ -62,7 +63,12 @@ class UserProfile extends Component {
     }
     return (
       <div className="logged-in-profile">
-        <h1>Pucci</h1>
+        <div className="landing-container">
+          <h1 className="landing-title">
+            P U C C I
+            <FaPaw />
+          </h1>
+        </div>
 
         <div className="profile-container">
           <div className="profile-picture">This is the profile-picture class</div>

@@ -2,12 +2,14 @@
   box-sizing: border-box;
 }
 
+
 #app {
-  height: 100%;
+  height: auto;
   min-height: 850px;
   min-width: 800px;
   padding-left: 5%;
   padding-right: 5%;
+  background-image: linear-gradient(to bottom right, grey, white);
 }
 
 .navbar {
@@ -79,7 +81,6 @@
   height: 100%;
   font-size: 10px;
 }
-
 
 .profile-info {
   flex: 3 1 100px;
@@ -226,13 +227,9 @@
   border: solid;
   border-color: black;
   height: 30%;
+  min-height: 300px;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-  background-color: lightblue;
-  }
-  }
 
 #calendar {
   display: grid;
