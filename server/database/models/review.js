@@ -13,11 +13,6 @@ const Review = db.define('review', {
   reviewer_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: User,
-      key: 'id',
-      deferrable: Deferrable.INITIALLY_IMMEDIATE,
-    },
   },
   reviewee_id: {
     type: DataTypes.INTEGER,
@@ -27,24 +22,6 @@ const Review = db.define('review', {
       key: 'id',
       deferrable: Deferrable.INITIALLY_IMMEDIATE,
     },
-  },
-  first_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  last_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  date_time: {
-    type: DataTypes.DATE,
-    defaultValue: db.fn('now'),
-    allowNull: false,
   },
   rating: {
     type: DataTypes.INTEGER,
@@ -58,7 +35,6 @@ const Review = db.define('review', {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
-
 });
 
 module.exports = Review;
