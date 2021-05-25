@@ -7,9 +7,29 @@ import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 
 class UserProfile extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: 'Joseph',
+      dogs: 'Bunty and Big Gertha',
+      walker: false,
+      services: ['dog washing', 'teeth brushing'],
+      description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
+      bids: [{
+        username: 'Cody',
+        date: '?',
+        reqServices: ['acupunture', 'treat'],
+        info: 'dkdkdkdkdkdkdkdkdkdkdkdkdkdkd',
+        amount: 56,
+      },
+      {
+        username: 'Tish',
+        date: '?',
+        reqServices: ['acupunture', 'wash'],
+        info: 'lalalalalalalalalalalalalalalalala',
+        amount: 90,
+      }],
+    };
   }
 
   componentDidMount() {
@@ -17,25 +37,47 @@ class UserProfile extends Component {
   }
 
   render() {
+    let profileInfo;
+    if (this.state.walker === false) {
+      profileInfo = (<div className="profile-info">
+                       <h5>Dogs Name</h5>
+                       <div>{this.state.dogs}</div>
+                       <h5>About</h5>
+                       <p>
+                         {this.state.description}
+                       </p>
+                     </div>);
+    } else {
+      profileInfo = (<div className="profile-info">
+                       <h5>Services</h5>
+                       <ul>
+                         {
+                           this.state.services.map((service, k) => {
+                             return <li key={k}>{service}</li>
+                           })
+                         }
+                       </ul>
+                       <p>{this.state.description}</p>
+                     </div>);
+    }
     return (
       <div className="logged-in-profile">
         <h1>Pucci</h1>
 
         <div className="profile-container">
           <div className="profile-picture">This is the profile-picture class</div>
-          <div className="username">Thie is username class</div>
+          <div className="username">{this.state.username}</div>
           <PostBidModal />
-          <div className="profile-info">This is profile-info class</div>
+          {profileInfo}
         </div>
 
         <div className="posts-schedule-walks-container">
           <div className="auction-posts">
-            <BidPost page="owner" />
-            <BidPost page="walker" />
-            <BidPost page="owner" />
-            <BidPost page="walker" />
-            <BidPost page="owner" />
-            <BidPost page="walker" />
+            {
+              this.state.bids.map((bid, k) => {
+                return <BidPost key={k} bid={bid} page={this.state.walker} />
+              })
+            }
           </div>
 
           <div className="schedule">

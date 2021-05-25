@@ -41,9 +41,8 @@
 }
 
 .profile-picture {
-  flex: 1 1 50px;
-  height: auto;
-  width: 80%;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: solid;
   border-color: black;
