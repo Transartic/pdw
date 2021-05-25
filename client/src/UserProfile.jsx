@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 // eslint-disable-next-line import/extensions
-import { calendar } from './helpers.js';
+import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 
@@ -12,7 +12,7 @@ class UserProfile extends Component {
     this.state = {
       username: 'Joseph',
       dogs: 'Bunty and Big Gertha',
-      walker: false,
+      walker: true,
       services: ['dog washing', 'teeth brushing'],
       description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
       bids: [{
@@ -30,11 +30,82 @@ class UserProfile extends Component {
         amount: 90,
       }],
     };
+    this.updateCalendar = this.updateCalendar.bind(this);
   }
 
   componentDidMount() {
     calendar();
+    this.updateCalendar();
   }
+
+  updateCalendar() {
+    if (this.state.walker) {
+      //insert axios request here when route is made, update dummyData with response
+      var days = document.getElementsByClassName("day");
+      for (var i = 0; i < days.length; i++) {
+        for (var j = 0; j < dummyData.length; j++) {
+          var current = dummyData[j];
+          var dataString = dummyData[j].dateTime;
+          var stringToDate = new Date(dataString);
+      
+          const options = { weekday: "short" };
+          const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
+      
+          var dataTime = stringToDate.toLocaleTimeString("en-US");
+
+          var services = [];
+          var servicesObj = current.services;
+          for (var key in servicesObj) {
+            if (servicesObj[key] === true) {
+              services.push(key);
+            }
+          }
+          var servicesString = services.join(', ');
+      
+          if (days[i].innerText === dataDay) {
+            days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
+            <div>Dog: ${current.dogName}</div>
+            <div>Duration: ${current.duration} min</div>
+            <div>Services: ${servicesString}</div>`)
+          }
+        }
+      }
+    } else {
+      //owner logic 
+      //axios request here, will update dummy data with ^ 
+      var days = document.getElementsByClassName("day");
+      for (var i = 0; i < days.length; i++) {
+        for (var j = 0; j < dummyData.length; j++) {
+          var current = dummyData[j];
+          var dataString = dummyData[j].dateTime;
+          var stringToDate = new Date(dataString);
+      
+          const options = { weekday: "short" };
+          const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
+      
+          var dataTime = stringToDate.toLocaleTimeString("en-US");
+
+          var services = [];
+          var servicesObj = current.services;
+          for (var key in servicesObj) {
+            if (servicesObj[key] === true) {
+              services.push(key);
+            }
+          }
+          var servicesString = services.join(', ');
+      
+          if (days[i].innerText === dataDay) {
+            days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
+            <div>Walker: ${current.dogwalkerName}</div>
+            <div>Duration: ${current.duration} min</div>
+            <div>Services: ${servicesString}</div>`)
+          }
+        }
+      }
+    }
+  }
+
+
 
   render() {
     let profileInfo;

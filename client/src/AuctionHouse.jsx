@@ -4,6 +4,8 @@ import { FaPaw, FaSearch } from 'react-icons/fa';
 import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
+import axios from 'axios'
+
 
 import DWBidForm from './DWBidForm.jsx';
 
@@ -20,6 +22,11 @@ class AuctionHouse extends Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
+
+  componentDidMount(){
+
+  }
+
 
   handleReset() {
     location.reload();
@@ -39,6 +46,7 @@ class AuctionHouse extends Component {
 
 
 
+
   render() {
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -47,7 +55,7 @@ class AuctionHouse extends Component {
 
     today = `${mm}/${dd}/${yyyy}`;
 
-    var oneBid =   <div className="singlepost">
+    var oneBid =  <div className="singlepost">
      Date:
       <br />
       Time:
