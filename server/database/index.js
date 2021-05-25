@@ -20,11 +20,11 @@ Review.belongsTo(User, { foreignKey: 'id', as: 'reviewer' });
 Bid.hasMany(Post);
 Post.hasMany(Bid);
 
-User.sync();
-Post.sync();
-WalkMeta.sync();
-Review.sync();
-Bid.sync();
+User.sync({ alter: true });
+Post.sync({ alter: true });
+WalkMeta.sync({ alter: true });
+Review.sync({ alter: true });
+Bid.sync({ alter: true });
 
 module.exports = {
   User,
