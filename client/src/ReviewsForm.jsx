@@ -33,6 +33,14 @@ class ReviewsForm extends Component {
     this.setState({
       date: stateDate
     },() => {
+
+      const send = {
+        rating: this.state.rating,
+        review: this.state.review,
+        recommend: this.state.recommended
+      }
+      console.log(send)
+      ///axios post review
     console.log(this.state)
     })
   }
@@ -50,7 +58,7 @@ class ReviewsForm extends Component {
     return (
       <div>
         <Form>
-          <Form.Group widths="equal">
+          {/* <Form.Group widths="equal">
             <Form.Field
               control={Input}
               onChange={this.handleChange}
@@ -72,7 +80,7 @@ class ReviewsForm extends Component {
             name="email"
             placeholder="Email"
           />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Field
             control={TextArea}
             onChange={this.handleChange}

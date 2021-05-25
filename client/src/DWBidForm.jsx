@@ -11,10 +11,10 @@ class DWBidForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      // firstName: '',
+      // lastName: '',
       bidprice: '',
-      linktoprofile: '',
+      // linktoprofile: '',
 
     };
 
@@ -38,7 +38,7 @@ class DWBidForm extends Component {
 
         <Form>
 
-          <Form.Group>
+          {/* <Form.Group>
             <Form.Field
               onChange={this.handleChange}
               control={Input}
@@ -61,7 +61,7 @@ class DWBidForm extends Component {
               placeholder="Profile URL"
             />
 
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group>
 
             <Form.Field

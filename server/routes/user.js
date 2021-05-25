@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 const { User } = require('../database');
+const authenticateUser = require('../middleware/authenticateToken');
 
 // Add a new user to the DB
 const checkNewUserInput = (req, res, next) => {
@@ -23,6 +24,7 @@ const checkNewUserInput = (req, res, next) => {
   }
   res.status(400).send('missing required field');
 };
+
 router.post('/signup', checkNewUserInput, async (req, res) => {
   const {
     username,
@@ -71,6 +73,19 @@ router.post('/signup', checkNewUserInput, async (req, res) => {
       .catch((err) => res.status(500).send(err));
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+router.get('/', authenticateUser, async (req, res) => {
+  const { userId } = req;
+  try {
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: ['username', 'email', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zipcode', 'dog_name', 'description', 'user_type', 'services', 'certifications'],
+    });
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).end();
   }
 });
 

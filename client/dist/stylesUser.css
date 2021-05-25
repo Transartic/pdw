@@ -347,7 +347,32 @@ html, body {
   color: whitesmoke;
   margin: 0;
 }
+.nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 .calendar-time {
   font-weight: bold;
+}
+
+.dogwalker-review-name {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dogwalker-review-date {
+  margin-left: 10px;
+}
+
+.dogwalker-review-review {
+  font-style: italic;
+  margin-left: 10px;
+}
+
+.dogwalker-review-recs-ratings {
+  margin-bottom: 20px;
+  margin-left: 10px;ß
 }
