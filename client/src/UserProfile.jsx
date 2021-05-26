@@ -71,15 +71,9 @@ class UserProfile extends Component {
         })
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-<<<<<<< HEAD
           for (var j = 0; j < dummyData.length; j++) { 
             var current = dummyData[j]; 
             var dataString = dummyData[j].dateTime; 
-=======
-          for (var j = 0; j < response.length; j++) {
-            var current = response[j];
-            var dataString = response[j].dateTime;
->>>>>>> development
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -107,7 +101,6 @@ class UserProfile extends Component {
       //})
 
     } else {
-<<<<<<< HEAD
       
       // axios.get('/api/posts', {
       //   headers: {
@@ -123,20 +116,6 @@ class UserProfile extends Component {
           for (var j = 0; j < dummyData.length; j++) { 
             var current = dummyData[j]; 
             var dataString = dummyData[j].dateTime; 
-=======
-
-      axios.get('/api/posts', {
-        headers: {
-          'Authorization': this.props.token
-        }
-      })
-      .then((response) => {
-        var days = document.getElementsByClassName("day");
-        for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) {
-            var current = response[j];
-            var dataString = response[j].dateTime;
->>>>>>> development
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
