@@ -4,6 +4,7 @@ import {
   Form,
   Input,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class OwnerSignUpForm extends Component {
@@ -55,7 +56,6 @@ class OwnerSignUpForm extends Component {
             placeholder="Enter Password"
           />
         </Form.Group>
-
         <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
       </Form>
     );

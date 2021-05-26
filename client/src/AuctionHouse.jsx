@@ -198,10 +198,15 @@ class AuctionHouse extends Component {
       )
         })
     return (
-      <div>
+      <div className="logged-in-profile">
 
         <div>
-          <h1>Pucci</h1>
+        <div className="landing-container">
+          <h1 className="landing-title">
+            P U C C I
+            <FaPaw />
+          </h1>
+        </div>
 
           <div className="auction-profile-container">
             <FaPaw size={70} />

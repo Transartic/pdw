@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PostBidModal from './PostBidModal';
 // eslint-disable-next-line import/extensions
 import UserProfile from './UserProfile.jsx';
@@ -30,13 +30,13 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home updateToken={this.updateToken} />
+            {!this.state.token ? <Home updateToken={this.updateToken} /> : <Redirect to="/UserProfile" />}
           </Route>
           <Route exact path="/UserProfile">
-            <UserProfile token={this.state.token} />
+            {!this.state.token ? <Redirect to="/" /> : <UserProfile token={this.state.token} />}
           </Route>
           <Route exact path="/AuctionHouse">
-            <AuctionHouse />
+            {!this.state.token ? <Redirect to="/" /> : <AuctionHouse />}
           </Route>
           <Route exact path="/DogwalkerProfile">
             <DogwalkerProfile />
