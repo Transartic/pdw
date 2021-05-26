@@ -7,6 +7,7 @@ import {
   TextArea,
   Rating,
 } from 'semantic-ui-react';
+import axios from 'axios'
 
 class ReviewsForm extends Component {
   constructor(props) {
@@ -41,6 +42,8 @@ class ReviewsForm extends Component {
       }
       console.log(send)
       ///axios post review
+      // axios.post('/api/review/', send)
+      // .then()
     console.log(this.state)
     })
   }
