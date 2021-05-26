@@ -125,15 +125,18 @@ class PostBidForm extends Component {
       duration: this.state.duration,
       dateTime: this.state.dateTime,
       services: dogServices,
-      maxPrice: this.state.maxPrice,
-
+      maxPrice: JSON.stringify(Number(this.state.maxPrice.replace(/[^0-9.-]+/g,"")))
     };
     //need user Id
-    console.log('send', send);
+    console.log('send', JSON.stringify(send));
+
     // axios.post('/api/posts/', send)
     //   .then((response) => {
     //     console.log(('res', response));
-    //   });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 
   handleChange(e) {

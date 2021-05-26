@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { FaPaw } from 'react-icons/fa';
 import background from '../dist/video/background.mp4';
 import OwnerSignUpModal from './Widgets/OwnerSignupModal.jsx';
+import UserLoginModal from './Widgets/UserLoginModal.jsx';
+import WalkerSignUpModal from './Widgets/WalkerSignUpModal.jsx';
 
 class Home extends Component {
   constructor() {
@@ -14,6 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div className="landing-page">
+        <UserLoginModal updateToken={this.props.updateToken} />
         <video
           autoPlay
           loop
@@ -37,7 +40,11 @@ class Home extends Component {
             <FaPaw />
           </h1>
           <h2 className="landing-sub-title">Where LA walks their best friend</h2>
-          <OwnerSignUpModal />
+          <div className="landing-sign-in-container">
+            <OwnerSignUpModal updateToken={this.props.updateToken} />
+            <WalkerSignUpModal updateToken={this.props.updateToken} />
+          </div>
+
         </div>
 
       </div>

@@ -7,7 +7,7 @@ const { User } = require('../database');
 
 // login route
 router.post('/', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body.data;
   try {
     const user = await User.findOne({ where: { username } });
     if (user === null) {
@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
         user_id: user.id,
       }, process.env.ACCESS_TOKEN_SECRET);
       res.json({ accessToken });
+      return;
     }
     res.status(400).send('Username or Password incorrect');
   } catch (err) {
