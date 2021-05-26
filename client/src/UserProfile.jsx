@@ -2,10 +2,12 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import {
+  Button, Form, Header, Icon, Checkbox, Modal
+} from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import { calendar } from './helpers.js';
+import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
@@ -16,7 +18,8 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       user: null,
-      posts: null
+      posts: null,
+      modalOpen: false
     };
     this.updateCalendar = this.updateCalendar.bind(this);
     this.getNextWalk = this.getNextWalk.bind(this);
@@ -32,7 +35,6 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data.data.id);
       this.setState({ user: data.data });
     })
     .catch(() => {});
@@ -43,12 +45,18 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data);
       this.setState({ posts: data.data });
     })
     .catch(() => {});
     // calendar();
     // this.updateCalendar();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts !== this.state.posts) {
+      this.getNextWalk();
+    }
+
   }
 
   updateCalendar() {
@@ -139,53 +147,57 @@ class UserProfile extends Component {
   }
 
   getNextWalk() {
-    if (this.state.walker) {
-      let walks = this.state.posts;
+    if (this.state.user.user_type) {
+      if (this.state.walks) {
+        let walks = this.state.posts;
 
-      walks.sort(function(a,b) {
-        return new Date(b.dateTime) - new Date(a.dateTime);
-      })
+        walks.sort(function(a,b) {
+          return new Date(b.dateTime) - new Date(a.dateTime);
+        })
 
-      let nextWalk = walks.pop();
+        let nextWalk = walks.pop();
 
-      let dataString = nextWalk.dateTime;
-      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
-      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+        let dataString = nextWalk.dateTime;
+        const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+        let newDate = new Date(dataString).toLocaleDateString(undefined, options);
 
-      let services = Object.keys(nextWalk.services);
-      services = services.join(', ');
+        let services = Object.keys(nextWalk.services);
+        services = services.join(', ');
 
-      let div = document.getElementsByClassName("next-walk");
-      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
-      <div>Duration: ${nextWalk.duration}</div>
-      <div>Services: ${services}</div>
-      <div>Owner: ${nextWalk.user.firstName}</div>
-      <div>Comments: ${nextWalk.comments}</div>
-      <div>Address: ${nextWalk.user.address1}</div>`)
+        let div = document.getElementsByClassName("next-walk");
+        div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+        <div>Duration: ${nextWalk.duration}</div>
+        <div>Services: ${services}</div>
+        <div>Owner: ${nextWalk.user.firstName}</div>
+        <div>Comments: ${nextWalk.comments}</div>
+        <div>Address: ${nextWalk.user.address1}</div>`)
+      }
 
     } else {
-      let walks = this.state.posts;
+      if (this.state.walks) {
+        let walks = this.state.posts;
 
-      walks.sort(function(a,b) {
-        return new Date(b.dateTime) - new Date(a.dateTime);
-      })
+        walks.sort(function(a,b) {
+          return new Date(b.dateTime) - new Date(a.dateTime);
+        })
 
-      let nextWalk = walks.pop();
+        let nextWalk = walks.pop();
 
-      let dataString = nextWalk.dateTime;
-      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
-      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+        let dataString = nextWalk.dateTime;
+        const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+        let newDate = new Date(dataString).toLocaleDateString(undefined, options);
 
-      let services = Object.keys(nextWalk.services);
-      services = services.join(', ');
+        let services = Object.keys(nextWalk.services);
+        services = services.join(', ');
 
-      let div = document.getElementsByClassName("next-walk");
-      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
-      <div>Duration: ${nextWalk.duration}</div>
-      <div>Services: ${services}</div>
-      <div>Walker: ${nextWalk.assignedWalker}</div>
-      <div>Comments: ${nextWalk.comments}</div>
-      <div>Price: $${nextWalk.maxPrice}</div>`)
+        let div = document.getElementsByClassName("next-walk");
+        div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+        <div>Duration: ${nextWalk.duration}</div>
+        <div>Services: ${services}</div>
+        <div>Walker: ${nextWalk.assignedWalker}</div>
+        <div>Comments: ${nextWalk.comments}</div>
+        <div>Price: $${nextWalk.maxPrice}</div>`)
+      }
 
     }
 
@@ -211,6 +223,7 @@ class UserProfile extends Component {
       return (<div></div>);
     }
     let profileInfo;
+    let recordWalk;
     if (this.state.user.user_type === false) {
       profileInfo = (<div className="profile-info">
                        <h5>Dogs Name</h5>
