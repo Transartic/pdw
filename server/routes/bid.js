@@ -43,8 +43,11 @@ router.post('/', authenticateUser, checkNewBid, async (req, res) => {
       bidder_id,
       bid,
     })
-      .then((data) => res.status(201).send(data))
-      .catch(err => console.log(err));
+      .then((success) => res.sendStatus(201))
+      .catch(err => {
+        console.log(err)
+        res.sendStatus(404);
+      });
   }
   catch (err) { res.status(500).send(err); }
 });
@@ -56,17 +59,28 @@ router.get('/:id', (req, res) => {
       where: {
         bidder_id: id,
       },
-      include: [{
+      attributes: { exclude: ['post_id'] },
+      include: {
         model: Post,
         where: {
           userId: id,
         },
-      }],
+      },
     })
-      .then((data) => res.send(data))
+      .then((data) => res.json(data))
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
 
+router.get('/', (req, res) => {
+  Bid.findAll({
+    attributes: [['bidder_id', 'user_id'], 'bid'],
+  })
+    .then(bids => res.json(bids))
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(404);
+    });
+});
 module.exports = router;
