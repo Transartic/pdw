@@ -1,16 +1,18 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
-import { Link, Route, Router, Switch, HashRouter } from 'react-router-dom';
 import {
-  Button, Header, Icon, Modal
+  Link, Route, Router, Switch, HashRouter,
+} from 'react-router-dom';
+import {
+  Button, Header, Icon, Modal,
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
+import axios from 'axios';
 import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
-import axios from 'axios';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -48,113 +50,113 @@ class UserProfile extends Component {
     if (this.state.walker) {
       axios.get('/api/posts', {
         headers: {
-          'Authorization': this.props.token
-        }
+          Authorization: this.props.token,
+        },
       })
-      .then((response) => {
-        var days = document.getElementsByClassName("day");
-        for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) { 
-            var current = response[j]; 
-            var dataString = response[j].dateTime; 
-            var stringToDate = new Date(dataString);
-  
-            const options = { weekday: "short" };
-            const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-  
-            var dataTime = stringToDate.toLocaleTimeString("en-US");
-  
-            var services = [];
-            var servicesObj = current.services;
-            for (var key in servicesObj) {
-              if (servicesObj[key]) {
-                services.push(key);
+        .then((response) => {
+          const days = document.getElementsByClassName('day');
+          for (let i = 0; i < days.length; i++) {
+            for (let j = 0; j < response.length; j++) {
+              const current = response[j];
+              const dataString = response[j].dateTime;
+              const stringToDate = new Date(dataString);
+
+              const options = { weekday: 'short' };
+              const dataDay = new Intl.DateTimeFormat('en-US', options).format(stringToDate);
+
+              const dataTime = stringToDate.toLocaleTimeString('en-US');
+
+              const services = [];
+              const servicesObj = current.services;
+              for (const key in servicesObj) {
+                if (servicesObj[key]) {
+                  services.push(key);
+                }
               }
-            }
-            var servicesString = services.join(', ');
-  
-            if (days[i].innerText === dataDay) {
-              days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
+              const servicesString = services.join(', ');
+
+              if (days[i].innerText === dataDay) {
+                days[i].insertAdjacentHTML('beforeend', `<div class="calendar-time">${dataTime}</div>
               <div>Name: ${current.user.firstName}</div>
               <div>Duration: ${current.duration} </div>
-              <div>Services: ${servicesString}</div>`)
-            }
-          }
-        }
-      })
-
-    } else {
-      
-      axios.get('/api/posts', {
-        headers: {
-          'Authorization': this.props.token
-        }
-      })
-      .then((response) => {
-        var days = document.getElementsByClassName("day");
-        for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) { 
-            var current = response[j]; 
-            var dataString = response[j].dateTime; 
-            var stringToDate = new Date(dataString);
-  
-            const options = { weekday: "short" };
-            const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-  
-            var dataTime = stringToDate.toLocaleTimeString("en-US");
-  
-            var services = [];
-            var servicesObj = current.services;
-            for (var key in servicesObj) {
-              if (servicesObj[key]) {
-                services.push(key);
+              <div>Services: ${servicesString}</div>`);
               }
             }
-            var servicesString = services.join(', ');
-  
-            if (days[i].innerText === dataDay) {
-              days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
+          }
+        });
+    } else {
+      axios.get('/api/posts', {
+        headers: {
+          Authorization: this.props.token,
+        },
+      })
+        .then((response) => {
+          const days = document.getElementsByClassName('day');
+          for (let i = 0; i < days.length; i++) {
+            for (let j = 0; j < response.length; j++) {
+              const current = response[j];
+              const dataString = response[j].dateTime;
+              const stringToDate = new Date(dataString);
+
+              const options = { weekday: 'short' };
+              const dataDay = new Intl.DateTimeFormat('en-US', options).format(stringToDate);
+
+              const dataTime = stringToDate.toLocaleTimeString('en-US');
+
+              const services = [];
+              const servicesObj = current.services;
+              for (const key in servicesObj) {
+                if (servicesObj[key]) {
+                  services.push(key);
+                }
+              }
+              const servicesString = services.join(', ');
+
+              if (days[i].innerText === dataDay) {
+                days[i].insertAdjacentHTML('beforeend', `<div class="calendar-time">${dataTime}</div>
               <div>Walker: ${current.assignedWalker}</div>
               <div>Duration: ${current.duration} </div>
-              <div>Services: ${servicesString}</div>`)
+              <div>Services: ${servicesString}</div>`);
+              }
             }
           }
-        }
-      })
-
+        });
     }
   }
-
 
   render() {
     let profileInfo;
     if (this.state.walker === false) {
-      profileInfo = (<div className="profile-info">
-                       <h5>Dogs Name</h5>
-                       <div>{this.state.dogs}</div>
-                       <h5>About</h5>
-                       <p>
-                         {this.state.description}
-                       </p>
-                     </div>);
+      profileInfo = (
+        <div className="profile-info">
+          <h5>Dogs Name</h5>
+          <div>{this.state.dogs}</div>
+          <h5>About</h5>
+          <p>
+            {this.state.description}
+          </p>
+        </div>
+      );
     } else {
-      profileInfo = (<div className="profile-info">
-                       <h5>Services</h5>
-                       <ul>
-                         {
-                           this.state.services.map((service, k) => {
-                             return <li key={k}>{service}</li>
-                           })
+      profileInfo = (
+        <div className="profile-info">
+          <h5>Services</h5>
+          <ul>
+            {
+                           this.state.services.map((service, k) => <li key={k}>{service}</li>)
                          }
-                       </ul>
-                       <p>{this.state.description}</p>
-                     </div>);
+          </ul>
+          <p>{this.state.description}</p>
+        </div>
+      );
     }
-    const auctionButton = (<div className="profile-button-right">
-                             <Link className="auctionhouse" to="/AuctionHouse">
-                              <Button>Auction House</Button>
-                             </Link>
-                            </div>);
+    const auctionButton = (
+      <div className="profile-button-right">
+        <Link className="auctionhouse" to="/AuctionHouse">
+          <Button>Auction House</Button>
+        </Link>
+      </div>
+    );
     return (
       <div className="logged-in-profile">
         <div className="landing-container">
@@ -177,9 +179,7 @@ class UserProfile extends Component {
             <div className="posts-schedule-walks-container">
               <div className="auction-posts">
                 {
-                  this.state.bids.map((bid, k) => {
-                    return <BidPost key={k} bid={bid} page={this.state.walker} />
-                  })
+                  this.state.bids.map((bid, k) => <BidPost key={k} bid={bid} page={this.state.walker} />)
                 }
               </div>
 

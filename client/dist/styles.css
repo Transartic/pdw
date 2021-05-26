@@ -379,7 +379,7 @@ html, body {
 .landing-title {
   font-family: 'Gilda Display', serif;
   font-family: 'Tinos', serif;
-  font-size: 7rem;
+  font-size: 8rem;
   color: whitesmoke;
   vertical-align: middle;
   margin: 0;
@@ -413,6 +413,7 @@ html, body {
     position: absolute;
     top: 2rem;
     right: 8rem;
+    font-size: 1.5rem;
   }
 
 

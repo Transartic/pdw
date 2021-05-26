@@ -28,7 +28,6 @@ class OwnerSignUpModal extends Component {
 };
 
   render() {
-
     return (
         <div>
 
