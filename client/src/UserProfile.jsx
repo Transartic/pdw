@@ -137,7 +137,7 @@ class UserProfile extends Component {
     }
   }
 
-  getNextWalk() {
+  getNextWalk() { 
     if (this.state.walker) {
       let walks = this.state.posts;
 
