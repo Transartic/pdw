@@ -13,7 +13,7 @@ class DWBidForm extends Component {
     this.state = {
       // firstName: '',
       // lastName: '',
-      bidprice: '',
+      bid: '',
       // linktoprofile: '',
 
     };
