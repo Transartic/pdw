@@ -280,33 +280,35 @@ html, body {
 .auction-posts-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  margin-left: auto;
+  margin-right: 10px;
+  width: 60%;
   float: left;
 }
 .auction-profile-container {
   display: flex;
   flex-direction: column;
   width: 25%;
-  margin-right: 5%;
+  margin-right: 10%;
+  margin-left: 10px;
   float: left;
   height: 70%;
 }
 .allposts{
-  flex: 3 0 100px;
-  border: solid;
-  border-color: black;
+  flex: 1 0 100px;
+  box-shadow: 5px 5px blueviolet;
 }
 .singlepost{
-  flex: 3 0 100px;
+  flex: 1 1 100px;
   margin-bottom: 10px;
-  border: solid;
-  border-color: black;
+  background-image: radial-gradient(white, aqua);
+  box-shadow: 5px 5px blueviolet;
   margin-left: 1%;
   margin-right: 1%;
 }
 .aucpost{
   /* display: flex; */
-    flex: 1 0 100px;
+    flex: 1 1 100px;
     justify-content: space-between;
     /* border: solid;
     border-color: black; */
