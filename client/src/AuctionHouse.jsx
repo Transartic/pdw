@@ -127,7 +127,61 @@ class AuctionHouse extends Component {
             },
             "bids": []
         }
-    ]
+    ],
+    testbids: [
+      {
+          "user_id": 11,
+          "bid": 461
+      },
+      {
+          "user_id": 11,
+          "bid": 58
+      },
+      {
+          "user_id": 3,
+          "bid": 398
+      },
+      {
+          "user_id": 3,
+          "bid": 477
+      },
+      {
+          "user_id": 13,
+          "bid": 248
+      },
+      {
+          "user_id": 1,
+          "bid": 216
+      },
+      {
+          "user_id": 1,
+          "bid": 322
+      },
+      {
+          "user_id": 3,
+          "bid": 477
+      },
+      {
+          "user_id": 11,
+          "bid": 255
+      },
+      {
+          "user_id": 11,
+          "bid": 92
+      },
+      {
+          "user_id": 11,
+          "bid": 58
+      },
+      {
+          "user_id": 27,
+          "bid": 30
+      },
+      {
+          "user_id": 27,
+          "bid": 110
+      }
+  ]
 
     };
     this.handleReset = this.handleReset.bind(this);
@@ -169,10 +223,21 @@ class AuctionHouse extends Component {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
     today = `${mm}/${dd}/${yyyy}`;
-
+    var output = []
+this.state.testbids.map((onebid) =>{
+  this.state.testdata.map((el)=>{
+    if(el.userId === onebid.user_id){
+      if(output.indexOf(el.user.firstName) === -1){
+        output.push(el.user.firstName, onebid.bid);
+    }
+    }
+  })
+})
+console.log(output)
 
 
     var post = this.state.testdata.map((el, index)=>{
+
 
 var date = new Date(el.dateTime)
 
@@ -219,6 +284,7 @@ var date = new Date(el.dateTime)
       </Modal>
     </div>
       )
+    //})
         })
     return (
       <div className="logged-in-profile">
