@@ -2,10 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import {
-  Link, Route, Router, Switch, HashRouter,
-} from 'react-router-dom';
-import {
-  Button, Header, Icon, Modal,
+  Button, Form, Header, Icon, Checkbox, Modal
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
@@ -13,6 +10,7 @@ import axios from 'axios';
 import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
+import WalkChecklist from './WalkChecklist';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -37,41 +35,56 @@ class UserProfile extends Component {
         info: 'lalalalalalalalalalalalalalalalala',
         amount: 90,
       }],
+      posts: []
     };
     this.updateCalendar = this.updateCalendar.bind(this);
+    this.getNextWalk = this.getNextWalk.bind(this);
+    this.onRecordWalkClick = this.onRecordWalkClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     calendar();
     this.updateCalendar();
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts !== this.state.posts) {
+      this.getNextWalk();
+    }
+
   }
 
   updateCalendar() {
     if (this.state.walker) {
-      axios.get('/api/posts', {
-        headers: {
-          Authorization: this.props.token,
-        },
-      })
-        .then((response) => {
-          const days = document.getElementsByClassName('day');
-          for (let i = 0; i < days.length; i++) {
-            for (let j = 0; j < response.length; j++) {
-              const current = response[j];
-              const dataString = response[j].dateTime;
-              const stringToDate = new Date(dataString);
+      // axios.get('/api/posts', {
+      //   headers: {
+      //     'Authorization': this.props.token
+      //   }
+      // })
+      // .then((response) => {
+        this.setState({
+          posts: dummyData
+        })
+        var days = document.getElementsByClassName("day");
+        for (var i = 0; i < days.length; i++) {
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
+            var stringToDate = new Date(dataString);
 
-              const options = { weekday: 'short' };
-              const dataDay = new Intl.DateTimeFormat('en-US', options).format(stringToDate);
+            const options = { weekday: "short" };
+            const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
 
-              const dataTime = stringToDate.toLocaleTimeString('en-US');
+            var dataTime = stringToDate.toLocaleTimeString("en-US");
 
-              const services = [];
-              const servicesObj = current.services;
-              for (const key in servicesObj) {
-                if (servicesObj[key]) {
-                  services.push(key);
-                }
+            var services = [];
+            var servicesObj = current.services;
+            for (var key in servicesObj) {
+              if (servicesObj[key]) {
+                services.push(key);
               }
               const servicesString = services.join(', ');
 
@@ -83,32 +96,37 @@ class UserProfile extends Component {
               }
             }
           }
-        });
+        }
+      //})
+
     } else {
-      axios.get('/api/posts', {
-        headers: {
-          Authorization: this.props.token,
-        },
-      })
-        .then((response) => {
-          const days = document.getElementsByClassName('day');
-          for (let i = 0; i < days.length; i++) {
-            for (let j = 0; j < response.length; j++) {
-              const current = response[j];
-              const dataString = response[j].dateTime;
-              const stringToDate = new Date(dataString);
 
-              const options = { weekday: 'short' };
-              const dataDay = new Intl.DateTimeFormat('en-US', options).format(stringToDate);
+      // axios.get('/api/posts', {
+      //   headers: {
+      //     'Authorization': this.props.token
+      //   }
+      // })
+      // .then((response) => {
+        this.setState({
+          posts: dummyData
+        })
+        var days = document.getElementsByClassName("day");
+        for (var i = 0; i < days.length; i++) {
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
+            var stringToDate = new Date(dataString);
 
-              const dataTime = stringToDate.toLocaleTimeString('en-US');
+            const options = { weekday: "short" };
+            const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
 
-              const services = [];
-              const servicesObj = current.services;
-              for (const key in servicesObj) {
-                if (servicesObj[key]) {
-                  services.push(key);
-                }
+            var dataTime = stringToDate.toLocaleTimeString("en-US");
+
+            var services = [];
+            var servicesObj = current.services;
+            for (var key in servicesObj) {
+              if (servicesObj[key]) {
+                services.push(key);
               }
               const servicesString = services.join(', ');
 
@@ -120,23 +138,92 @@ class UserProfile extends Component {
               }
             }
           }
-        });
+        }
+      //})
+
     }
+  }
+
+  getNextWalk() {
+    if (this.state.walker) {
+      let walks = this.state.posts;
+
+      walks.sort(function(a,b) {
+        return new Date(b.dateTime) - new Date(a.dateTime);
+      })
+
+      let nextWalk = walks.pop();
+
+      let dataString = nextWalk.dateTime;
+      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+
+      let services = Object.keys(nextWalk.services);
+      services = services.join(', ');
+
+      let div = document.getElementsByClassName("next-walk");
+      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+      <div>Duration: ${nextWalk.duration}</div>
+      <div>Services: ${services}</div>
+      <div>Owner: ${nextWalk.user.firstName}</div>
+      <div>Comments: ${nextWalk.comments}</div>
+      <div>Address: ${nextWalk.user.address1}</div>`)
+
+    } else {
+      let walks = this.state.posts;
+
+      walks.sort(function(a,b) {
+        return new Date(b.dateTime) - new Date(a.dateTime);
+      })
+
+      let nextWalk = walks.pop();
+
+      let dataString = nextWalk.dateTime;
+      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+
+      let services = Object.keys(nextWalk.services);
+      services = services.join(', ');
+
+      let div = document.getElementsByClassName("next-walk");
+      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+      <div>Duration: ${nextWalk.duration}</div>
+      <div>Services: ${services}</div>
+      <div>Walker: ${nextWalk.assignedWalker}</div>
+      <div>Comments: ${nextWalk.comments}</div>
+      <div>Price: $${nextWalk.maxPrice}</div>`)
+
+    }
+
+  }
+
+  onRecordWalkClick() {
+    this.setState({
+      modalOpen: true
+    })
+  }
+
+  handleClose = () => this.setState({ modalOpen: false });
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
   render() {
     let profileInfo;
+    let recordWalk;
     if (this.state.walker === false) {
-      profileInfo = (
-        <div className="profile-info">
-          <h5>Dogs Name</h5>
-          <div>{this.state.dogs}</div>
-          <h5>About</h5>
-          <p>
-            {this.state.description}
-          </p>
-        </div>
-      );
+      profileInfo = (<div className="profile-info">
+                       <h5>Dogs Name</h5>
+                       <div>{this.state.dogs}</div>
+                       <h5>About</h5>
+                       <p>
+                         {this.state.description}
+                       </p>
+                     </div>);
+      recordWalk = <span></span>
     } else {
       profileInfo = (
         <div className="profile-info">
@@ -145,10 +232,10 @@ class UserProfile extends Component {
             {
                            this.state.services.map((service, k) => <li key={k}>{service}</li>)
                          }
-          </ul>
-          <p>{this.state.description}</p>
-        </div>
-      );
+                       </ul>
+                       <p>{this.state.description}</p>
+                     </div>);
+      recordWalk = <button onClick={this.onRecordWalkClick}>Record Walk</button>
     }
     const auctionButton = (
       <div className="profile-button-right">
@@ -184,14 +271,21 @@ class UserProfile extends Component {
               </div>
 
               <div className="schedule">
-                This is the schedule class
+                Schedule
                 <div id="calendar" />
               </div>
 
               <div className="walks-container">
-                <div className="next-walk">This is the next-walk class</div>
-                <div className="checklist">This is the checklist class</div>
-                <div className="previous-walk">This is the previous-walk class</div>
+                <div className="next-walk">Next Walk</div>
+                {recordWalk}
+                <Modal
+                  open={this.state.modalOpen}
+                  onClose={this.handleClose}>
+                    <Modal.Header>Walk Checklist</Modal.Header>
+                    <Modal.Content>
+                      <WalkChecklist onClose={this.handleClose}/>
+                    </Modal.Content>
+                  </Modal>
               </div>
             </div>
           </div>
