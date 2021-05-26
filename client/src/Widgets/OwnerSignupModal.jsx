@@ -32,7 +32,8 @@ class OwnerSignUpModal extends Component {
     return (
         <div>
 
-          <button onClick={this.handleOpen}>Furry Friend Signup</button>
+          <button className="landing-btn" onClick={this.handleOpen}>Furry Friend Signup</button>
+
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}

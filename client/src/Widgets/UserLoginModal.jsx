@@ -30,9 +30,9 @@ class UserLoginModal extends Component {
   render() {
 
     return (
-        <div>
+        <div className="login-container">
 
-          <button onClick={this.handleOpen}>Sign In</button>
+          <button className="landing-btn" onClick={this.handleOpen}>Sign In</button>
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}

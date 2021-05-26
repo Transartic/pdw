@@ -10,8 +10,8 @@ class OwnerSignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'jj13',
+      password: 'test1',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,7 +19,15 @@ class OwnerSignUpForm extends Component {
   }
 
   handlePost() {
-    console.log(this.state);
+    axios.post('/api/login/', {
+      data: (this.state),
+    })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      })
+      .catch(() => {});
   }
 
   handleChange(e) {

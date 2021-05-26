@@ -365,6 +365,22 @@
   justify-content: space-between;
 }
 
+.landing-btn {
+  cursor: pointer;
+  background: transparent;
+  color: whitesmoke;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold
+  }
+
+  .login-container {
+    position: absolute;
+    top: 2rem;
+    right: 8rem;
+  }
+
+
 /* ==================================================== */
 
 .nav{

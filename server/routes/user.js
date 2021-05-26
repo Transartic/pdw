@@ -10,7 +10,6 @@ const authenticateUser = require('../middleware/authenticateToken');
 // Add a new user to the DB
 const checkNewUserInput = (req, res, next) => {
   req = req.body.data;
-  console.log(req);
   const manditoryField = ['username', 'email', 'first_name', 'last_name', 'password', 'address1', 'city', 'state', 'zipcode', 'user_type'];
   let hasAllRequiredFields = true;
   manditoryField.forEach((field) => {

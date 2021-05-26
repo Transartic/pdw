@@ -15,6 +15,7 @@ class Home extends Component {
   render() {
     return (
       <div className="landing-page">
+        <UserLoginModal />
         <video
           autoPlay
           loop
@@ -40,7 +41,6 @@ class Home extends Component {
           <h2 className="landing-sub-title">Where LA walks their best friend</h2>
           <div className="landing-sign-in-container">
             <OwnerSignUpModal />
-            <UserLoginModal />
           </div>
 
         </div>
