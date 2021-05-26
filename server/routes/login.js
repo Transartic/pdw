@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
         user_id: user.id,
       }, process.env.ACCESS_TOKEN_SECRET);
       res.json({ accessToken });
+      return;
     }
     res.status(400).send('Username or Password incorrect');
   } catch (err) {

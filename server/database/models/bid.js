@@ -5,7 +5,7 @@ const Bid = db.define('bid', {
   post_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'postId'
+    field: 'postId',
   },
   bidder_id: {
     type: DataTypes.INTEGER,
