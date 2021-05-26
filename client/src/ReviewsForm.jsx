@@ -30,6 +30,8 @@ class ReviewsForm extends Component {
 
 
   handlePost(e) {
+
+    //axios request to get current person logged in id
     var date = new Date().getTime()
     var stateDate = new Date(date)
     this.setState({
@@ -39,6 +41,7 @@ class ReviewsForm extends Component {
 
 
       const send = {
+
         rating: this.state.rating,
         review: this.state.review,
         recommend: true,

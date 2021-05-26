@@ -175,7 +175,7 @@ class AuctionHouse extends Component {
     var post = this.state.testdata.map((el, index)=>{
 
 var date = new Date(el.dateTime)
-console.log('date', date)
+
       return(
        <div key={index} className="singlepost">
      Date:
