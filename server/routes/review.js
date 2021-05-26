@@ -1,9 +1,11 @@
 /* jshint esversion: 8 */
+/* eslint-disable camelcase */
 const express = require('express');
 const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
 const { Review, User } = require('../database/index');
+const sequelize = require('../database/connection');
 
 
 const checkNewReview = (req, res, next) => {
@@ -46,7 +48,7 @@ router.post('/', authenticateUser, checkNewReview, async (req, res) => {
       review,
       recommend,
     })
-      .then((user) => res.status(201).send(user))
+      .then((success) => res.sendStatus(201))
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
@@ -54,21 +56,20 @@ router.post('/', authenticateUser, checkNewReview, async (req, res) => {
 
 router.get('/:id', authenticateUser, (req, res) => {
   const { id } = req.params;
-  const replyObj = {};
 
   try {
     Review.findAll({
       where: {
         reviewee_id: id,
       },
-      include: [{
+      include: {
         model: User,
         as: 'reviewer',
-        attributes: ['first_name', 'last_name'] }],
+        attributes: ['first_name', 'last_name'],
+      },
     })
       .then((reviews) => {
-        res.send(reviews);
-        replyObj.reviews = reviews;
+        res.json(reviews);
       })
       .catch(err => console.log(err));
   }

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
-import OwnerSignUpForm from './OwnerSignUpForm.jsx';
+import WalkerSignUpForm from './WalkerSignUpForm.jsx';
 
-class OwnerSignUpModal extends Component {
+class WalkerSignUpModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,16 +32,16 @@ class OwnerSignUpModal extends Component {
     return (
         <div>
 
-          <button className="landing-btn" onClick={this.handleOpen}>DOG OWNER SIGNUP</button>
+          <button className="landing-btn" onClick={this.handleOpen}>WALK DOGGOS SIGNUP</button>
 
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
           >
-            <Modal.Header>Furry Friend Sign-Up</Modal.Header>
+            <Modal.Header>Walker Sign-Up</Modal.Header>
             <Modal.Content>
-              <OwnerSignUpForm
+              <WalkerSignUpForm
                 updateToken={this.props.updateToken}
                 handleClose={this.handleClose}/>
             </Modal.Content>
@@ -51,4 +51,4 @@ class OwnerSignUpModal extends Component {
 }
 }
 
-export default OwnerSignUpModal;
+export default WalkerSignUpModal;
