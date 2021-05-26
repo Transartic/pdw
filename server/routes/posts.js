@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
-const { Post, User } = require('../database');
+const { Post, User, Bid } = require('../database');
 
 const checkNewPostInput = (req, res, next) => {
   const { body } = req;
@@ -33,13 +33,22 @@ router.get('/', authenticateUser, (req, res) => {
         [Op.gte]: moment().toDate(),
       },
     },
-    include: {
-      model: User,
-      attributes: ['firstName', 'dogname', 'address1'],
-    }
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'dogname', 'address1'],
+      },
+      {
+        model: Bid,
+        attributes: ['post_id', 'bidder_id', 'bid'],
+      },
+    ],
   })
     .then((userPosts) => res.send(userPosts))
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err)
+    });
 });
 
 router.get('/all', authenticateUser, (req, res) => {
@@ -49,6 +58,16 @@ router.get('/all', authenticateUser, (req, res) => {
         [Op.gte]: moment().toDate(),
       },
     },
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'dogname', 'address1'],
+      },
+      {
+        model: Bid,
+        attributes: ['post_id', 'bidder_id', 'bid'],
+      },
+    ],
   })
     .then((posts) => res.send(posts));
 });
