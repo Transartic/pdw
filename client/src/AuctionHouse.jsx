@@ -17,96 +17,96 @@ class AuctionHouse extends Component {
 
       testdata: [
         {
-
-          "id": 1,
-
-          "duration": "90",
-
-          "dateTime": "2021-05-26T12:30:00.000Z",
-
-          "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-
-          "services": {
-
-              "accupuncture": false,
-
-              "spa": true,
-
-              "dental": false
-
-          },
-
-          "maxPrice": 30,
-
-          "status": true,
-
-          "assignedWalker": 2,
-
-          "createdAt": "2021-05-25T20:02:16.720Z",
-
-          "updatedAt": "2021-05-25T20:02:16.720Z",
-
-          "userId": 1,
-
-          "bidId": null,
-
-          "user": {
-
-              "firstName": "John",
-
-              "dogname": 'Slinky',
-
-              "address1": "123 Main St."
-
-          }
-
-      },
-      {
-
-        "id": 1,
-
-        "duration": "90",
-
-        "dateTime": "2021-05-26T12:30:00.000Z",
-
-        "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-
-        "services": {
-
-            "accupuncture": false,
-
-            "spa": false,
-
-            "dental": true
-
+            "id": 5,
+            "duration": "90",
+            "dateTime": "2021-05-30T12:30:00.000Z",
+            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
+            "services": {
+                "accupuncture": true,
+                "spa": true,
+                "dental": true
+            },
+            "maxPrice": 30,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-25T23:48:02.327Z",
+            "updatedAt": "2021-05-25T23:48:02.327Z",
+            "userId": 1,
+            "user": {
+                "firstName": "John",
+                "dogname": null,
+                "address1": "123 Main St."
+            },
+            "bids": []
         },
-
-        "maxPrice": 30,
-
-        "status": true,
-
-        "assignedWalker": 2,
-
-        "createdAt": "2021-05-25T20:02:16.720Z",
-
-        "updatedAt": "2021-05-25T20:02:16.720Z",
-
-        "userId": 1,
-
-        "bidId": null,
-
-        "user": {
-
-            "firstName": "John",
-
-            "dogname": 'Clooney',
-
-            "address1": "123 Main St."
-
+        {
+            "id": 6,
+            "duration": "2 Hour",
+            "dateTime": "2021-06-03T16:00:00.000Z",
+            "comments": "Bad Dog",
+            "services": {
+                "dogMassage": false,
+                "dogAccupuncture": false,
+            },
+            "maxPrice": 30,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-26T15:23:54.124Z",
+            "updatedAt": "2021-05-26T15:23:54.124Z",
+            "userId": 1,
+            "user": {
+                "firstName": "John",
+                "dogname": null,
+                "address1": "123 Main St."
+            },
+            "bids": []
+        },
+        {
+            "id": 4,
+            "duration": "90",
+            "dateTime": "2021-05-27T12:30:00.000Z",
+            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
+            "services": {
+                "accupuncture": true,
+                "spa": true,
+                "dental": true
+            },
+            "maxPrice": 30,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-25T23:47:56.838Z",
+            "updatedAt": "2021-05-25T23:47:56.838Z",
+            "userId": 1,
+            "user": {
+                "firstName": "John",
+                "dogname": null,
+                "address1": "123 Main St."
+            },
+            "bids": []
+        },
+        {
+            "id": 7,
+            "duration": "3 Hour",
+            "dateTime": "2021-07-13T18:00:00.000Z",
+            "comments": "Good Dog",
+            "services": {
+                "dogMassage": "dogMassage",
+                "dogAccupuncture": "dogAccupuncture"
+            },
+            "maxPrice": 50,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-26T15:26:54.585Z",
+            "updatedAt": "2021-05-26T15:26:54.585Z",
+            "userId": 1,
+            "user": {
+                "firstName": "John",
+                "dogname": null,
+                "address1": "123 Main St."
+            },
+            "bids": []
         }
-
-    }
-      ]
+    ]
 
     };
     this.handleReset = this.handleReset.bind(this);
@@ -153,10 +153,12 @@ class AuctionHouse extends Component {
 
     var post = this.state.testdata.map((el, index)=>{
 
-
+var date = new Date(el.dateTime)
+console.log('date', date)
       return(
        <div key={index} className="singlepost">
-     Date: {el.dateTime}
+     Date:
+     {date.toString()}
       <br /><br />
       Price Posted By Owner: {`$${el.maxPrice}`}
       <br /><br />
@@ -174,7 +176,7 @@ class AuctionHouse extends Component {
       Services
       <ul>
 {Object.entries(el.services).map(([key, value], index) => {
-  if(value === false)
+  if(value === true)
    return(
     <li key={index}>{key}</li>
    )
