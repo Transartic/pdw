@@ -26,18 +26,18 @@ const checkNewPostInput = (req, res, next) => {
 router.get('/', authenticateUser, (req, res) => {
   const { userId } = req;
   Post.findAll({
-    where: {
-      [Op.or]: [{ userId }, { assignedWalker: userId }],
-      status: true,
-      dateTime: {
-        [Op.gte]: moment().toDate(),
-      },
-    },
+    // where: {
+    //   [Op.or]: [{ userId }, { assignedWalker: userId }],
+    //   status: true,
+    //   dateTime: {
+    //     [Op.gte]: moment().toDate(),
+    //   },
+    // },
     include: [
-      {
-        model: User,
-        attributes: ['firstName', 'dogname', 'address1'],
-      },
+      // {
+      //   model: User,
+      //   attributes: ['firstName', 'dogname', 'address1'],
+      // },
       {
         model: Bid,
         attributes: ['post_id', 'bidder_id', 'bid'],
