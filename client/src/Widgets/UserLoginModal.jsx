@@ -40,7 +40,7 @@ class UserLoginModal extends Component {
           >
             <Modal.Header>Sign In</Modal.Header>
             <Modal.Content>
-              <UserLoginForm handleClose={this.handleClose}/>
+              <UserLoginForm updateToken={this.props.updateToken} handleClose={this.handleClose}/>
             </Modal.Content>
           </Modal>
         </div>
