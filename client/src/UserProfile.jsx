@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Router, Switch, HashRouter } from 'react-router-dom';
 import {
-  Button, Header, Icon, Modal
+  Button, Form, Header, Icon, Checkbox, Modal
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
@@ -11,6 +11,7 @@ import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
+import WalkChecklist from './WalkChecklist';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class UserProfile extends Component {
     this.state = {
       username: 'Joseph',
       dogs: 'Bunty and Big Gertha',
-      walker: false,
+      walker: true,
       services: ['dog washing', 'teeth brushing'],
       description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
       bids: [{
@@ -39,15 +40,22 @@ class UserProfile extends Component {
     };
     this.updateCalendar = this.updateCalendar.bind(this);
     this.getNextWalk = this.getNextWalk.bind(this);
+    this.onRecordWalkClick = this.onRecordWalkClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     calendar();
     this.updateCalendar();
+    
   }
 
-  componentDidUpdate() {
-    this.getNextWalk();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts !== this.state.posts) {
+      this.getNextWalk();
+    }
+    
   }
 
   updateCalendar() {
@@ -190,6 +198,20 @@ class UserProfile extends Component {
 
   }
 
+  onRecordWalkClick() {
+    this.setState({
+      modalOpen: true
+    })
+  }
+
+  handleClose = () => this.setState({ modalOpen: false });
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
 
   render() {
     let profileInfo;
@@ -216,7 +238,7 @@ class UserProfile extends Component {
                        </ul>
                        <p>{this.state.description}</p>
                      </div>);
-      recordWalk = <button>Record Walk</button>
+      recordWalk = <button onClick={this.onRecordWalkClick}>Record Walk</button>
     }
     const auctionButton = (<div className="profile-button-right">
                              <Link className="auctionhouse" to="/AuctionHouse">
@@ -252,13 +274,21 @@ class UserProfile extends Component {
               </div>
 
               <div className="schedule">
-                This is the schedule class
+                Schedule
                 <div id="calendar" />
               </div>
 
               <div className="walks-container">
                 <div className="next-walk">Next Walk</div>
                 {recordWalk}
+                <Modal 
+                  open={this.state.modalOpen}
+                  onClose={this.handleClose}>
+                    <Modal.Header>Walk Checklist</Modal.Header>
+                    <Modal.Content>
+                      <WalkChecklist onClose={this.handleClose}/>
+                    </Modal.Content>
+                  </Modal>
               </div>
             </div>
           </div>
