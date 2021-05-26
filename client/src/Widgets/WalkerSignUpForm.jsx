@@ -5,6 +5,8 @@ import {
   Form,
   Input,
   Select,
+  Radio,
+  TextArea,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -32,8 +34,13 @@ class OwnerSignUpForm extends Component {
       city: '',
       state: '',
       description: '',
-      user_type: false,
-      services: '',
+      user_type: true,
+      services: {
+        massage: false,
+        dental_cleaning: false,
+        accupuncture: false,
+        spa: false,
+      },
       certifications: '',
     };
 
@@ -41,6 +48,16 @@ class OwnerSignUpForm extends Component {
     this.handleCityChange = this.handleCityChange.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.handleSpaChange = this.handleSpaChange.bind(this);
+    this.handleTeethChange = this.handleTeethChange.bind(this);
+    this.handleAccChange = this.handleAccChange.bind(this);
+    this.handleMassageChange = this.handleMassageChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
   handlePost() {
@@ -48,15 +65,54 @@ class OwnerSignUpForm extends Component {
       data: (this.state),
     })
       .then((response) => {
+        console.log(response);
         this.props.updateToken(response.data);
       }, (error) => {
         console.log(error);
       });
   }
 
-  handleChange(e) {
+  handleSpaChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
+      services: {
+        massage: this.state.services.massage,
+        dental_cleaning: this.state.services.dental_cleaning,
+        accupuncture: this.state.services.accupuncture,
+        spa: Boolean(e.target.value),
+      },
+    });
+  }
+
+  handleTeethChange(e) {
+    this.setState({
+      services: {
+        massage: this.state.services.massage,
+        dental_cleaning: Boolean(e.target.value),
+        accupuncture: this.state.services.accupuncture,
+        spa: this.state.services.spa,
+      },
+    });
+  }
+
+  handleAccChange(e) {
+    this.setState({
+      services: {
+        massage: this.state.services.massage,
+        dental_cleaning: this.state.services.dental_cleaning,
+        accupuncture: Boolean(e.target.value),
+        spa: this.state.services.spa,
+      },
+    });
+  }
+
+  handleMassageChange(e) {
+    this.setState({
+      services: {
+        massage: Boolean(e.target.value),
+        dental_cleaning: this.state.services.dental_cleaning,
+        accupuncture: this.state.services.accupuncture,
+        spa: this.state.services.spa,
+      },
     });
   }
 
@@ -73,12 +129,8 @@ class OwnerSignUpForm extends Component {
   }
 
   render() {
-    // console.log('formState', this.state);
-    // const { value } = this.state;
-
     return (
       <Form>
-
         <Form.Group>
           <Form.Field
             onChange={this.handleChange}
@@ -93,13 +145,6 @@ class OwnerSignUpForm extends Component {
             name="last_name"
             label="Last name"
             placeholder="Last name"
-          />
-          <Form.Field
-            onChange={this.handleChange}
-            control={Input}
-            name="dog_name"
-            label="Dog Name"
-            placeholder="Dog Name"
           />
         </Form.Group>
 
@@ -168,6 +213,22 @@ class OwnerSignUpForm extends Component {
             label="Zip Code"
             placeholder="Zipe Code"
           />
+        </Form.Group>
+        <h4>Services Offered</h4>
+
+        <Form.Group>
+          <input style={{ marginRight: '5px', marginLeft: '15px' }} type="radio" value="true" name="massage" onChange={this.handleMassageChange} />
+          {' '}
+          Dog Massage
+          <input style={{ marginRight: '5px', marginLeft: '15px' }} type="radio" value="true" name="accupuncture" onChange={this.handleAccChange} />
+          {' '}
+          Dog Accupuncture
+          <input style={{ marginRight: '5px', marginLeft: '15px' }} type="radio" value="true" name="dental_cleaning" onChange={this.handleTeethChange} />
+          {' '}
+          Teeth Brushing
+          <input style={{ marginRight: '5px', marginLeft: '15px' }} type="radio" value="true" name="spa" onChange={this.handleSpaChange} />
+          {' '}
+          Dog Spa
         </Form.Group>
 
         <Form.Field

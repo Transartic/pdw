@@ -7,7 +7,6 @@ const { User } = require('../database');
 
 // login route
 router.post('/', async (req, res) => {
-  console.log(req.body.data);
   const { username, password } = req.body.data;
   try {
     const user = await User.findOne({ where: { username } });
@@ -26,7 +25,6 @@ router.post('/', async (req, res) => {
     }
     res.status(400).send('Username or Password incorrect');
   } catch (err) {
-    console.log('err 28 login.js', err);
     res.status(500).send(err);
   }
 });
