@@ -15,33 +15,48 @@ const calendar = () => {
 };
 
 var dummyData = [{
-  duration: 60,
-  dateTime: "2021-05-26T12:15:50.283Z",
-  maxPrice: 30,
-  comments: "stuff stuff stuff",
-  services: {
-    acupuncture: true,
-    spa: true,
-    dental: false
+  id : 6,
+  duration : "2 Hour",
+  dateTime : "2021-06-03T16:00:00.000Z",
+  comments : "Bad Dog",
+  services : {
+      dogMassage : "dogMassage",
+      dogAcupuncture : "dogAccupuncture"
   },
-  ownerName: "billy",
-  dogName: "Greg",
-  ownerAddress: "123 main st, LA 90210",
-  dogwalkerName: "Sally"
-}, {
-  duration: 60,
-  dateTime: "2021-05-28T18:15:50.283Z",
-  maxPrice: 30,
-  comments: "stuff stuff stuff",
-  services: {
-    acupuncture: false,
-    spa: true,
-    dental: false
+  maxPrice : 30,
+  status: true,
+  assignedWalker: null,
+  createdAt: "2021-05-26T15:23:54.124Z",
+  updatedAt: "2021-05-26T15:23:54.124Z",
+  userId: 1,
+  bidId : null,
+  user : {
+      firstName : "John",
+      dogname : null,
+      address1 : "123 Main St."
+  }
+},
+{
+  id : 7,
+  duration : "3 Hour",
+  dateTime : "2021-07-13T18:00:00.000Z",
+  comments : "Good Dog",
+  services : {
+      dogMassage : "dogMassage",
+      dogAccupuncture: "dogAccupuncture"
   },
-  ownerName: "billy",
-  dogName: "Steve",
-  ownerAddress: "123 main st, LA 90210",
-  dogwalkerName: "Bob"
+  maxPrice : 50,
+  status : true,
+  assignedWalker: null,
+  createdAt : "2021-05-26T15:26:54.585Z",
+  updatedAt : "2021-05-26T15:26:54.585Z",
+  userId : 1,
+  bidId : null,
+  user : {
+      firstName: "John",
+      dogname : null,
+      address1 : "123 Main St."
+  }
 }]
 
 export {calendar, dummyData}
