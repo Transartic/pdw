@@ -65,7 +65,7 @@ router.get('/all', authenticateUser, (req, res) => {
       },
       {
         model: Bid,
-        attributes: ['post_id', 'bidder_id', 'bid'],
+        attributes: ['id', 'bidder_id', 'bid'],
       },
     ],
   })

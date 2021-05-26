@@ -1,13 +1,11 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
-import { Link, Route, Router, Switch, HashRouter } from 'react-router-dom';
-import {
-  Button, Header, Icon, Modal
-} from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import { calendar, dummyData } from './helpers.js';
+import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
@@ -16,32 +14,36 @@ class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'Joseph',
-      dogs: 'Bunty and Big Gertha',
-      walker: true,
-      services: ['dog washing', 'teeth brushing'],
-      description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
-      bids: [{
-        username: 'Cody',
-        date: '?',
-        reqServices: ['acupunture', 'treat'],
-        info: 'dkdkdkdkdkdkdkdkdkdkdkdkdkdkd',
-        amount: 56,
-      },
-      {
-        username: 'Tish',
-        date: '?',
-        reqServices: ['acupunture', 'wash'],
-        info: 'lalalalalalalalalalalalalalalalala',
-        amount: 90,
-      }],
+      user: null,
+      posts: null
     };
     this.updateCalendar = this.updateCalendar.bind(this);
   }
 
   componentDidMount() {
-    calendar();
-    this.updateCalendar();
+    axios.get('/api/user', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      console.log(data.data.id);
+      this.setState({ user: data.data });
+    })
+    .catch(() => {});
+
+    axios.get('/api/posts/', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      console.log(data);
+      this.setState({ posts: data.data });
+    })
+    .catch(() => {});
+    // calendar();
+    // this.updateCalendar();
   }
 
   updateCalendar() {
@@ -127,14 +129,19 @@ class UserProfile extends Component {
 
 
   render() {
+    if (!this.state.user || !this.state.posts) {
+      return (<div></div>);
+    }
     let profileInfo;
-    if (this.state.walker === false) {
+    if (this.state.user.user_type === false) {
       profileInfo = (<div className="profile-info">
                        <h5>Dogs Name</h5>
-                       <div>{this.state.dogs}</div>
+                       <div>{this.state.user.dog_name}</div>
                        <h5>About</h5>
                        <p>
-                         {this.state.description}
+                         {this.state.user.city}
+                         {this.state.user.state}
+                         {this.state.user.descriptions}
                        </p>
                      </div>);
     } else {
@@ -142,12 +149,12 @@ class UserProfile extends Component {
                        <h5>Services</h5>
                        <ul>
                          {
-                           this.state.services.map((service, k) => {
+                           this.state.user.services.map((service, k) => {
                              return <li key={k}>{service}</li>
                            })
                          }
                        </ul>
-                       <p>{this.state.description}</p>
+                       <p>{this.state.user.certifications}</p>
                      </div>);
     }
     const auctionButton = (<div className="profile-button-right">
@@ -169,18 +176,18 @@ class UserProfile extends Component {
           <div className="top-container">
             <div className="profile-container">
               <div className="profile-picture">This is the profile-picture class</div>
-              <div className="username">{this.state.username}</div>
-              {this.state.walker === false ? <PostBidModal /> : auctionButton}
+              <div className="username">{this.state.user.username}</div>
+              {this.state.user.user_type === false ? <PostBidModal /> : auctionButton}
               {profileInfo}
             </div>
 
             <div className="posts-schedule-walks-container">
               <div className="auction-posts">
-                {
+                {/* {
                   this.state.bids.map((bid, k) => {
                     return <BidPost key={k} bid={bid} page={this.state.walker} />
                   })
-                }
+                } */}
               </div>
 
               <div className="schedule">
