@@ -21,11 +21,11 @@ Post.hasMany(Bid, { foreignKey: 'bidder_id' });
 Bid.belongsTo(Post, { foreignKey: 'bidder_id' });
 //  Post.hasMany(Bid, { foreignKey: 'bidder_id' });
 
-User.sync();
-Post.sync();
-WalkMeta.sync();
-Review.sync();
-Bid.sync();
+User.sync({ alter: true });
+Post.sync({ alter: true });
+WalkMeta.sync({ alter: true });
+Review.sync({ alter: true });
+Bid.sync({ alter: true });
 
 module.exports = {
   User,
