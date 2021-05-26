@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
-import OwnerSignUpForm from './OwnerSignUpForm.jsx';
+import UserLoginForm from './UserLoginForm.jsx'
 
-class OwnerSignUpModal extends Component {
+class UserLoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,18 +30,17 @@ class OwnerSignUpModal extends Component {
   render() {
 
     return (
-        <div>
+        <div className="login-container">
 
-          <button className="landing-btn" onClick={this.handleOpen}>Furry Friend Signup</button>
-
+          <button className="landing-btn" onClick={this.handleOpen}>Sign In</button>
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
           >
-            <Modal.Header>Furry Friend Sign-Up</Modal.Header>
+            <Modal.Header>Sign In</Modal.Header>
             <Modal.Content>
-              <OwnerSignUpForm handleClose={this.handleClose}/>
+              <UserLoginForm handleClose={this.handleClose}/>
             </Modal.Content>
           </Modal>
         </div>
@@ -49,4 +48,4 @@ class OwnerSignUpModal extends Component {
 }
 }
 
-export default OwnerSignUpModal;
+export default UserLoginModal;

@@ -6,9 +6,10 @@ import {
   Input,
   Select,
 } from 'semantic-ui-react';
+import axios from 'axios';
 
 const options3 = [
-  { text: 'Califonia', value: 'California' },
+  { text: 'California', value: 'CA' },
 ];
 const options4 = [
   { text: 'Los Angeles', value: 'Los Angeles' },
@@ -21,14 +22,18 @@ class OwnerSignUpForm extends Component {
       username: '',
       password: '',
       email: '',
-      firstName: '',
-      lastName: '',
-      dogName: '',
-      streetAddress: '',
-      apt: '',
-      zipeCode: '',
+      first_name: '',
+      last_name: '',
+      dog_name: '',
+      address1: '',
+      address2: '',
+      zipcode: '',
       city: '',
       state: '',
+      description: '',
+      user_type: false,
+      services: '',
+      certifications: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,6 +44,14 @@ class OwnerSignUpForm extends Component {
 
   handlePost() {
     console.log(this.state);
+    axios.post('/api/user/signup', {
+      data: (this.state),
+    })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   handleChange(e) {
@@ -70,21 +83,21 @@ class OwnerSignUpForm extends Component {
           <Form.Field
             onChange={this.handleChange}
             control={Input}
-            name="firstName"
-            label="First name"
+            name="first_name"
+            label="First Name"
             placeholder="First name"
           />
           <Form.Field
             onChange={this.handleChange}
             control={Input}
-            name="lastName"
+            name="last_name"
             label="Last name"
             placeholder="Last name"
           />
           <Form.Field
             onChange={this.handleChange}
             control={Input}
-            name="dogName"
+            name="dog_name"
             label="Dog Name"
             placeholder="Dog Name"
           />
@@ -118,14 +131,14 @@ class OwnerSignUpForm extends Component {
 
           <Form.Field
             onChange={this.handleChange}
-            name="streetAddress"
+            name="address1"
             control={Input}
             label="Street Address"
             placeholder="Street Address"
           />
           <Form.Field
             onChange={this.handleChange}
-            name="apt"
+            name="address2"
             control={Input}
             label="Apt"
             placeholder="Apt."
@@ -150,7 +163,7 @@ class OwnerSignUpForm extends Component {
           />
           <Form.Field
             onChange={this.handleChange}
-            name="zipeCode"
+            name="zipcode"
             control={Input}
             label="Zip Code"
             placeholder="Zipe Code"
@@ -168,4 +181,3 @@ class OwnerSignUpForm extends Component {
 }
 
 export default OwnerSignUpForm;
-
