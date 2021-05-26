@@ -32,7 +32,7 @@ class OwnerSignUpModal extends Component {
     return (
         <div>
 
-          <button className="landing-btn" onClick={this.handleOpen}>Furry Friend Signup</button>
+          <button className="landing-btn" onClick={this.handleOpen}>DOG OWNER SIGNUP</button>
 
           <Modal
             open={this.state.modalOpen}

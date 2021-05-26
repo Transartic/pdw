@@ -48,7 +48,7 @@ class OwnerSignUpForm extends Component {
       data: (this.state),
     })
       .then((response) => {
-        this.props.updateToken(response.data);
+        this.props.updateToken(response.data.accessToken);
       }, (error) => {
         console.log(error);
       });

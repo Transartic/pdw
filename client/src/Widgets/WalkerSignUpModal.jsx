@@ -32,7 +32,7 @@ class WalkerSignUpModal extends Component {
     return (
         <div>
 
-          <button className="landing-btn" onClick={this.handleOpen}>Walker Signup</button>
+          <button className="landing-btn" onClick={this.handleOpen}>WALK DOGGOS SIGNUP</button>
 
           <Modal
             open={this.state.modalOpen}

@@ -16,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div className="landing-page">
-        <UserLoginModal />
+        <UserLoginModal updateToken={this.props.updateToken} />
         <video
           autoPlay
           loop
