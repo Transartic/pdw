@@ -234,9 +234,7 @@ class OwnerSignUpForm extends Component {
           control={Checkbox}
           label="I agree to the Terms and Conditions"
         />
-        <Link className="users" to="/UserProfile">
-          <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
-        </Link>
+        <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
       </Form>
     );
   }

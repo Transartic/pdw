@@ -195,8 +195,6 @@ class UserProfile extends Component {
               </div>
             </div>
           </div>
-
-          <div className="area-map">This is the area-map class</div>
         </div>
       </div>
     );
