@@ -126,7 +126,6 @@ class UserProfile extends Component {
   }
 
 
-
   render() {
     let profileInfo;
     if (this.state.walker === false) {
