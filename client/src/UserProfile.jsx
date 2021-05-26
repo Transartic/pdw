@@ -193,6 +193,7 @@ class UserProfile extends Component {
 
   render() {
     let profileInfo;
+    let recordWalk;
     if (this.state.walker === false) {
       profileInfo = (<div className="profile-info">
                        <h5>Dogs Name</h5>
@@ -202,6 +203,7 @@ class UserProfile extends Component {
                          {this.state.description}
                        </p>
                      </div>);
+      recordWalk = <span></span>
     } else {
       profileInfo = (<div className="profile-info">
                        <h5>Services</h5>
@@ -214,6 +216,7 @@ class UserProfile extends Component {
                        </ul>
                        <p>{this.state.description}</p>
                      </div>);
+      recordWalk = <button>Record Walk</button>
     }
     const auctionButton = (<div className="profile-button-right">
                              <Link className="auctionhouse" to="/AuctionHouse">
@@ -255,6 +258,7 @@ class UserProfile extends Component {
 
               <div className="walks-container">
                 <div className="next-walk">Next Walk</div>
+                {recordWalk}
               </div>
             </div>
           </div>
