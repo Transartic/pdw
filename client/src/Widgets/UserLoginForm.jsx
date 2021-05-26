@@ -10,8 +10,8 @@ class OwnerSignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'jj13',
-      password: 'test1',
+      username: '',
+      password: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
