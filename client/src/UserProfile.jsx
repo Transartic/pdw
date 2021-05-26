@@ -9,6 +9,7 @@ import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
+import WalkChecklist from './WalkChecklist';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class UserProfile extends Component {
       posts: null
     };
     this.updateCalendar = this.updateCalendar.bind(this);
+    this.getNextWalk = this.getNextWalk.bind(this);
+    this.onRecordWalkClick = this.onRecordWalkClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,17 +53,20 @@ class UserProfile extends Component {
 
   updateCalendar() {
     if (this.state.walker) {
-      axios.get('/api/posts', {
-        headers: {
-          'Authorization': this.props.token
-        }
-      })
-      .then((response) => {
+      // axios.get('/api/posts', {
+      //   headers: {
+      //     'Authorization': this.props.token
+      //   }
+      // })
+      // .then((response) => {
+        this.setState({
+          posts: dummyData
+        })
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) {
-            var current = response[j];
-            var dataString = response[j].dateTime;
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -83,21 +91,24 @@ class UserProfile extends Component {
             }
           }
         }
-      })
+      //})
 
     } else {
 
-      axios.get('/api/posts', {
-        headers: {
-          'Authorization': this.props.token
-        }
-      })
-      .then((response) => {
+      // axios.get('/api/posts', {
+      //   headers: {
+      //     'Authorization': this.props.token
+      //   }
+      // })
+      // .then((response) => {
+        this.setState({
+          posts: dummyData
+        })
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) {
-            var current = response[j];
-            var dataString = response[j].dateTime;
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -122,9 +133,76 @@ class UserProfile extends Component {
             }
           }
         }
-      })
+      //})
 
     }
+  }
+
+  getNextWalk() {
+    if (this.state.walker) {
+      let walks = this.state.posts;
+
+      walks.sort(function(a,b) {
+        return new Date(b.dateTime) - new Date(a.dateTime);
+      })
+
+      let nextWalk = walks.pop();
+
+      let dataString = nextWalk.dateTime;
+      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+
+      let services = Object.keys(nextWalk.services);
+      services = services.join(', ');
+
+      let div = document.getElementsByClassName("next-walk");
+      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+      <div>Duration: ${nextWalk.duration}</div>
+      <div>Services: ${services}</div>
+      <div>Owner: ${nextWalk.user.firstName}</div>
+      <div>Comments: ${nextWalk.comments}</div>
+      <div>Address: ${nextWalk.user.address1}</div>`)
+
+    } else {
+      let walks = this.state.posts;
+
+      walks.sort(function(a,b) {
+        return new Date(b.dateTime) - new Date(a.dateTime);
+      })
+
+      let nextWalk = walks.pop();
+
+      let dataString = nextWalk.dateTime;
+      const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+      let newDate = new Date(dataString).toLocaleDateString(undefined, options);
+
+      let services = Object.keys(nextWalk.services);
+      services = services.join(', ');
+
+      let div = document.getElementsByClassName("next-walk");
+      div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
+      <div>Duration: ${nextWalk.duration}</div>
+      <div>Services: ${services}</div>
+      <div>Walker: ${nextWalk.assignedWalker}</div>
+      <div>Comments: ${nextWalk.comments}</div>
+      <div>Price: $${nextWalk.maxPrice}</div>`)
+
+    }
+
+  }
+
+  onRecordWalkClick() {
+    this.setState({
+      modalOpen: true
+    })
+  }
+
+  handleClose = () => this.setState({ modalOpen: false });
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
 
@@ -144,6 +222,7 @@ class UserProfile extends Component {
                          {this.state.user.descriptions}
                        </p>
                      </div>);
+      recordWalk = <span></span>
     } else {
       profileInfo = (<div className="profile-info">
                        <h5>Services</h5>
@@ -156,6 +235,7 @@ class UserProfile extends Component {
                        </ul>
                        <p>{this.state.user.certifications}</p>
                      </div>);
+      recordWalk = <button onClick={this.onRecordWalkClick}>Record Walk</button>
     }
     const auctionButton = (<div className="profile-button-right">
                              <Link className="auctionhouse" to="/AuctionHouse">
@@ -191,14 +271,21 @@ class UserProfile extends Component {
               </div>
 
               <div className="schedule">
-                This is the schedule class
+                Schedule
                 <div id="calendar" />
               </div>
 
               <div className="walks-container">
-                <div className="next-walk">This is the next-walk class</div>
-                <div className="checklist">This is the checklist class</div>
-                <div className="previous-walk">This is the previous-walk class</div>
+                <div className="next-walk">Next Walk</div>
+                {recordWalk}
+                <Modal
+                  open={this.state.modalOpen}
+                  onClose={this.handleClose}>
+                    <Modal.Header>Walk Checklist</Modal.Header>
+                    <Modal.Content>
+                      <WalkChecklist onClose={this.handleClose}/>
+                    </Modal.Content>
+                  </Modal>
               </div>
             </div>
           </div>

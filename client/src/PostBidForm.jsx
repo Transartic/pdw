@@ -110,21 +110,22 @@ class PostBidForm extends Component {
   handlePost() {
     const dogServices = {};
     if (this.state.dogMassage === 'true') {
-      dogServices.dogMassage = 'dogMassage';
+      dogServices.dogMassage = true;
     }
     if (this.state.dogAccupuncture === 'true') {
-      dogServices.dogAccupuncture = 'dogAccupuncture';
+      dogServices.dogAccupuncture = true;
     }
     if (this.state.teethBrushing === 'true') {
-      dogServices.teethBrushing = 'teethBrushing';
+      dogServices.teethBrushing = 'true';
     }
     if (this.state.dogSpa === 'true') {
-      dogServices.dogSpa = 'dogSpa';
+      dogServices.dogSpa = true;
     }
     const send = {
       duration: this.state.duration,
       dateTime: this.state.dateTime,
       services: dogServices,
+      comments: this.state.comments,
       maxPrice: JSON.stringify(Number(this.state.maxPrice.replace(/[^0-9.-]+/g,"")))
     };
     //need user Id
