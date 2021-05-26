@@ -18,7 +18,7 @@ class UserProfile extends Component {
     this.state = {
       username: 'Joseph',
       dogs: 'Bunty and Big Gertha',
-      walker: false,
+      walker: true,
       services: ['dog washing', 'teeth brushing'],
       description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
       bids: [{
@@ -54,16 +54,16 @@ class UserProfile extends Component {
       .then((response) => {
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) { 
-            var current = response[j]; 
-            var dataString = response[j].dateTime; 
+          for (var j = 0; j < response.length; j++) {
+            var current = response[j];
+            var dataString = response[j].dateTime;
             var stringToDate = new Date(dataString);
-  
+
             const options = { weekday: "short" };
             const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-  
+
             var dataTime = stringToDate.toLocaleTimeString("en-US");
-  
+
             var services = [];
             var servicesObj = current.services;
             for (var key in servicesObj) {
@@ -72,7 +72,7 @@ class UserProfile extends Component {
               }
             }
             var servicesString = services.join(', ');
-  
+
             if (days[i].innerText === dataDay) {
               days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Name: ${current.user.firstName}</div>
@@ -84,7 +84,7 @@ class UserProfile extends Component {
       })
 
     } else {
-      
+
       axios.get('/api/posts', {
         headers: {
           'Authorization': this.props.token
@@ -93,16 +93,16 @@ class UserProfile extends Component {
       .then((response) => {
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < response.length; j++) { 
-            var current = response[j]; 
-            var dataString = response[j].dateTime; 
+          for (var j = 0; j < response.length; j++) {
+            var current = response[j];
+            var dataString = response[j].dateTime;
             var stringToDate = new Date(dataString);
-  
+
             const options = { weekday: "short" };
             const dataDay = new Intl.DateTimeFormat("en-US", options).format(stringToDate);
-  
+
             var dataTime = stringToDate.toLocaleTimeString("en-US");
-  
+
             var services = [];
             var servicesObj = current.services;
             for (var key in servicesObj) {
@@ -111,7 +111,7 @@ class UserProfile extends Component {
               }
             }
             var servicesString = services.join(', ');
-  
+
             if (days[i].innerText === dataDay) {
               days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Walker: ${current.assignedWalker}</div>

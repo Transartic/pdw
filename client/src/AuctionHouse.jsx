@@ -40,13 +40,34 @@ class AuctionHouse extends Component {
             "bids": []
         },
         {
+            "id": 8,
+            "duration": "2 Hour",
+            "dateTime": "2021-06-03T16:00:00.000Z",
+            "comments": "Bad Dog",
+            "services": {
+                "dogMassage": true
+            },
+            "maxPrice": 30,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-26T18:01:15.782Z",
+            "updatedAt": "2021-05-26T18:01:15.782Z",
+            "userId": 27,
+            "user": {
+                "firstName": "Cody",
+                "dogname": null,
+                "address1": "2205 37TH ST"
+            },
+            "bids": []
+        },
+        {
             "id": 6,
             "duration": "2 Hour",
             "dateTime": "2021-06-03T16:00:00.000Z",
             "comments": "Bad Dog",
             "services": {
-                "dogMassage": false,
-                "dogAccupuncture": false,
+                "dogMassage": "dogMassage",
+                "dogAccupuncture": "dogAccupuncture"
             },
             "maxPrice": 30,
             "status": true,

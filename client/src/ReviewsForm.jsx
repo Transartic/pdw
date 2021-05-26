@@ -13,13 +13,14 @@ class ReviewsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      // firstName: '',
+      // lastName: '',
       review: '',
       rating: '',
-      recommended: '',
-      date: '',
-      email: ''
+      recommended: null,
+      // date: '',
+      // email: ''
+      date: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,13 +35,26 @@ class ReviewsForm extends Component {
     this.setState({
       date: stateDate
     },() => {
+      if(this.state.recommended === 'true'){
+
 
       const send = {
         rating: this.state.rating,
         review: this.state.review,
-        recommend: this.state.recommended
+        recommend: true,
+        createdAt: this.state.date
       }
-      console.log(send)
+      console.log(JSON.stringify(send))
+    } else if(this.state.recommended === 'false'){
+      const send = {
+        rating: this.state.rating,
+        review: this.state.review,
+        recommend: false,
+        createdAt: this.state.date
+      }
+      console.log(JSON.stringify(send))
+    }
+
       ///axios post review
       // axios.post('/api/review/', send)
       // .then()
