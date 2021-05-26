@@ -5,6 +5,7 @@ const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
 const { Review, User } = require('../database/index');
+const sequelize = require('../database/connection');
 
 
 const checkNewReview = (req, res, next) => {
@@ -55,7 +56,6 @@ router.post('/', authenticateUser, checkNewReview, async (req, res) => {
 
 router.get('/:id', authenticateUser, (req, res) => {
   const { id } = req.params;
-  const replyObj = {};
 
   try {
     Review.findAll({
@@ -70,7 +70,6 @@ router.get('/:id', authenticateUser, (req, res) => {
     })
       .then((reviews) => {
         res.json(reviews);
-        replyObj.reviews = reviews;
       })
       .catch(err => console.log(err));
   }

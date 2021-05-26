@@ -59,7 +59,7 @@ router.get('/:id', (req, res) => {
       where: {
         bidder_id: id,
       },
-      attributes: { exclude: ['post_id'] },
+      attributes: { exclude: ['post_id', 'postId'] },
       include: {
         model: Post,
         where: {
