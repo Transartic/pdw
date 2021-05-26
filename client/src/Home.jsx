@@ -37,7 +37,7 @@ class Home extends Component {
             <FaPaw />
           </h1>
           <h2 className="landing-sub-title">Where LA walks their best friend</h2>
-          <OwnerSignUpModal />
+          <OwnerSignUpModal updateToken={this.props.updateToken}/>
         </div>
 
       </div>

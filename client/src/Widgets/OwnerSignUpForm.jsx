@@ -6,6 +6,7 @@ import {
   Input,
   Select,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const options3 = [
   { text: 'Califonia', value: 'California' },
@@ -39,6 +40,7 @@ class OwnerSignUpForm extends Component {
 
   handlePost() {
     console.log(this.state);
+    this.props.updateToken(1);
   }
 
   handleChange(e) {
@@ -161,7 +163,9 @@ class OwnerSignUpForm extends Component {
           control={Checkbox}
           label="I agree to the Terms and Conditions"
         />
-        <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
+        <Link className="users" to="/UserProfile">
+          <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
+        </Link>
       </Form>
     );
   }

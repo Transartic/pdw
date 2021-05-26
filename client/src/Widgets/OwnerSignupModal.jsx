@@ -40,7 +40,9 @@ class OwnerSignUpModal extends Component {
           >
             <Modal.Header>Furry Friend Sign-Up</Modal.Header>
             <Modal.Content>
-              <OwnerSignUpForm handleClose={this.handleClose}/>
+              <OwnerSignUpForm
+                updateToken={this.props.updateToken}
+                handleClose={this.handleClose}/>
             </Modal.Content>
           </Modal>
         </div>
