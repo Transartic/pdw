@@ -25,33 +25,25 @@ class App extends Component {
   }
 
   render() {
-    let page;
-    if (!this.state.token) {
-      page = (<Home updateToken={this.updateToken} />);
-    } else {
-      page = (<UserProfile token={this.state.token} />);
-    }
     return (
-      <div className="navbar">
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/UserProfile">
-              <UserProfile />
-            </Route>
-            <Route exact path="/AuctionHouse">
-              <AuctionHouse />
-            </Route>
-            <Route exact path="/DogwalkerProfile">
-              <DogwalkerProfile />
-            </Route>
-            <div className="app" />
-          </Switch>
-        </Router>
-      </div>
+    <div className="app">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home updateToken={this.updateToken} />
+          </Route>
+          <Route exact path="/UserProfile">
+            <UserProfile token={this.state.token} />
+          </Route>
+          <Route exact path="/AuctionHouse">
+            <AuctionHouse />
+          </Route>
+          <Route exact path="/DogwalkerProfile">
+            <DogwalkerProfile />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
 
     );
   }
