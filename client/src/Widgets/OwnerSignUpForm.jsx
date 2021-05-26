@@ -6,6 +6,7 @@ import {
   Input,
   Select,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const options3 = [
@@ -49,6 +50,7 @@ class OwnerSignUpForm extends Component {
     })
       .then((response) => {
         console.log(response);
+        this.props.updateToken(1);
       }, (error) => {
         console.log(error);
       });
@@ -174,7 +176,9 @@ class OwnerSignUpForm extends Component {
           control={Checkbox}
           label="I agree to the Terms and Conditions"
         />
-        <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
+        <Link className="users" to="/UserProfile">
+          <Form.Field control={Button} onClick={this.handlePost}>Submit</Form.Field>
+        </Link>
       </Form>
     );
   }

@@ -40,7 +40,7 @@ class Home extends Component {
           </h1>
           <h2 className="landing-sub-title">Where LA walks their best friend</h2>
           <div className="landing-sign-in-container">
-            <OwnerSignUpModal />
+            <OwnerSignUpModal updateToken={this.props.updateToken}/>
           </div>
 
         </div>

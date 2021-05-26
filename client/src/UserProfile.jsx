@@ -1,6 +1,10 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
+import { Link, Route, Router, Switch, HashRouter } from 'react-router-dom';
+import {
+  Button, Header, Icon, Modal
+} from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
 import { calendar, dummyData } from './helpers.js';
@@ -132,6 +136,11 @@ class UserProfile extends Component {
                        <p>{this.state.description}</p>
                      </div>);
     }
+    const auctionButton = (<div className="profile-button-right">
+                             <Link className="auctionhouse" to="/AuctionHouse">
+                              <Button>Auction House</Button>
+                             </Link>
+                            </div>);
     return (
       <div className="logged-in-profile">
         <div className="landing-container">
@@ -147,7 +156,7 @@ class UserProfile extends Component {
             <div className="profile-container">
               <div className="profile-picture">This is the profile-picture class</div>
               <div className="username">{this.state.username}</div>
-              <PostBidModal />
+              {this.state.walker === false ? <PostBidModal /> : auctionButton}
               {profileInfo}
             </div>
 
