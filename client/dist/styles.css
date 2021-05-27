@@ -398,7 +398,7 @@ html, body {
 .landing-sign-in-container {
   display: flex;
   flex-direction: row;
-  width: 25%;
+  width: 30rem;
   justify-content: space-between;
 }
 

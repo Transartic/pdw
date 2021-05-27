@@ -1,12 +1,12 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
+import { Link, Route, Router, Switch, HashRouter } from 'react-router-dom';
 import {
   Button, Form, Header, Icon, Checkbox, Modal
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import axios from 'axios';
 import { calendar, dummyData } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
@@ -87,14 +87,14 @@ class UserProfile extends Component {
               if (servicesObj[key]) {
                 services.push(key);
               }
-              const servicesString = services.join(', ');
+            }
+            var servicesString = services.join(', ');
 
-              if (days[i].innerText === dataDay) {
-                days[i].insertAdjacentHTML('beforeend', `<div class="calendar-time">${dataTime}</div>
+            if (days[i].innerText === dataDay) {
+              days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Name: ${current.user.firstName}</div>
               <div>Duration: ${current.duration} </div>
-              <div>Services: ${servicesString}</div>`);
-              }
+              <div>Services: ${servicesString}</div>`)
             }
           }
         }
@@ -129,14 +129,14 @@ class UserProfile extends Component {
               if (servicesObj[key]) {
                 services.push(key);
               }
-              const servicesString = services.join(', ');
+            }
+            var servicesString = services.join(', ');
 
-              if (days[i].innerText === dataDay) {
-                days[i].insertAdjacentHTML('beforeend', `<div class="calendar-time">${dataTime}</div>
+            if (days[i].innerText === dataDay) {
+              days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Walker: ${current.assignedWalker}</div>
               <div>Duration: ${current.duration} </div>
-              <div>Services: ${servicesString}</div>`);
-              }
+              <div>Services: ${servicesString}</div>`)
             }
           }
         }
@@ -212,6 +212,7 @@ class UserProfile extends Component {
     });
   }
 
+
   render() {
     let profileInfo;
     let recordWalk;
@@ -226,25 +227,24 @@ class UserProfile extends Component {
                      </div>);
       recordWalk = <span></span>
     } else {
-      profileInfo = (
-        <div className="profile-info">
-          <h5>Services</h5>
-          <ul>
-            {
-                           this.state.services.map((service, k) => <li key={k}>{service}</li>)
+      profileInfo = (<div className="profile-info">
+                       <h5>Services</h5>
+                       <ul>
+                         {
+                           this.state.services.map((service, k) => {
+                             return <li key={k}>{service}</li>
+                           })
                          }
                        </ul>
                        <p>{this.state.description}</p>
                      </div>);
       recordWalk = <button onClick={this.onRecordWalkClick}>Record Walk</button>
     }
-    const auctionButton = (
-      <div className="profile-button-right">
-        <Link className="auctionhouse" to="/AuctionHouse">
-          <Button>Auction House</Button>
-        </Link>
-      </div>
-    );
+    const auctionButton = (<div className="profile-button-right">
+                             <Link className="auctionhouse" to="/AuctionHouse">
+                              <Button>Auction House</Button>
+                             </Link>
+                            </div>);
     return (
       <div className="logged-in-profile">
         <div className="landing-container">
@@ -267,7 +267,9 @@ class UserProfile extends Component {
             <div className="posts-schedule-walks-container">
               <div className="auction-posts">
                 {
-                  this.state.bids.map((bid, k) => <BidPost key={k} bid={bid} page={this.state.walker} />)
+                  this.state.bids.map((bid, k) => {
+                    return <BidPost key={k} bid={bid} page={this.state.walker} />
+                  })
                 }
               </div>
 
