@@ -50,7 +50,7 @@ class UserProfile extends Component {
       this.setState({ posts: data.data });
       calendar();
       this.updateCalendar();
-      //this.getNextWalk();
+      this.getNextWalk();
     })
     .catch(() => {});
     
@@ -59,13 +59,13 @@ class UserProfile extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.posts !== this.state.posts) {
-      //this.getNextWalk();
+      this.getNextWalk();
     }
 
   }
 
   updateCalendar() {
-    if (this.state.walker) {
+    if (this.state.user.user_type) {
         var data = this.state.posts;
         if (data.length === 0) {
           return;
@@ -138,7 +138,7 @@ class UserProfile extends Component {
 
   getNextWalk() {
     if (this.state.user.user_type) {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
@@ -164,7 +164,7 @@ class UserProfile extends Component {
       }
 
     } else {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
