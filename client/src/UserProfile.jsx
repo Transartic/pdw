@@ -19,7 +19,7 @@ class UserProfile extends Component {
     this.state = {
       username: 'Joseph',
       dogs: 'Bunty and Big Gertha',
-      walker: true,
+      walker: false,
       services: ['dog washing', 'teeth brushing'],
       description: 'This is a bunch of text so that I may test the rendering power of the component and ensure it is being put in the box',
       bids: [{
@@ -48,14 +48,14 @@ class UserProfile extends Component {
   componentDidMount() {
     calendar();
     this.updateCalendar();
-    
+
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.posts !== this.state.posts) {
       this.getNextWalk();
     }
-    
+
   }
 
   updateCalendar() {
@@ -71,9 +71,9 @@ class UserProfile extends Component {
         })
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) { 
-            var current = dummyData[j]; 
-            var dataString = dummyData[j].dateTime; 
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -101,7 +101,7 @@ class UserProfile extends Component {
       //})
 
     } else {
-      
+
       // axios.get('/api/posts', {
       //   headers: {
       //     'Authorization': this.props.token
@@ -113,9 +113,9 @@ class UserProfile extends Component {
         })
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) { 
-            var current = dummyData[j]; 
-            var dataString = dummyData[j].dateTime; 
+          for (var j = 0; j < dummyData.length; j++) {
+            var current = dummyData[j];
+            var dataString = dummyData[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -145,23 +145,23 @@ class UserProfile extends Component {
     }
   }
 
-  getNextWalk() { 
+  getNextWalk() {
     if (this.state.walker) {
       let walks = this.state.posts;
 
       walks.sort(function(a,b) {
         return new Date(b.dateTime) - new Date(a.dateTime);
       })
-  
+
       let nextWalk = walks.pop();
-  
+
       let dataString = nextWalk.dateTime;
       const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
       let newDate = new Date(dataString).toLocaleDateString(undefined, options);
-      
+
       let services = Object.keys(nextWalk.services);
       services = services.join(', ');
-  
+
       let div = document.getElementsByClassName("next-walk");
       div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
       <div>Duration: ${nextWalk.duration}</div>
@@ -176,16 +176,16 @@ class UserProfile extends Component {
       walks.sort(function(a,b) {
         return new Date(b.dateTime) - new Date(a.dateTime);
       })
-  
+
       let nextWalk = walks.pop();
-  
+
       let dataString = nextWalk.dateTime;
       const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
       let newDate = new Date(dataString).toLocaleDateString(undefined, options);
-      
+
       let services = Object.keys(nextWalk.services);
       services = services.join(', ');
-  
+
       let div = document.getElementsByClassName("next-walk");
       div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
       <div>Duration: ${nextWalk.duration}</div>
@@ -281,7 +281,7 @@ class UserProfile extends Component {
               <div className="walks-container">
                 <div className="next-walk">Next Walk</div>
                 {recordWalk}
-                <Modal 
+                <Modal
                   open={this.state.modalOpen}
                   onClose={this.handleClose}>
                     <Modal.Header>Walk Checklist</Modal.Header>

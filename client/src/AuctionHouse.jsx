@@ -5,6 +5,7 @@ import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 import DWBidForm from './DWBidForm.jsx';
@@ -37,28 +38,28 @@ class AuctionHouse extends Component {
                 "dogname": null,
                 "address1": "123 Main St."
             },
-            "bids": []
-        },
-        {
-            "id": 8,
-            "duration": "2 Hour",
-            "dateTime": "2021-06-03T16:00:00.000Z",
-            "comments": "Bad Dog",
-            "services": {
-                "dogMassage": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T18:01:15.782Z",
-            "updatedAt": "2021-05-26T18:01:15.782Z",
-            "userId": 27,
-            "user": {
-                "firstName": "Cody",
-                "dogname": null,
-                "address1": "2205 37TH ST"
-            },
-            "bids": []
+            "bids": [
+                {
+                    "post_id": 5,
+                    "bidder_id": 11,
+                    "bid": 255
+                },
+                {
+                    "post_id": 5,
+                    "bidder_id": 11,
+                    "bid": 92
+                },
+                {
+                    "post_id": 5,
+                    "bidder_id": 11,
+                    "bid": 461
+                },
+                {
+                    "post_id": 5,
+                    "bidder_id": 11,
+                    "bid": 58
+                }
+            ]
         },
         {
             "id": 6,
@@ -79,6 +80,81 @@ class AuctionHouse extends Component {
                 "firstName": "John",
                 "dogname": null,
                 "address1": "123 Main St."
+            },
+            "bids": [
+                {
+                    "post_id": 6,
+                    "bidder_id": 3,
+                    "bid": 398
+                },
+                {
+                    "post_id": 6,
+                    "bidder_id": 3,
+                    "bid": 477
+                },
+                {
+                    "post_id": 6,
+                    "bidder_id": 13,
+                    "bid": 248
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "duration": "3 Hour",
+            "dateTime": "2021-07-13T18:00:00.000Z",
+            "comments": "Good Dog",
+            "services": {
+                "dogMassage": "dogMassage",
+                "dogAccupuncture": "dogAccupuncture"
+            },
+            "maxPrice": 50,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-26T15:26:54.585Z",
+            "updatedAt": "2021-05-26T15:26:54.585Z",
+            "userId": 1,
+            "user": {
+                "firstName": "John",
+                "dogname": null,
+                "address1": "123 Main St."
+            },
+            "bids": [
+                {
+                    "post_id": 7,
+                    "bidder_id": 1,
+                    "bid": 216
+                },
+                {
+                    "post_id": 7,
+                    "bidder_id": 1,
+                    "bid": 322
+                },
+                {
+                    "post_id": 7,
+                    "bidder_id": 3,
+                    "bid": 477
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "duration": "2 Hour",
+            "dateTime": "2021-06-03T16:00:00.000Z",
+            "comments": "Bad Dog",
+            "services": {
+                "dogMassage": true
+            },
+            "maxPrice": 30,
+            "status": true,
+            "assignedWalker": null,
+            "createdAt": "2021-05-26T18:01:15.782Z",
+            "updatedAt": "2021-05-26T18:01:15.782Z",
+            "userId": 27,
+            "user": {
+                "firstName": "Cody",
+                "dogname": null,
+                "address1": "2205 37TH ST"
             },
             "bids": []
         },
@@ -104,84 +180,8 @@ class AuctionHouse extends Component {
                 "address1": "123 Main St."
             },
             "bids": []
-        },
-        {
-            "id": 7,
-            "duration": "3 Hour",
-            "dateTime": "2021-07-13T18:00:00.000Z",
-            "comments": "Good Dog",
-            "services": {
-                "dogMassage": "dogMassage",
-                "dogAccupuncture": "dogAccupuncture"
-            },
-            "maxPrice": 50,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T15:26:54.585Z",
-            "updatedAt": "2021-05-26T15:26:54.585Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
         }
-    ],
-    testbids: [
-      {
-          "user_id": 11,
-          "bid": 461
-      },
-      {
-          "user_id": 11,
-          "bid": 58
-      },
-      {
-          "user_id": 3,
-          "bid": 398
-      },
-      {
-          "user_id": 3,
-          "bid": 477
-      },
-      {
-          "user_id": 13,
-          "bid": 248
-      },
-      {
-          "user_id": 1,
-          "bid": 216
-      },
-      {
-          "user_id": 1,
-          "bid": 322
-      },
-      {
-          "user_id": 3,
-          "bid": 477
-      },
-      {
-          "user_id": 11,
-          "bid": 255
-      },
-      {
-          "user_id": 11,
-          "bid": 92
-      },
-      {
-          "user_id": 11,
-          "bid": 58
-      },
-      {
-          "user_id": 27,
-          "bid": 30
-      },
-      {
-          "user_id": 27,
-          "bid": 110
-      }
-  ]
+    ]
 
     };
     this.handleReset = this.handleReset.bind(this);
@@ -223,17 +223,17 @@ class AuctionHouse extends Component {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
     today = `${mm}/${dd}/${yyyy}`;
-    var output = []
-this.state.testbids.map((onebid) =>{
-  this.state.testdata.map((el)=>{
-    if(el.userId === onebid.user_id){
-      if(output.indexOf(el.user.firstName) === -1){
-        output.push(el.user.firstName, onebid.bid);
-    }
-    }
-  })
-})
-console.log(output)
+//     var output = []
+// this.state.testbids.map((onebid) =>{
+//   this.state.testdata.map((el)=>{
+//     if(el.userId === onebid.user_id){
+//       if(output.indexOf(el.user.firstName) === -1){
+//         output.push(el.user.firstName, onebid.bid);
+//     }
+//     }
+//   })
+// })
+// console.log(output)
 
 
     var post = this.state.testdata.map((el, index)=>{
@@ -299,7 +299,13 @@ var date = new Date(el.dateTime)
 
           <div className="auction-profile-container">
             <FaPaw size={70} />
-            <div><h3>Auction House</h3></div>
+            <div className="landing-title">
+              <h2>Auction House</h2>
+              </div>
+              <Link className="users" to="/UserProfile">
+              <Button>Back To Profile</Button>
+      </Link>
+
             <div className="profile-info">Calender</div>
           </div>
 
