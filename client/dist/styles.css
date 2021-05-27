@@ -477,5 +477,10 @@ html, body {
 }
 .ahComments{
   text-align: center;
-
+}
+.ahBidButton{
+  padding-right: 200px;
+  padding-left: 200px;
+  display: flex;
+  justify-content: center;
 }
