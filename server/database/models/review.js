@@ -1,15 +1,8 @@
-const { DataTypes, Deferrable } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const db = require('../connection');
-const { User } = require('./user');
 
 const Review = db.define('review', {
-  // id: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   unique: true,
-  //   primaryKey: true,
-  //   autoIncrement: true,
-  // },
+
   reviewer_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -17,10 +10,6 @@ const Review = db.define('review', {
   reviewee_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: User,
-      key: 'id',
-    },
   },
   rating: {
     type: DataTypes.INTEGER,

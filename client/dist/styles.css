@@ -17,6 +17,7 @@ html, body {
   right: 0;
   background-image: linear-gradient(to top left, darkorchid, darkturquoise, white);
   z-index: 0;
+  font-family: 'Lora', serif;
 }
 
 .navbar {

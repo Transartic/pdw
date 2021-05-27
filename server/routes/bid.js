@@ -9,8 +9,7 @@ const { Bid, Post } = require('../database/index');
 const checkNewBid = (req, res, next) => {
   const { body } = req;
   const requiredFields = [
-    'post_id',
-    'bidder_id',
+    'postId',
     'bid',
   ];
 
@@ -32,18 +31,20 @@ const checkNewBid = (req, res, next) => {
 
 router.post('/', authenticateUser, checkNewBid, async (req, res) => {
   const {
-    post_id,
+    postId,
     bid,
   } = req.body;
 
   const { userId: bidder_id } = req;
   try {
     await Bid.create({
-      post_id,
+      postId,
       bidder_id,
       bid,
     })
-      .then((success) => res.sendStatus(201))
+      .then((success) => {
+        console.log(success);
+        res.sendStatus(201); })
       .catch(err => {
         console.log(err)
         res.sendStatus(404);
@@ -59,13 +60,8 @@ router.get('/:id', (req, res) => {
       where: {
         bidder_id: id,
       },
-      attributes: { exclude: ['post_id', 'postId'] },
-      include: {
-        model: Post,
-        where: {
-          userId: id,
-        },
-      },
+      attributes: { exclude: ['postId'] },
+      include: Post,
     })
       .then((data) => res.json(data))
       .catch(err => console.log(err));
