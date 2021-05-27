@@ -465,5 +465,22 @@ html, body {
   text-align: center;
   list-style-type: none;
   padding-right: 35px;
+}
 
+.ahDate{
+  text-align: center;
+
+}
+.ahOwner{
+  text-align: center;
+
+}
+.ahComments{
+  text-align: center;
+}
+.ahBidButton{
+  padding-right: 200px;
+  padding-left: 200px;
+  display: flex;
+  justify-content: center;
 }
