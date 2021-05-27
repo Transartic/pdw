@@ -11,7 +11,6 @@ const calendar = () => {
 
     calendar.insertAdjacentHTML("beforeend", `<div class="day"><div class="name">${dayName}</div></div>`);
   }
-
 };
 
 var dummyData = [{

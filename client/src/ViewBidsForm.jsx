@@ -42,7 +42,7 @@ class ViewBidsForm extends Component {
         <h5>Select one and submit to accept your walker!</h5>
         <div>
           {
-          this.props.bids.map((bid) => {
+            this.props.bids.map((bid) => {
             return (<Form.Field key={bid.username}>
               <Checkbox
                 radio
