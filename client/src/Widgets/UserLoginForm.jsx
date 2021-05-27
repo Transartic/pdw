@@ -53,6 +53,7 @@ class OwnerSignUpForm extends Component {
             onChange={this.handleChange}
             control={Input}
             name="password"
+            type="password"
             label="Enter Password"
             placeholder="Enter Password"
           />
