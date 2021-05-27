@@ -7,7 +7,6 @@ const Post = require('./models/post');
 const WalkMeta = require('./models/walkMeta');
 const Review = require('./models/review');
 const Bid = require('./models/bid');
-const Photo = require('./models/photo');
 
 User.hasMany(Post);
 Post.belongsTo(User);
@@ -18,19 +17,14 @@ WalkMeta.belongsTo(Post);
 User.hasMany(Review, { foreignKey: 'reviewee_id' });
 Review.belongsTo(User, { foreignKey: 'id', as: 'reviewer' });
 
-Post.hasMany(Bid);
-Bid.belongsTo(Post, { foreignKey: 'bidder_id' });
-// User.hasMany(Bid);
-// Bid.belongsTo(User);
-
-Photo.belongsTo(User, { foreignKey: 'id' });
+Post.hasMany(Bid, { foreignKey: 'id' });
+Bid.belongsTo(Post, { foreignKey: 'postId' });
 
 User.sync({ alter: true });
 Post.sync({ alter: true });
 WalkMeta.sync({ alter: true });
 Review.sync({ alter: true });
 Bid.sync({ alter: true });
-Photo.sync({ alter: true });
 
 module.exports = {
   User,

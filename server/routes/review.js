@@ -5,8 +5,6 @@ const authenticateUser = require('../middleware/authenticateToken');
 
 const router = express.Router();
 const { Review, User } = require('../database/index');
-const sequelize = require('../database/connection');
-
 
 const checkNewReview = (req, res, next) => {
   const { body } = req;
