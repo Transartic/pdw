@@ -23,8 +23,9 @@ class DWBidForm extends Component {
   }
 
   handlePost() {
+    console.log(this.props.postId)
     const send = {
-      postId: this.props.userId,
+      postId: this.state.postId,
       // bidder_id: this.props.userId,
       bid: JSON.stringify(Number(this.state.bid.replace(/[^0-9.-]+/g, ''))),
     };
@@ -48,7 +49,6 @@ class DWBidForm extends Component {
   }
 
   render() {
-
     return (
       <div>
 
