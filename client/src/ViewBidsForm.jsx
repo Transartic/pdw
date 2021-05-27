@@ -35,6 +35,7 @@ class ViewBidsForm extends Component {
   }
 
   render() {
+    console.log(this.props.bids)
     return (
       <Form>
 
@@ -43,7 +44,7 @@ class ViewBidsForm extends Component {
         <div>
           {
             this.props.bids.map((bid) => {
-            return (<Form.Field key={bid.username}>
+            return (<Form.Field key={bid.id}>
               <Checkbox
                 radio
                 label={`${bid.bidder_id} has placed a bid of ${bid.bid}`}

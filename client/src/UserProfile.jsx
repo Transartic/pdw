@@ -35,7 +35,6 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data.data)
       this.setState({ user: data.data });
     })
     .catch(() => {});
@@ -46,11 +45,11 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data.data)
       this.setState({ posts: data.data });
       calendar();
       this.updateCalendar();
       this.getNextWalk();
+      console.log(data.data)
     })
     .catch(() => {});
 
@@ -60,7 +59,6 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data)
     })
     .catch(() => {});
   }
@@ -248,6 +246,7 @@ class UserProfile extends Component {
                               <Button>Auction House</Button>
                              </Link>
                             </div>);
+                            console.log(this.state)
     return (
       <div className="logged-in-profile">
         <div className="landing-container">
