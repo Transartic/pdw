@@ -53,8 +53,8 @@ class UserProfile extends Component {
       this.getNextWalk();
     })
     .catch(() => {});
-    
-    
+
+
   }
 
 
@@ -253,7 +253,7 @@ class UserProfile extends Component {
 
           <div className="top-container">
             <div className="profile-container">
-              <div className="profile-picture">This is the profile-picture class</div>
+              <img className="profile-picture" src={this.state.user.user_type ? "https://eskipaper.com/images/dog-background-hd-1.jpg" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvWBG0PlX6HaX3ZtwAi-bLaZwTvKy85xwwb_IzIlAk3eYGiVuzzkLPqFI6zicYi2kcETs&usqp=CAU"}/>
               <div className="username">{this.state.user.username}</div>
               {this.state.user.user_type === false ? <PostBidModal token={this.props.token}/> : auctionButton}
               {profileInfo}
