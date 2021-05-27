@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import { calendar, dummyData } from './helpers.js';
+import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
@@ -46,10 +46,13 @@ class UserProfile extends Component {
     })
     .then((data) => {
       this.setState({ posts: data.data });
+      calendar();
+      this.updateCalendar();
+      //this.getNextWalk();
     })
     .catch(() => {});
-    // calendar();
-    // this.updateCalendar();
+    
+    
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -61,20 +64,15 @@ class UserProfile extends Component {
 
   updateCalendar() {
     if (this.state.walker) {
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -99,24 +97,16 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     } else {
-
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -141,8 +131,6 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     }
   }
 
