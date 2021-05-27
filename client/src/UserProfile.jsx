@@ -241,7 +241,7 @@ class UserProfile extends Component {
                        </ul>
                        <p>{this.state.user.certifications}</p>
                      </div>);
-      recordWalk = <button onClick={this.onRecordWalkClick}>Record Walk</button>
+      recordWalk = <button className="record-walk-button" onClick={this.onRecordWalkClick}>Record Walk</button>
     }
     const auctionButton = (<div className="profile-button-right">
                              <Link className="auctionhouse" to="/AuctionHouse">
