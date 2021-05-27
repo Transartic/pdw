@@ -54,7 +54,15 @@ class UserProfile extends Component {
     })
     .catch(() => {});
 
-
+    axios.get('/api/bid/', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      console.log(data)
+    })
+    .catch(() => {});
   }
 
 
