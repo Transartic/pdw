@@ -57,7 +57,7 @@ class UserProfile extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.posts !== this.state.posts) {
-      this.getNextWalk();
+      //this.getNextWalk();
     }
 
   }
