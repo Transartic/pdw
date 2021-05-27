@@ -37,30 +37,42 @@ class UserProfile extends Component {
     .then((data) => {
       console.log(data)
       this.setState({ user: data.data });
-    })
-    .catch(() => {});
-
-    axios.get('/api/posts/', {
-      headers: {
-        'Authorization': this.props.token
-      },
-    })
-    .then((data) => {
-      console.log(data)
-      this.setState({ posts: data.data });
-      calendar();
-      this.updateCalendar();
-      this.getNextWalk();
-    })
-    .catch(() => {});
-
-    axios.get('/api/bid/77', {
-      headers: {
-        'Authorization': this.props.token
-      },
-    })
-    .then((data) => {
-      console.log(data)
+      if (data.data.user_type) {
+        console.log(data.data.id)
+        axios.get(`/api/bid/${data.data.id}`, {
+          headers: {
+            'Authorization': this.props.token
+          },
+        })
+        .then((data) => {
+          console.log(data.data)
+          var posts = []
+          data.data.forEach((bidPost) => {
+            if (bidPost.post) {
+              posts.push(bidPost.post)
+            }
+          })
+          console.log(posts)
+          this.setState({ posts: posts });
+          calendar();
+          this.updateCalendar();
+          this.getNextWalk();
+        })
+        .catch(() => {});
+      } else {
+        axios.get('/api/posts/', {
+          headers: {
+            'Authorization': this.props.token
+          },
+        })
+        .then((data) => {
+          this.setState({ posts: data.data });
+          calendar();
+          this.updateCalendar();
+          this.getNextWalk();
+        })
+        .catch(() => {});
+      }
     })
     .catch(() => {});
   }
@@ -271,7 +283,6 @@ class UserProfile extends Component {
               <div className="auction-posts">
                 {
                   this.state.posts.map((post, k) => {
-                    console.log(post)
                     return <BidPost key={k} post={post} page={this.state.user.user_type} />
                   })
                 }

@@ -34,12 +34,12 @@ const BidPost = ({ post, page }) => {
     profilePost = (
       <div className="post-body">
         <div className="post-date-time">
-          <div className="post-date">Date {post.date}</div>
-          <div className="post-time">Time {post.date}</div>
+          <div className="post-date">Date: {post.dateTime}</div>
         </div>
         <div className="post-details">
-          <div className="post-username">{post.user.firstName}</div>
+          <div className="post-username">User: {post.userId}</div>
           <div className="post-info">
+          Services:
           <ul>
               {
                 services.map((ser, k) => {
@@ -47,7 +47,8 @@ const BidPost = ({ post, page }) => {
                 })
               }
             </ul>
-            <p>{post.comments}</p>
+            <div>Duration of walk: {post.duration}</div>
+            <p>Details: {post.comments}</p>
           </div>
         </div>
         <div className="bid-status">Pending Review</div>
