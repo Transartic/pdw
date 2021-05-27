@@ -24,8 +24,8 @@ class DWBidForm extends Component {
 
   handlePost() {
     const send = {
-      post_id: this.props.userId,
-      bidder_id: this.props.userId,
+      postId: this.props.userId,
+      // bidder_id: this.props.userId,
       bid: JSON.stringify(Number(this.state.bid.replace(/[^0-9.-]+/g, ''))),
     };
     console.log(send)
