@@ -35,16 +35,18 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
+      console.log(data.data)
       this.setState({ user: data.data });
     })
     .catch(() => {});
 
-    axios.get('/api/posts/', {
+    axios.get('/api/posts/all', {
       headers: {
         'Authorization': this.props.token
       },
     })
     .then((data) => {
+      console.log(data.data)
       this.setState({ posts: data.data });
       calendar();
       this.updateCalendar();
@@ -225,11 +227,12 @@ class UserProfile extends Component {
                      </div>);
       recordWalk = <span></span>
     } else {
+      let services = Object.keys(this.state.user.services)
       profileInfo = (<div className="profile-info">
                        <h5>Services</h5>
                        <ul>
                          {
-                           this.state.user.services.map((service, k) => {
+                           services.map((service, k) => {
                              return <li key={k}>{service}</li>
                            })
                          }
@@ -258,17 +261,17 @@ class UserProfile extends Component {
             <div className="profile-container">
               <div className="profile-picture">This is the profile-picture class</div>
               <div className="username">{this.state.user.username}</div>
-              {this.state.user.user_type === false ? <PostBidModal /> : auctionButton}
+              {this.state.user.user_type === false ? <PostBidModal token={this.props.token}/> : auctionButton}
               {profileInfo}
             </div>
 
             <div className="posts-schedule-walks-container">
               <div className="auction-posts">
-                {/* {
-                  this.state.bids.map((bid, k) => {
-                    return <BidPost key={k} bid={bid} page={this.state.walker} />
+                {
+                  this.state.posts.map((post, k) => {
+                    return <BidPost key={k} post={post} page={this.state.user.user_type} />
                   })
-                } */}
+                }
               </div>
 
               <div className="schedule">
