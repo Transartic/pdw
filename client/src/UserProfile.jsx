@@ -12,6 +12,7 @@ import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
 import WalkChecklist from './WalkChecklist';
+import ReviewsForm from './ReviewsForm';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -19,13 +20,15 @@ class UserProfile extends Component {
     this.state = {
       user: null,
       posts: null,
-      modalOpen: false
+      modalOpen: false,
+      modal2Open: false
     };
     this.updateCalendar = this.updateCalendar.bind(this);
     this.getNextWalk = this.getNextWalk.bind(this);
     this.onRecordWalkClick = this.onRecordWalkClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.leaveReviewClick = this.leaveReviewClick.bind(this);
   }
 
   componentDidMount() {
@@ -88,7 +91,7 @@ class UserProfile extends Component {
             if (days[i].innerText === dataDay) {
               days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Name: ${current.user.firstName}</div>
-              <div>Duration: ${current.duration} </div>
+              <div>Duration: ${current.duration} min</div>
               <div>Services: ${servicesString}</div>`)
             }
           }
@@ -122,7 +125,7 @@ class UserProfile extends Component {
             if (days[i].innerText === dataDay) {
               days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
               <div>Walker: ${current.assignedWalker}</div>
-              <div>Duration: ${current.duration} </div>
+              <div>Duration: ${current.duration} min</div>
               <div>Services: ${servicesString}</div>`)
             }
           }
@@ -187,6 +190,12 @@ class UserProfile extends Component {
 
   }
 
+  leaveReviewClick() {
+    this.setState({
+      modal2Open: true
+    })
+  }
+
   onRecordWalkClick() {
     this.setState({
       modalOpen: true
@@ -194,6 +203,8 @@ class UserProfile extends Component {
   }
 
   handleClose = () => this.setState({ modalOpen: false });
+
+  handleClose2 = () => this.setState({ modal2Open: false });
 
   handleChange(e) {
     this.setState({
@@ -219,7 +230,7 @@ class UserProfile extends Component {
                          {this.state.user.descriptions}
                        </p>
                      </div>);
-      recordWalk = <button>Leave a Review</button>
+      recordWalk = <button onClick={this.leaveReviewClick}>Leave a Review</button>
     } else {
       let services = Object.keys(this.state.user.services)
       profileInfo = (<div className="profile-info">
@@ -282,6 +293,14 @@ class UserProfile extends Component {
                     <Modal.Header>Walk Checklist</Modal.Header>
                     <Modal.Content>
                       <WalkChecklist onClose={this.handleClose}/>
+                    </Modal.Content>
+                  </Modal>
+                  <Modal
+                  open={this.state.modal2Open}
+                  onClose={this.handleClose2}>
+                    <Modal.Header>Write a Review</Modal.Header>
+                    <Modal.Content>
+                      <ReviewsForm onClose={this.handleClose2}/>
                     </Modal.Content>
                   </Modal>
               </div>

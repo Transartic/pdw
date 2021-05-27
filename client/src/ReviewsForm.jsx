@@ -30,6 +30,7 @@ class ReviewsForm extends Component {
 
 
   handlePost(e) {
+    this.props.onClose();
 
     //axios request to get current person logged in id
     var date = new Date().getTime()
