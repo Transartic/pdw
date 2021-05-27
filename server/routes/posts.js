@@ -40,7 +40,7 @@ router.get('/', authenticateUser, (req, res) => {
       },
       {
         model: Bid,
-        attributes: ['bidder_id', 'bid'],
+        // attributes: ['bidder_id', 'bid'],
       },
     ],
   })
@@ -89,7 +89,7 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
     comments,
     services,
   })
-    .then(() => res.status(201).send())
+    .then((post) => res.status(201).send(post))
     .catch((err) => res.status(500).send(err));
 });
 

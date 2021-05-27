@@ -19,7 +19,7 @@ WalkMeta.belongsTo(Post);
 User.hasMany(Review, { foreignKey: 'id' });
 Review.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
 
-Post.hasMany(Bid, { foreignKey: 'id' });
+Post.hasMany(Bid, { foreignKey: 'postId' });
 Bid.belongsTo(Post, { foreignKey: 'postId' });
 
 
