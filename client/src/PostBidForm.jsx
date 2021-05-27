@@ -17,10 +17,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
 const options2 = [
-  { text: '30 Min', value: '30 Min' },
-  { text: '1 Hour', value: '1 Hour' },
-  { text: '1 Hr 30 Min', value: '1 Hr 30 Min' },
-  { text: '2 Hour', value: '2 Hour' },
+  { text: '30 Min', value: '30' },
+  { text: '1 Hour', value: '60' },
+  { text: '1 Hr 30 Min', value: '90' },
+  { text: '2 Hour', value: '120' },
 ];
 const options3 = [
   { text: 'Califonia', value: 'California' },
