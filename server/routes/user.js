@@ -80,7 +80,7 @@ router.get('/', authenticateUser, async (req, res) => {
   try {
     const user = await User.findOne({
       where: { id: userId },
-      attributes: ['username', 'email', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zipcode', 'dog_name', 'description', 'user_type', 'services', 'certifications'],
+      attributes: ['id', 'username', 'email', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zipcode', 'dog_name', 'description', 'user_type', 'services', 'certifications'],
     });
     return res.json(user);
   } catch (err) {
