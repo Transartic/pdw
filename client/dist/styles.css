@@ -451,5 +451,18 @@ html, body {
 
 .dogwalker-review-recs-ratings {
   margin-bottom: 20px;
-  margin-left: 10px;ß
+  margin-left: 10px;
+}
+
+.ah{
+  display: flex;
+  justify-content: center;
+
+}
+.ahServices{
+
+  text-align: center;
+  list-style-type: none;
+  padding-right: 35px;
+
 }

@@ -36,7 +36,7 @@ class App extends Component {
             {!this.state.token ? <Redirect to="/" /> : <UserProfile token={this.state.token} />}
           </Route>
           <Route exact path="/AuctionHouse">
-            {!this.state.token ? <Redirect to="/" /> : <AuctionHouse />}
+            {!this.state.token ? <Redirect to="/" /> : <AuctionHouse token={this.state.token}/>}
           </Route>
           <Route exact path="/DogwalkerProfile">
             <DogwalkerProfile />
