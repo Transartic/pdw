@@ -219,7 +219,7 @@ class UserProfile extends Component {
                          {this.state.user.descriptions}
                        </p>
                      </div>);
-      recordWalk = <span></span>
+      recordWalk = <button>Leave a Review</button>
     } else {
       let services = Object.keys(this.state.user.services)
       profileInfo = (<div className="profile-info">
