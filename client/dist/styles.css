@@ -110,6 +110,7 @@ html, body {
 
 .profile-info {
   flex: 3 0 100px;
+  padding: 5px;
   background-image: radial-gradient(white, aqua);
   box-shadow: 5px 5px blueviolet;
 }
@@ -150,6 +151,7 @@ html, body {
   width: 225px;
   float: left;
   margin: 2px;
+  padding: 5px;
 }
 
 .post-body {
@@ -305,6 +307,7 @@ html, body {
   box-shadow: 5px 5px blueviolet;
   margin-left: 1%;
   margin-right: 1%;
+  padding: 5px;
 }
 .aucpost{
   /* display: flex; */
@@ -315,7 +318,7 @@ html, body {
     width: 30%;
     margin-left: 1%;
     margin-right: 1%;
-
+    padding: 5px;
 }
 
 .non-user-dogwalker-profile {
