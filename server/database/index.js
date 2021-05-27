@@ -1,6 +1,8 @@
 const db = require('./connection');
 
-db.authenticate().then(() => console.log('Connected to PostgreSQL...'));
+db.authenticate()
+  .then(() => console.log('Connected to PostgreSQL...'))
+  .catch((err) => console.error('Error connecting to the database'));
 
 const User = require('./models/user');
 const Post = require('./models/post');
@@ -16,21 +18,14 @@ Post.hasMany(WalkMeta);
 WalkMeta.belongsTo(Post);
 
 User.hasMany(Review, { foreignKey: 'reviewee_id' });
-Review.belongsTo(User, { foreignKey: 'id', as: 'reviewer' });
+Review.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
 
-Post.hasMany(Bid);
-Bid.belongsTo(Post, { foreignKey: 'bidder_id' });
-// User.hasMany(Bid);
-// Bid.belongsTo(User);
+Post.hasMany(Bid, { foreignKey: 'postId' });
+Bid.belongsTo(Post, { foreignKey: 'postId' });
+User.hasMany(Bid, { foreignKey: 'bidder_id' });
+Bid.belongsTo(User, { foreignKey: 'bidder_id' });
 
 Photo.belongsTo(User, { foreignKey: 'id' });
-
-User.sync({ alter: true });
-Post.sync({ alter: true });
-WalkMeta.sync({ alter: true });
-Review.sync({ alter: true });
-Bid.sync({ alter: true });
-Photo.sync({ alter: true });
 
 module.exports = {
   User,
