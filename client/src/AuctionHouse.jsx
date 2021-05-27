@@ -98,38 +98,60 @@ handleOpen(e){
     var post = this.state.posts.map((el, index)=>{
 
 
-var date = new Date(el.dateTime)
 
+var date = new Date(el.dateTime)
+const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = date.getFullYear();
+    date = `${mm}/${dd}/${yyyy}`;
       return(
        <div key={index} className="singlepost">
+         <div className='ah'>
      Date:
-     {date.toString()}
+
+     {date}
+     </div>
       <br /><br />
+      <div className='ah'>
       Price Posted By Owner: {`$${el.maxPrice}`}
+      </div>
       <br /><br />
+      <div className='ah'>
       Walk Duration: {`${el.duration} minutes`}
+      </div>
       <br /><br />
+      <div className='ah'>
       Dog Owner:
       {Object.entries(el.user).map(([key, value], index) => {
    return(
      <div key={index}>
      {value}
+
      </div>
    )
 })}
+</div>
       <br /><br />
+      <div className='ah'>
       Services
+      </div>
       <ul>
+        <div className='ahServices'>
 {Object.entries(el.services).map(([key, value], index) => {
   if(value === true)
    return(
     <li key={index}>{key}</li>
    )
 })}
+</div>
     </ul>
+
     <br /><br />
+    <div className='ah'>
     Comments:
     {el.comments}
+    </div>
+    <br /><br />
       <Button value={el.userId} onClick={this.handleOpen}>Place Bid</Button>
       <Modal
         open={this.state.modalOpen}

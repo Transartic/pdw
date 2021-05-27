@@ -110,16 +110,16 @@ class PostBidForm extends Component {
   handlePost() {
     const dogServices = {};
     if (this.state.dogMassage === 'true') {
-      dogServices.dogMassage = true;
+      dogServices.Massage = true;
     }
     if (this.state.dogAccupuncture === 'true') {
-      dogServices.dogAccupuncture = true;
+      dogServices.Accupuncture = true;
     }
     if (this.state.teethBrushing === 'true') {
-      dogServices.teethBrushing = 'true';
+      dogServices.TeethBrushing = true;
     }
     if (this.state.dogSpa === 'true') {
-      dogServices.dogSpa = true;
+      dogServices.Spa = true;
     }
     const send = {
       duration: this.state.duration,
