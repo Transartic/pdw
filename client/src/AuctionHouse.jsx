@@ -187,7 +187,7 @@ const dd = String(date.getDate()).padStart(2, '0');
               <Button>Back To Profile</Button>
       </Link>
 
-            <div className="profile-info">Calender</div>
+            
           </div>
 
           <div className="auction-posts-container">
