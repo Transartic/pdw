@@ -46,7 +46,7 @@ router.post('/', authenticateUser, checkNewBid, async (req, res) => {
         console.log(success);
         res.sendStatus(201); })
       .catch(err => {
-        console.log(err)
+        console.log(err);
         res.sendStatus(404);
       });
   }

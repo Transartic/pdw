@@ -35,18 +35,18 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data.data)
+      console.log(data)
       this.setState({ user: data.data });
     })
     .catch(() => {});
 
-    axios.get('/api/posts/all', {
+    axios.get('/api/posts/', {
       headers: {
         'Authorization': this.props.token
       },
     })
     .then((data) => {
-      console.log(data.data)
+      console.log(data)
       this.setState({ posts: data.data });
       calendar();
       this.updateCalendar();
@@ -54,7 +54,15 @@ class UserProfile extends Component {
     })
     .catch(() => {});
 
-
+    axios.get('/api/bid/77', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      console.log(data)
+    })
+    .catch(() => {});
   }
 
 
@@ -263,6 +271,7 @@ class UserProfile extends Component {
               <div className="auction-posts">
                 {
                   this.state.posts.map((post, k) => {
+                    console.log(post)
                     return <BidPost key={k} post={post} page={this.state.user.user_type} />
                   })
                 }

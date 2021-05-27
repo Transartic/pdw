@@ -25,6 +25,7 @@ const checkNewPostInput = (req, res, next) => {
 
 router.get('/', authenticateUser, (req, res) => {
   const { userId } = req;
+  console.log(userId)
   Post.findAll({
     where: {
       [Op.or]: [{ userId }, { assignedWalker: userId }],
@@ -40,7 +41,7 @@ router.get('/', authenticateUser, (req, res) => {
       },
       {
         model: Bid,
-        // attributes: ['bidder_id', 'bid'],
+        attributes: ['bidder_id', 'bid'],
       },
     ],
   })
@@ -89,7 +90,7 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
     comments,
     services,
   })
-    .then((post) => res.status(201).send(post))
+    .then(() => res.status(201).send())
     .catch((err) => res.status(500).send(err));
 });
 
