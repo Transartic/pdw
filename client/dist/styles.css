@@ -59,8 +59,6 @@ html, body {
   position: absolute;
   top: 10px;
   bottom: 10px;
-  /* border: solid;
-  border-color: black; */
   width: 30%;
   min-height: 450px;
   float: left;
@@ -74,6 +72,7 @@ html, body {
   height: 200px;
   border-radius: 50%;
   background-image: radial-gradient(white, aqua);
+  object-fit: cover;
   box-shadow: 5px 5px blueviolet;
   margin: 10px;
   margin-left: auto;
