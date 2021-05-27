@@ -22,7 +22,6 @@ Review.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
 Post.hasMany(Bid, { foreignKey: 'postId' });
 Bid.belongsTo(Post, { foreignKey: 'postId' });
 
-
 module.exports = {
   User,
   Review,
