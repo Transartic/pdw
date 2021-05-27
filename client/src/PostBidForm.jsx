@@ -124,20 +124,22 @@ class PostBidForm extends Component {
     const send = {
       duration: this.state.duration,
       dateTime: this.state.dateTime,
-      services: dogServices,
       comments: this.state.comments,
-      maxPrice: JSON.stringify(Number(this.state.maxPrice.replace(/[^0-9.-]+/g,"")))
+      services: dogServices,
+      maxPrice: JSON.stringify(Number(this.state.maxPrice.replace(/[^0-9.-]+/g, ''))),
     };
-    //need user Id
+    // need user Id
     console.log('send', JSON.stringify(send));
 
-    // axios.post('/api/posts/', send)
-    //   .then((response) => {
-    //     console.log(('res', response));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
+    axios.post('/api/posts/', send, {
+      headers: {
+        Authorization: this.props.token
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => { console.log(error); });
   }
 
   handleChange(e) {
@@ -178,7 +180,7 @@ class PostBidForm extends Component {
     // console.log('formState', this.state);
     const { dateTime } = this.state;
 
-
+    console.log('pdmodal', this.props);
     return (
       <Form>
 

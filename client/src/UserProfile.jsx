@@ -270,7 +270,7 @@ class UserProfile extends Component {
             <div className="profile-container">
               <div className="profile-picture">This is the profile-picture class</div>
               <div className="username">{this.state.user.username}</div>
-              {this.state.user.user_type === false ? <PostBidModal /> : auctionButton}
+              {this.state.user.user_type === false ? <PostBidModal token={this.props.token}/> : auctionButton}
               {profileInfo}
             </div>
 
