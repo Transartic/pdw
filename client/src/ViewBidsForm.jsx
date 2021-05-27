@@ -46,10 +46,10 @@ class ViewBidsForm extends Component {
             return (<Form.Field key={bid.username}>
               <Checkbox
                 radio
-                label={`${bid.username} has placed a bid of ${bid.bid}`}
-                name={bid.username}
+                label={`${bid.bidder_id} has placed a bid of ${bid.bid}`}
+                name={bid.bidder_id}
                 value={bid.bid}
-                checked={this.state.user === bid.username}
+                checked={this.state.user === bid.bidder_id}
                 onChange={this.handleChange}/>
             </Form.Field>)
           })

@@ -44,7 +44,7 @@ class ViewBidsModal extends Component {
             <Modal.Content>
               <ViewBidsForm
               handleClose={this.handleClose}
-              bids={[{username: 'joseph', bid: 20}, {username: 'cody', bid: 30}]}/>
+              bids={this.props.bids}/>
             </Modal.Content>
           </Modal>
         </div>
