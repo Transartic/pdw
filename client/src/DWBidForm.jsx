@@ -11,10 +11,8 @@ class DWBidForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // firstName: '',
-      // lastName: '',
+
       bid: '',
-      // linktoprofile: '',
 
     };
 
@@ -25,11 +23,10 @@ class DWBidForm extends Component {
   handlePost() {
     console.log(this.props.postId)
     const send = {
-      postId: this.state.postId,
-      // bidder_id: this.props.userId,
+      postId: this.props.userId,
       bid: JSON.stringify(Number(this.state.bid.replace(/[^0-9.-]+/g, ''))),
     };
-    console.log(send)
+    console.log(send);
 
     axios.post('/api/bid/', send, {
       headers: {
@@ -54,30 +51,6 @@ class DWBidForm extends Component {
 
         <Form>
 
-          {/* <Form.Group>
-            <Form.Field
-              onChange={this.handleChange}
-              control={Input}
-              name="firstName"
-              label="First name"
-              placeholder="First name"
-            />
-            <Form.Field
-              onChange={this.handleChange}
-              control={Input}
-              name="lastName"
-              label="Last name"
-              placeholder="Last name"
-            />
-            <Form.Field
-              onChange={this.handleChange}
-              control={Input}
-              name="linktoprofile"
-              label="Profile Link"
-              placeholder="Profile URL"
-            />
-
-          </Form.Group> */}
           <Form.Group>
 
             <Form.Field
