@@ -54,7 +54,9 @@ router.post('/', authenticateUser, checkNewReview, async (req, res) => {
 
 router.get('/:id', authenticateUser, (req, res) => {
   const { id } = req.params;
-
+  const revs = [];
+  let avg = 0;
+  let count = 0;
   try {
     Review.findAll({
       where: {
@@ -67,11 +69,29 @@ router.get('/:id', authenticateUser, (req, res) => {
       },
     })
       .then((reviews) => {
-        res.json(reviews);
+        reviews.forEach(review => {
+          avg += review.rating;
+          count++;
+        });
+        const avrg = { average: avg / count };
+        reviews = Object.assign(avrg, { ...reviews });
+        for (const key in reviews) {
+          if (key === 'average') {
+            let avObject = {
+              average: reviews[key],
+            }
+            revs.push(avObject);
+          } else {
+            revs.push(reviews[key]);
+          }
+        }
+
+        res.json(revs);
       })
       .catch(err => console.log(err));
   }
   catch (err) { res.status(500).send(err); }
 });
+
 
 module.exports = router;

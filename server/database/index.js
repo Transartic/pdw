@@ -14,17 +14,11 @@ Post.belongsTo(User);
 Post.hasMany(WalkMeta);
 WalkMeta.belongsTo(Post);
 
-User.hasMany(Review, { foreignKey: 'reviewee_id' });
-Review.belongsTo(User, { foreignKey: 'id', as: 'reviewer' });
+User.hasMany(Review, { foreignKey: 'id' });
+Review.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
 
 Post.hasMany(Bid, { foreignKey: 'id' });
 Bid.belongsTo(Post, { foreignKey: 'postId' });
-
-User.sync({ alter: true });
-Post.sync({ alter: true });
-WalkMeta.sync({ alter: true });
-Review.sync({ alter: true });
-Bid.sync({ alter: true });
 
 module.exports = {
   User,
