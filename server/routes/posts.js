@@ -93,4 +93,21 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+router.patch('/setWalker/:postId', authenticateUser, async (req, res) => {
+  const { userId } = req;
+  const { postId } = req.params;
+  const { walkerId } = req.body.data;
+
+  try {
+    await Post.update({ assignedWalker: walkerId }, {
+      where: {
+        id: postId,
+      },
+    });
+    return res.status(201).end();
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
+});
 module.exports = router;
