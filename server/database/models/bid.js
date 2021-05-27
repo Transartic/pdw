@@ -2,14 +2,14 @@ const { DataTypes } = require('sequelize');
 const db = require('../connection');
 
 const Bid = db.define('bid', {
-  post_id: {
+  postId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'postId',
   },
   bidder_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   bid: {
     type: DataTypes.INTEGER,
