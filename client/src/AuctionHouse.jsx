@@ -15,173 +15,8 @@ class AuctionHouse extends Component {
     super(props);
     this.state = {
       modalOpen: false,
-
-      testdata: [
-        {
-            "id": 5,
-            "duration": "90",
-            "dateTime": "2021-05-30T12:30:00.000Z",
-            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-            "services": {
-                "accupuncture": true,
-                "spa": true,
-                "dental": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-25T23:48:02.327Z",
-            "updatedAt": "2021-05-25T23:48:02.327Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": [
-                {
-                    "post_id": 5,
-                    "bidder_id": 11,
-                    "bid": 255
-                },
-                {
-                    "post_id": 5,
-                    "bidder_id": 11,
-                    "bid": 92
-                },
-                {
-                    "post_id": 5,
-                    "bidder_id": 11,
-                    "bid": 461
-                },
-                {
-                    "post_id": 5,
-                    "bidder_id": 11,
-                    "bid": 58
-                }
-            ]
-        },
-        {
-            "id": 6,
-            "duration": "2 Hour",
-            "dateTime": "2021-06-03T16:00:00.000Z",
-            "comments": "Bad Dog",
-            "services": {
-                "dogMassage": "dogMassage",
-                "dogAccupuncture": "dogAccupuncture"
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T15:23:54.124Z",
-            "updatedAt": "2021-05-26T15:23:54.124Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": [
-                {
-                    "post_id": 6,
-                    "bidder_id": 3,
-                    "bid": 398
-                },
-                {
-                    "post_id": 6,
-                    "bidder_id": 3,
-                    "bid": 477
-                },
-                {
-                    "post_id": 6,
-                    "bidder_id": 13,
-                    "bid": 248
-                }
-            ]
-        },
-        {
-            "id": 7,
-            "duration": "3 Hour",
-            "dateTime": "2021-07-13T18:00:00.000Z",
-            "comments": "Good Dog",
-            "services": {
-                "dogMassage": "dogMassage",
-                "dogAccupuncture": "dogAccupuncture"
-            },
-            "maxPrice": 50,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T15:26:54.585Z",
-            "updatedAt": "2021-05-26T15:26:54.585Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": [
-                {
-                    "post_id": 7,
-                    "bidder_id": 1,
-                    "bid": 216
-                },
-                {
-                    "post_id": 7,
-                    "bidder_id": 1,
-                    "bid": 322
-                },
-                {
-                    "post_id": 7,
-                    "bidder_id": 3,
-                    "bid": 477
-                }
-            ]
-        },
-        {
-            "id": 8,
-            "duration": "2 Hour",
-            "dateTime": "2021-06-03T16:00:00.000Z",
-            "comments": "Bad Dog",
-            "services": {
-                "dogMassage": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T18:01:15.782Z",
-            "updatedAt": "2021-05-26T18:01:15.782Z",
-            "userId": 27,
-            "user": {
-                "firstName": "Cody",
-                "dogname": null,
-                "address1": "2205 37TH ST"
-            },
-            "bids": []
-        },
-        {
-            "id": 4,
-            "duration": "90",
-            "dateTime": "2021-05-27T12:30:00.000Z",
-            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-            "services": {
-                "accupuncture": true,
-                "spa": true,
-                "dental": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-25T23:47:56.838Z",
-            "updatedAt": "2021-05-25T23:47:56.838Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
-        }
-    ]
+      posts: [],
+      userId: 0,
 
     };
     this.handleReset = this.handleReset.bind(this);
@@ -191,10 +26,28 @@ class AuctionHouse extends Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
-  componentDidMount(){
-    // axios.get('/api/posts/')
-    // .then()
+  componentDidMount() {
+    // axios.get('/api/user', {
+    //   headers: {
+    //     'Authorization': this.props.token
+    //   },
+    // })
+    // .then((data) => {
+    //   this.setState({ user: data.data });
+    // })
+    // .catch(() => {});
 
+    axios.get('/api/posts/all', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      this.setState({ posts: data.data });
+    })
+    .catch(() => {});
+    // calendar();
+    // this.updateCalendar();
   }
 
 
@@ -202,8 +55,14 @@ class AuctionHouse extends Component {
     location.reload();
   }
 
+handleOpen(e){
 
-  handleOpen = () => this.setState({ modalOpen: true });
+  this.setState({
+    userId: e.target.value,
+    modalOpen: true
+  })
+}
+  //handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 
@@ -236,7 +95,7 @@ class AuctionHouse extends Component {
 // console.log(output)
 
 
-    var post = this.state.testdata.map((el, index)=>{
+    var post = this.state.posts.map((el, index)=>{
 
 
 var date = new Date(el.dateTime)
@@ -271,7 +130,7 @@ var date = new Date(el.dateTime)
     <br /><br />
     Comments:
     {el.comments}
-      <Button onClick={this.handleOpen}>Place Bid</Button>
+      <Button value={el.userId} onClick={this.handleOpen}>Place Bid</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
@@ -279,7 +138,7 @@ var date = new Date(el.dateTime)
         >
         <Modal.Header>Bid</Modal.Header>
         <Modal.Content>
-          <DWBidForm handleClose={this.handleClose}/>
+          <DWBidForm userId={this.state.userId} token={this.props.token} handleClose={this.handleClose}/>
         </Modal.Content>
       </Modal>
     </div>

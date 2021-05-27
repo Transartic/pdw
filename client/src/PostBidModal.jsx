@@ -30,7 +30,7 @@ class PostBidModal extends Component {
 
 
   render() {
-console.log('pdmodal', this.props)
+
     return (
         <div className="profile-button-right">
 

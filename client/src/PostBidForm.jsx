@@ -129,7 +129,7 @@ class PostBidForm extends Component {
       maxPrice: JSON.stringify(Number(this.state.maxPrice.replace(/[^0-9.-]+/g, ''))),
     };
     // need user Id
-    console.log('send', JSON.stringify(send));
+    // console.log('send', JSON.stringify(send));
 
     axios.post('/api/posts/', send, {
       headers: {
@@ -180,7 +180,7 @@ class PostBidForm extends Component {
     // console.log('formState', this.state);
     const { dateTime } = this.state;
 
-    console.log('pdmodal', this.props);
+
     return (
       <Form>
 
