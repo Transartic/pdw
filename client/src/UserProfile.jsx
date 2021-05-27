@@ -40,7 +40,7 @@ class UserProfile extends Component {
     })
     .catch(() => {});
 
-    axios.get('/api/posts/all', {
+    axios.get('/api/posts/', {
       headers: {
         'Authorization': this.props.token
       },
@@ -48,10 +48,10 @@ class UserProfile extends Component {
     .then((data) => {
       console.log(data.data)
       this.setState({ posts: data.data });
+      calendar()
+      this.updateCalendar();
     })
     .catch(() => {});
-    // calendar();
-    // this.updateCalendar();
   }
 
   componentDidUpdate(prevProps, prevState) {
