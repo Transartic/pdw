@@ -24,6 +24,7 @@ class OwnerSignUpForm extends Component {
       data: (this.state),
     })
       .then((response) => {
+        console.log(response)
         this.props.updateToken(response.data.accessToken);
       }, (error) => {
         console.log(error);
@@ -52,6 +53,7 @@ class OwnerSignUpForm extends Component {
             onChange={this.handleChange}
             control={Input}
             name="password"
+            type="password"
             label="Enter Password"
             placeholder="Enter Password"
           />

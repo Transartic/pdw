@@ -160,6 +160,7 @@ class OwnerSignUpForm extends Component {
             control={Input}
             name="password"
             label="Choose Password"
+            type="password"
             placeholder="Choose Password"
           />
           <Form.Field
