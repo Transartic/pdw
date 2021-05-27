@@ -115,6 +115,7 @@ class OwnerSignUpForm extends Component {
             onChange={this.handleChange}
             control={Input}
             name="password"
+            type="password"
             label="Choose Password"
             placeholder="Choose Password"
           />

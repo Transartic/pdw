@@ -5,6 +5,7 @@ import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 import DWBidForm from './DWBidForm.jsx';
@@ -14,174 +15,8 @@ class AuctionHouse extends Component {
     super(props);
     this.state = {
       modalOpen: false,
-
-      testdata: [
-        {
-            "id": 5,
-            "duration": "90",
-            "dateTime": "2021-05-30T12:30:00.000Z",
-            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-            "services": {
-                "accupuncture": true,
-                "spa": true,
-                "dental": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-25T23:48:02.327Z",
-            "updatedAt": "2021-05-25T23:48:02.327Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
-        },
-        {
-            "id": 8,
-            "duration": "2 Hour",
-            "dateTime": "2021-06-03T16:00:00.000Z",
-            "comments": "Bad Dog",
-            "services": {
-                "dogMassage": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T18:01:15.782Z",
-            "updatedAt": "2021-05-26T18:01:15.782Z",
-            "userId": 27,
-            "user": {
-                "firstName": "Cody",
-                "dogname": null,
-                "address1": "2205 37TH ST"
-            },
-            "bids": []
-        },
-        {
-            "id": 6,
-            "duration": "2 Hour",
-            "dateTime": "2021-06-03T16:00:00.000Z",
-            "comments": "Bad Dog",
-            "services": {
-                "dogMassage": "dogMassage",
-                "dogAccupuncture": "dogAccupuncture"
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T15:23:54.124Z",
-            "updatedAt": "2021-05-26T15:23:54.124Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
-        },
-        {
-            "id": 4,
-            "duration": "90",
-            "dateTime": "2021-05-27T12:30:00.000Z",
-            "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Arcu ac tortor dignissim convallis.",
-            "services": {
-                "accupuncture": true,
-                "spa": true,
-                "dental": true
-            },
-            "maxPrice": 30,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-25T23:47:56.838Z",
-            "updatedAt": "2021-05-25T23:47:56.838Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
-        },
-        {
-            "id": 7,
-            "duration": "3 Hour",
-            "dateTime": "2021-07-13T18:00:00.000Z",
-            "comments": "Good Dog",
-            "services": {
-                "dogMassage": "dogMassage",
-                "dogAccupuncture": "dogAccupuncture"
-            },
-            "maxPrice": 50,
-            "status": true,
-            "assignedWalker": null,
-            "createdAt": "2021-05-26T15:26:54.585Z",
-            "updatedAt": "2021-05-26T15:26:54.585Z",
-            "userId": 1,
-            "user": {
-                "firstName": "John",
-                "dogname": null,
-                "address1": "123 Main St."
-            },
-            "bids": []
-        }
-    ],
-    testbids: [
-      {
-          "user_id": 11,
-          "bid": 461
-      },
-      {
-          "user_id": 11,
-          "bid": 58
-      },
-      {
-          "user_id": 3,
-          "bid": 398
-      },
-      {
-          "user_id": 3,
-          "bid": 477
-      },
-      {
-          "user_id": 13,
-          "bid": 248
-      },
-      {
-          "user_id": 1,
-          "bid": 216
-      },
-      {
-          "user_id": 1,
-          "bid": 322
-      },
-      {
-          "user_id": 3,
-          "bid": 477
-      },
-      {
-          "user_id": 11,
-          "bid": 255
-      },
-      {
-          "user_id": 11,
-          "bid": 92
-      },
-      {
-          "user_id": 11,
-          "bid": 58
-      },
-      {
-          "user_id": 27,
-          "bid": 30
-      },
-      {
-          "user_id": 27,
-          "bid": 110
-      }
-  ]
+      posts: [],
+      userId: 0,
 
     };
     this.handleReset = this.handleReset.bind(this);
@@ -191,10 +26,28 @@ class AuctionHouse extends Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
-  componentDidMount(){
-    // axios.get('/api/posts/')
-    // .then()
+  componentDidMount() {
+    // axios.get('/api/user', {
+    //   headers: {
+    //     'Authorization': this.props.token
+    //   },
+    // })
+    // .then((data) => {
+    //   this.setState({ user: data.data });
+    // })
+    // .catch(() => {});
 
+    axios.get('/api/posts/all', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      this.setState({ posts: data.data });
+    })
+    .catch(() => {});
+    // calendar();
+    // this.updateCalendar();
   }
 
 
@@ -202,8 +55,14 @@ class AuctionHouse extends Component {
     location.reload();
   }
 
+handleOpen(e){
 
-  handleOpen = () => this.setState({ modalOpen: true });
+  this.setState({
+    userId: e.target.value,
+    modalOpen: true
+  })
+}
+  //handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 
@@ -223,55 +82,77 @@ class AuctionHouse extends Component {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
     today = `${mm}/${dd}/${yyyy}`;
-    var output = []
-this.state.testbids.map((onebid) =>{
-  this.state.testdata.map((el)=>{
-    if(el.userId === onebid.user_id){
-      if(output.indexOf(el.user.firstName) === -1){
-        output.push(el.user.firstName, onebid.bid);
-    }
-    }
-  })
-})
-console.log(output)
+//     var output = []
+// this.state.testbids.map((onebid) =>{
+//   this.state.testdata.map((el)=>{
+//     if(el.userId === onebid.user_id){
+//       if(output.indexOf(el.user.firstName) === -1){
+//         output.push(el.user.firstName, onebid.bid);
+//     }
+//     }
+//   })
+// })
+// console.log(output)
 
 
-    var post = this.state.testdata.map((el, index)=>{
+    var post = this.state.posts.map((el, index)=>{
+
 
 
 var date = new Date(el.dateTime)
-
+const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = date.getFullYear();
+    date = `${mm}/${dd}/${yyyy}`;
       return(
        <div key={index} className="singlepost">
+         <div className='ah'>
      Date:
-     {date.toString()}
+
+     {date}
+     </div>
       <br /><br />
+      <div className='ah'>
       Price Posted By Owner: {`$${el.maxPrice}`}
+      </div>
       <br /><br />
+      <div className='ah'>
       Walk Duration: {`${el.duration} minutes`}
+      </div>
       <br /><br />
+      <div className='ah'>
       Dog Owner:
       {Object.entries(el.user).map(([key, value], index) => {
    return(
      <div key={index}>
      {value}
+
      </div>
    )
 })}
+</div>
       <br /><br />
+      <div className='ah'>
       Services
+      </div>
       <ul>
+        <div className='ahServices'>
 {Object.entries(el.services).map(([key, value], index) => {
   if(value === true)
    return(
     <li key={index}>{key}</li>
    )
 })}
+</div>
     </ul>
+
     <br /><br />
+    <div className='ah'>
     Comments:
     {el.comments}
-      <Button onClick={this.handleOpen}>Place Bid</Button>
+    </div>
+    <br /><br />
+      <Button value={el.userId} onClick={this.handleOpen}>Place Bid</Button>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
@@ -279,7 +160,7 @@ var date = new Date(el.dateTime)
         >
         <Modal.Header>Bid</Modal.Header>
         <Modal.Content>
-          <DWBidForm handleClose={this.handleClose}/>
+          <DWBidForm userId={this.state.userId} token={this.props.token} handleClose={this.handleClose}/>
         </Modal.Content>
       </Modal>
     </div>
@@ -299,7 +180,13 @@ var date = new Date(el.dateTime)
 
           <div className="auction-profile-container">
             <FaPaw size={70} />
-            <div><h3>Auction House</h3></div>
+            <div className="landing-title">
+              <h2>Auction House</h2>
+              </div>
+              <Link className="users" to="/UserProfile">
+              <Button>Back To Profile</Button>
+      </Link>
+
             <div className="profile-info">Calender</div>
           </div>
 

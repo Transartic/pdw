@@ -32,7 +32,7 @@ class UserLoginModal extends Component {
     return (
         <div className="login-container">
 
-          <button className="landing-btn" onClick={this.handleOpen}>Sign In</button>
+          <button className="landing-btn" onClick={this.handleOpen}>SIGN IN</button>
           <Modal
             open={this.state.modalOpen}
             onClose={this.handleClose}
