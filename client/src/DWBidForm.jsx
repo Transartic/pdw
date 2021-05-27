@@ -28,6 +28,7 @@ class DWBidForm extends Component {
       bidder_id: this.props.userId,
       bid: JSON.stringify(Number(this.state.bid.replace(/[^0-9.-]+/g, ''))),
     };
+    console.log(send)
 
     axios.post('/api/bid/', send, {
       headers: {
@@ -37,7 +38,7 @@ class DWBidForm extends Component {
       .then((response) => {
         console.log(response);
       })
-      .catch((error) => { console.log(error); });
+      .catch((error) => { console.log(error) });
   }
 
   handleChange(e) {

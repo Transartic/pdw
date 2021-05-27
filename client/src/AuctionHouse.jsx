@@ -152,7 +152,9 @@ const dd = String(date.getDate()).padStart(2, '0');
     {el.comments}
     </div>
     <br /><br />
-      <Button value={el.userId} onClick={this.handleOpen}>Place Bid</Button>
+    <div className='ahBidButton'>
+    <Button value={el.userId} onClick={this.handleOpen}>Place Bid</Button>
+    </div>
       <Modal
         open={this.state.modalOpen}
         onClose={this.handleClose}
