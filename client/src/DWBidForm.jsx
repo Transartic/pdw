@@ -5,7 +5,7 @@ import {
   Form,
   Input,
 } from 'semantic-ui-react';
-
+import axios from 'axios';
 
 class DWBidForm extends Component {
   constructor(props) {
@@ -23,7 +23,21 @@ class DWBidForm extends Component {
   }
 
   handlePost() {
-    console.log(this.state);
+    const send = {
+      post_id: this.props.userId,
+      bidder_id: this.props.userId,
+      bid: JSON.stringify(Number(this.state.bid.replace(/[^0-9.-]+/g, ''))),
+    };
+
+    axios.post('/api/bid/', send, {
+      headers: {
+        Authorization: this.props.token,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => { console.log(error); });
   }
 
   handleChange(e) {
@@ -33,6 +47,7 @@ class DWBidForm extends Component {
   }
 
   render() {
+
     return (
       <div>
 
@@ -66,7 +81,7 @@ class DWBidForm extends Component {
 
             <Form.Field
               onChange={this.handleChange}
-              name="bidprice"
+              name="bid"
               control={Input}
               label="Bid Price"
               placeholder="$00.00"

@@ -1,6 +1,8 @@
 const db = require('./connection');
 
-db.authenticate().then(() => console.log('Connected to PostgreSQL...'));
+db.authenticate()
+  .then(() => console.log('Connected to PostgreSQL...'))
+  .catch((err) => console.error('Error connecting to the database'));
 
 const User = require('./models/user');
 const Post = require('./models/post');
@@ -19,6 +21,7 @@ Review.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
 
 Post.hasMany(Bid, { foreignKey: 'id' });
 Bid.belongsTo(Post, { foreignKey: 'postId' });
+
 
 module.exports = {
   User,

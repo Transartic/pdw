@@ -2,7 +2,7 @@
 ## _Find your dog walker_
 
 Pucci is a modern solution to the age old problem of finding someone to walk your dog.
-We offer dog owners a large slection of walkers with special premeium featuers.  
+We offer dog owners a large slection of walkers with special premeium featuers.
 
 ## Tech Stack
 
@@ -11,6 +11,8 @@ Pucci uses a number of open source projects to work properly:
 - [node.js] - evented I/O for the backend
 - [Express] - HTML enhanced for web apps!
 - [React] - Frontend Framework
+- [Sequelize] - Database ORM
+- [PostgreSQL] - Database
 - [markdown-it] - Markdown parser done right. Fast and easy to extend.
 - [Semantic-UI] - User Interface is the language of the web
 
@@ -31,4 +33,5 @@ Pucci uses a number of open source projects to work properly:
    [express]: <http://expressjs.com>
    [Semantic-UI]: <https://react.semantic-ui.com/>
    [React]: <https://reactjs.org/>
-
+   [Sequelize]: <https://sequelize.org/>
+   [PostreSQL]: <https://www.postgresql.org/>

@@ -43,7 +43,7 @@ class PostBidModal extends Component {
           >
             <Modal.Header>Request Walk</Modal.Header>
             <Modal.Content>
-              <PostBidForm handleClose={this.handleClose}/>
+              <PostBidForm token={this.props.token} handleClose={this.handleClose}/>
             </Modal.Content>
           </Modal>
         </div>

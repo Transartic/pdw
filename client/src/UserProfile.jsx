@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import { calendar, dummyData } from './helpers.js';
+import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
@@ -35,46 +35,40 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
+      console.log(data.data)
       this.setState({ user: data.data });
     })
     .catch(() => {});
 
-    axios.get('/api/posts/', {
+    axios.get('/api/posts/all', {
       headers: {
         'Authorization': this.props.token
       },
     })
     .then((data) => {
+      console.log(data.data)
       this.setState({ posts: data.data });
+      calendar();
+      this.updateCalendar();
+      this.getNextWalk();
     })
     .catch(() => {});
-    // calendar();
-    // this.updateCalendar();
+    
+    
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts !== this.state.posts) {
-      this.getNextWalk();
-    }
-
-  }
 
   updateCalendar() {
-    if (this.state.walker) {
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+    if (this.state.user.user_type) {
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -99,24 +93,16 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     } else {
-
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -141,14 +127,12 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     }
   }
 
   getNextWalk() {
     if (this.state.user.user_type) {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
@@ -174,7 +158,7 @@ class UserProfile extends Component {
       }
 
     } else {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
@@ -237,11 +221,12 @@ class UserProfile extends Component {
                      </div>);
       recordWalk = <span></span>
     } else {
+      let services = Object.keys(this.state.user.services)
       profileInfo = (<div className="profile-info">
                        <h5>Services</h5>
                        <ul>
                          {
-                           this.state.user.services.map((service, k) => {
+                           services.map((service, k) => {
                              return <li key={k}>{service}</li>
                            })
                          }
@@ -270,17 +255,17 @@ class UserProfile extends Component {
             <div className="profile-container">
               <div className="profile-picture">This is the profile-picture class</div>
               <div className="username">{this.state.user.username}</div>
-              {this.state.user.user_type === false ? <PostBidModal /> : auctionButton}
+              {this.state.user.user_type === false ? <PostBidModal token={this.props.token}/> : auctionButton}
               {profileInfo}
             </div>
 
             <div className="posts-schedule-walks-container">
               <div className="auction-posts">
-                {/* {
-                  this.state.bids.map((bid, k) => {
-                    return <BidPost key={k} bid={bid} page={this.state.walker} />
+                {
+                  this.state.posts.map((post, k) => {
+                    return <BidPost key={k} post={post} page={this.state.user.user_type} />
                   })
-                } */}
+                }
               </div>
 
               <div className="schedule">
