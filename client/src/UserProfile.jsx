@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import { FaPaw } from 'react-icons/fa';
 // eslint-disable-next-line import/extensions
-import { calendar, dummyData } from './helpers.js';
+import { calendar } from './helpers.js';
 import PostBidModal from './PostBidModal';
 import BidPost from './BidPost';
 import axios from 'axios';
@@ -48,35 +48,27 @@ class UserProfile extends Component {
     .then((data) => {
       console.log(data.data)
       this.setState({ posts: data.data });
-      calendar()
+      calendar();
       this.updateCalendar();
+      this.getNextWalk();
     })
     .catch(() => {});
-  }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts !== this.state.posts) {
-      this.getNextWalk();
-    }
 
   }
+
 
   updateCalendar() {
-    if (this.state.walker) {
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+    if (this.state.user.user_type) {
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -101,24 +93,16 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     } else {
-
-      // axios.get('/api/posts', {
-      //   headers: {
-      //     'Authorization': this.props.token
-      //   }
-      // })
-      // .then((response) => {
-        this.setState({
-          posts: dummyData
-        })
+        var data = this.state.posts;
+        if (data.length === 0) {
+          return;
+        }
         var days = document.getElementsByClassName("day");
         for (var i = 0; i < days.length; i++) {
-          for (var j = 0; j < dummyData.length; j++) {
-            var current = dummyData[j];
-            var dataString = dummyData[j].dateTime;
+          for (var j = 0; j < data.length; j++) {
+            var current = data[j];
+            var dataString = data[j].dateTime;
             var stringToDate = new Date(dataString);
 
             const options = { weekday: "short" };
@@ -143,14 +127,12 @@ class UserProfile extends Component {
             }
           }
         }
-      //})
-
     }
   }
 
   getNextWalk() {
     if (this.state.user.user_type) {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
@@ -176,7 +158,7 @@ class UserProfile extends Component {
       }
 
     } else {
-      if (this.state.walks) {
+      if (this.state.posts.length > 0) {
         let walks = this.state.posts;
 
         walks.sort(function(a,b) {
