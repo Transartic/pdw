@@ -35,11 +35,12 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
+      console.log(data)
       this.setState({ user: data.data });
     })
     .catch(() => {});
 
-    axios.get('/api/posts', {
+    axios.get('/api/posts/', {
       headers: {
         'Authorization': this.props.token
       },
@@ -53,14 +54,15 @@ class UserProfile extends Component {
     })
     .catch(() => {});
 
-    // axios.get('/api/bid/', {
-    //   headers: {
-    //     'Authorization': this.props.token
-    //   },
-    // })
-    // .then((data) => {
-    // })
-    // .catch(() => {});
+    axios.get('/api/bid/77', {
+      headers: {
+        'Authorization': this.props.token
+      },
+    })
+    .then((data) => {
+      console.log(data)
+    })
+    .catch(() => {});
   }
 
 
@@ -259,7 +261,7 @@ class UserProfile extends Component {
 
           <div className="top-container">
             <div className="profile-container">
-              <div className="profile-picture">This is the profile-picture class</div>
+              <img className="profile-picture" src={this.state.user.user_type ? "https://eskipaper.com/images/dog-background-hd-1.jpg" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvWBG0PlX6HaX3ZtwAi-bLaZwTvKy85xwwb_IzIlAk3eYGiVuzzkLPqFI6zicYi2kcETs&usqp=CAU"}/>
               <div className="username">{this.state.user.username}</div>
               {this.state.user.user_type === false ? <PostBidModal token={this.props.token}/> : auctionButton}
               {profileInfo}

@@ -25,6 +25,7 @@ const checkNewPostInput = (req, res, next) => {
 
 router.get('/', authenticateUser, (req, res) => {
   const { userId } = req;
+  console.log(userId)
   Post.findAll({
     where: {
       [Op.or]: [{ userId }, { assignedWalker: userId }],
