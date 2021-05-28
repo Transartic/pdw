@@ -24,11 +24,11 @@ class ViewBidsForm extends Component {
 
   handlePost() {
     const { handleClose } = this.props;
-    axios.patch(`/api/posts/setWalker/${this.props.postId}`, {
+    var obj = {data: { 'walkerId': Number(this.state.user) }}
+    axios.patch(`/api/posts/setWalker/${this.props.postId}`, obj, {
       headers: {
-        'Authorization': this.props.token,
+        Authorization: this.props.token,
       },
-      data: { 'walkerId': Number(this.state.user) },
     })
     .then(() => { console.log(200) })
     .catch(() => {});

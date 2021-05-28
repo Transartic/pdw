@@ -1,7 +1,7 @@
 import React from 'react';
 import ViewBidsModal from './ViewBidsModal.jsx';
 
-const BidPost = ({ post, page }) => {
+const BidPost = ({ post, page, token }) => {
   let profilePost;
   if (page === false) {
     var services = Object.keys(post.services);
@@ -24,7 +24,7 @@ const BidPost = ({ post, page }) => {
           </div>
         </div>
         <div className="post-button owner">
-          <ViewBidsModal postId={post.id} bids={post.bids} />
+          <ViewBidsModal postId={post.id} token={token} bids={post.bids} />
         </div>
       </div>
     );
@@ -54,8 +54,10 @@ const BidPost = ({ post, page }) => {
       </div>
     );
   }
+  var hide = {"visibility": "hidden"}
+  var show = {"visibility": "visible"}
   return (
-    <div className="post">
+    <div className="post" style={post.assignedWalker ? hide : show}>
       {profilePost}
     </div>
   );

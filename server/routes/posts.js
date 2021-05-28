@@ -25,7 +25,6 @@ const checkNewPostInput = (req, res, next) => {
 
 router.get('/', authenticateUser, (req, res) => {
   const { userId } = req;
-  console.log(userId)
   Post.findAll({
     where: {
       [Op.or]: [{ userId }, { assignedWalker: userId }],
@@ -98,6 +97,7 @@ router.patch('/setWalker/:postId', authenticateUser, async (req, res) => {
   const { userId } = req;
   const { postId } = req.params;
   const { walkerId } = req.body.data;
+  console.log(walkerId)
 
   try {
     await Post.update({ assignedWalker: walkerId }, {
