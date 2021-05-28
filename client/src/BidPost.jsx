@@ -9,7 +9,6 @@ const BidPost = ({ post, page }) => {
       <div className="post-body">
         <div className="post-date-time">
           <div className="post-date">Date {post.dateTime}</div>
-          <div className="post-time">Time {post.dateTime}</div>
         </div>
         <div className="post-details">
           {/* <div className="post-username">Username</div> */}
@@ -25,7 +24,7 @@ const BidPost = ({ post, page }) => {
           </div>
         </div>
         <div className="post-button owner">
-          <ViewBidsModal bids={post.bids} />
+          <ViewBidsModal postId={post.id} bids={post.bids} />
         </div>
       </div>
     );

@@ -43,6 +43,7 @@ class ViewBidsModal extends Component {
             <Modal.Header>View Bids</Modal.Header>
             <Modal.Content>
               <ViewBidsForm
+              postId={this.props.postId}
               handleClose={this.handleClose}
               bids={this.props.bids}/>
             </Modal.Content>

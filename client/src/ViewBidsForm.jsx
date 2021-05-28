@@ -8,6 +8,7 @@ import {
   Select,
   TextArea,
 } from 'semantic-ui-react';
+import axios from 'axios';
 
 class ViewBidsForm extends Component {
   constructor(props) {
@@ -23,7 +24,14 @@ class ViewBidsForm extends Component {
 
   handlePost() {
     const { handleClose } = this.props;
-    console.log(this.state);
+    axios.patch(`/api/posts/setWalker/${this.props.postId}`, {
+      headers: {
+        'Authorization': this.props.token,
+      },
+      data: { 'walkerId': Number(this.state.user) },
+    })
+    .then(() => { console.log(200) })
+    .catch(() => {});
     handleClose();
   }
 
@@ -35,7 +43,6 @@ class ViewBidsForm extends Component {
   }
 
   render() {
-    console.log(this.props.bids)
     return (
       <Form>
 
@@ -44,13 +51,13 @@ class ViewBidsForm extends Component {
         <div>
           {
             this.props.bids.map((bid) => {
-            return (<Form.Field key={bid.id}>
+            return (<Form.Field key={bid.bidder_id}>
               <Checkbox
                 radio
                 label={`${bid.bidder_id} has placed a bid of ${bid.bid}`}
-                name={bid.bidder_id}
+                name={`${bid.bidder_id}`}
                 value={bid.bid}
-                checked={this.state.user === bid.bidder_id}
+                checked={this.state.user === `${bid.bidder_id}`}
                 onChange={this.handleChange}/>
             </Form.Field>)
           })

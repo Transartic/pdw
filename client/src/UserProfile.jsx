@@ -35,7 +35,6 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data)
       this.setState({ user: data.data });
       if (data.data.user_type) {
         console.log(data.data.id)
@@ -283,6 +282,7 @@ class UserProfile extends Component {
               <div className="auction-posts">
                 {
                   this.state.posts.map((post, k) => {
+                    console.log(post)
                     return <BidPost key={k} post={post} page={this.state.user.user_type} />
                   })
                 }
