@@ -52,7 +52,7 @@ class UserProfile extends Component {
               posts.push(bidPost.post)
             }
           })
-          console.log(posts)
+          console.log('posts', posts)
           this.setState({ posts: posts });
           calendar();
           this.updateCalendar();
@@ -70,6 +70,9 @@ class UserProfile extends Component {
           calendar();
           this.updateCalendar();
           this.getNextWalk();
+        })
+        .then(() => {
+          
         })
         .catch(() => {});
       }
@@ -104,10 +107,8 @@ class UserProfile extends Component {
               }
             }
             var servicesString = services.join(', ');
-
             if (days[i].innerText === dataDay) {
               days[i].insertAdjacentHTML("beforeend", `<div class="calendar-time">${dataTime}</div>
-              <div>Name: ${current.user.firstName}</div>
               <div>Duration: ${current.duration} </div>
               <div>Services: ${servicesString}</div>`)
             }
@@ -172,9 +173,7 @@ class UserProfile extends Component {
         div[0].insertAdjacentHTML("beforeend", `<div>${newDate}</div>
         <div>Duration: ${nextWalk.duration}</div>
         <div>Services: ${services}</div>
-        <div>Owner: ${nextWalk.user.firstName}</div>
-        <div>Comments: ${nextWalk.comments}</div>
-        <div>Address: ${nextWalk.user.address1}</div>`)
+        <div>Comments: ${nextWalk.comments}</div>`)
       }
 
     } else {
