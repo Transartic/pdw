@@ -343,7 +343,9 @@ html, body {
 
 .nudp-nav {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 155px;
 }
 
 .nudp-nav-select {
