@@ -86,6 +86,10 @@ html, body {
   width: 200px;
   background-image: radial-gradient(white, aqua);
   box-shadow: 5px 5px blueviolet;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 10px;
   margin-right: auto;
   margin-left: auto;
 }
