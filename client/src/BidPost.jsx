@@ -12,7 +12,7 @@ const BidPost = ({ post, page, token }) => {
     profilePost = (
       <div className="post-body">
         <div className="post-date-time">
-          <div className="post-date">Date {post.dateTime}</div>
+          <div className="post-date"><b>Date:</b> {newDate}</div>
         </div>
         <div className="post-details">
           {/* <div className="post-username">Username</div> */}
@@ -24,7 +24,7 @@ const BidPost = ({ post, page, token }) => {
                 })
               }
             </ul>
-            <p>{post.comments}</p>
+            <p><b>Details:</b> {post.comments}</p>
           </div>
         </div>
         <div className="post-button owner">
@@ -37,10 +37,10 @@ const BidPost = ({ post, page, token }) => {
     profilePost = (
       <div className="post-body">
         <div className="post-date-time">
-          <div className="post-date">Date: {newDate}</div>
+          <div className="post-date"><b>Date:</b> {newDate}</div>
         </div>
         <div className="post-details">
-          <div className="post-username">User: {post.userId}</div>
+          <div className="post-username"><b>User:</b> {post.userId}</div>
           <div className="post-info">
           Services:
           <ul>
@@ -50,8 +50,8 @@ const BidPost = ({ post, page, token }) => {
                 })
               }
             </ul>
-            <div>Duration of walk: {post.duration}</div>
-            <p>Details: {post.comments}</p>
+            <div><b>Duration of walk:</b> {post.duration}</div>
+            <p><b>Details:</b> {post.comments}</p>
           </div>
         </div>
         <div className="bid-status">Pending Review</div>
