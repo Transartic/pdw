@@ -3,6 +3,10 @@ import ViewBidsModal from './ViewBidsModal.jsx';
 
 const BidPost = ({ post, page, token }) => {
   let profilePost;
+  let dateString = post.dateTime;
+  const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
+  let newDate = new Date(dateString).toLocaleDateString(undefined, options);
+
   if (page === false) {
     var services = Object.keys(post.services);
     profilePost = (
@@ -33,7 +37,7 @@ const BidPost = ({ post, page, token }) => {
     profilePost = (
       <div className="post-body">
         <div className="post-date-time">
-          <div className="post-date">Date: {post.dateTime}</div>
+          <div className="post-date">Date: {newDate}</div>
         </div>
         <div className="post-details">
           <div className="post-username">User: {post.userId}</div>
