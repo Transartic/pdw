@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {
   Button, Header, Icon, Modal
 } from 'semantic-ui-react';
+import { GiJumpingDog } from "react-icons/gi";
+import { GoVerified } from "react-icons/go";
 
 import ReviewsForm from './ReviewsForm.jsx';
 
@@ -14,7 +16,7 @@ class DogwalkerProfile extends Component {
             "id": 1,
             "reviewer_id": 11,
             "reviewee_id": 2,
-            "rating": 3,
+            "rating": 4,
             "review": "this person is a good dogwalker",
             "recommend": true,
             "createdAt": "2021-05-25T20:05:32.142Z",
@@ -28,7 +30,7 @@ class DogwalkerProfile extends Component {
                "id": 2,
                "reviewer_id": 11,
                "reviewee_id": 2,
-               "rating": 3,
+               "rating": 5,
                "review": "i like this dogwalker",
                "recommend": true,
                "createdAt": "2021-05-25T20:07:36.474Z",
@@ -92,11 +94,13 @@ class DogwalkerProfile extends Component {
 
     return (
     <div className="non-user-dogwalker-profile">
-      <div className="nudp-profile-picture">Profile picture</div>
+      <div >
+        <img className="nudp-profile-picture" src={"https://eskipaper.com/images/dog-background-hd-1.jpg"}></img>
+      </div>
       <div className="nudp-nav">
-          <span className="nudp-nav-select">Tier</span>
-          <span className="nudp-nav-select">Rating</span>
-          <Button onClick={this.handleOpen} className="nudp-nav-select">Leave a review</Button>
+          <div className="nudp-nav-select"> SUPER WALKER<GiJumpingDog size={70}/></div>
+          <div className="nudp-nav-rate">Rating: 4.5 </div>
+          <Button onClick={this.handleOpen} className="nudp-nav-select">Review</Button>
           <div className='dimmer'>
          <Modal
         open={this.state.modalOpen}
@@ -113,7 +117,25 @@ class DogwalkerProfile extends Component {
       </div>
       </div>
       <div className="nudp-meta-data">
-          <span className="nudp-specifics">User specifics (name, description, location, qualifications)</span>
+          <span className="nudp-specifics">
+            Blair
+            <br/>
+            <br/>
+            Trinity.Schuppe35@gmail.com
+            <br/>
+            <br/>
+            Los Angeles
+            <br/>
+            <br/>
+            Services Offered
+            Acupuncture
+            Spa
+            Massage
+            <br/>
+            <br/>
+            Verified
+            <GoVerified/>
+          </span>
           <span className="nudp-reviews">Reviews</span>
       </div>
     </div>
