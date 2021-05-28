@@ -110,7 +110,7 @@ class DogwalkerProfile extends Component {
         <Modal.Header>Leave A Review</Modal.Header>
 
         <Modal.Content >
-          <ReviewsForm />
+          <ReviewsForm onClose={this.props.onClose}/>
          </Modal.Content>
 
       </Modal>
