@@ -483,3 +483,9 @@ html, body {
   display: flex;
   justify-content: center;
 }
+
+.record-walk-button {
+  background-image: linear-gradient(to top left, darkorchid, darkturquoise, white);
+  border-radius: 50%;
+  border: none;
+}
