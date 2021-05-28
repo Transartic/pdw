@@ -94,7 +94,6 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
 });
 
 router.patch('/setWalker/:postId', authenticateUser, async (req, res) => {
-  const { userId } = req;
   const { postId } = req.params;
   const { walkerId } = req.body.data;
   console.log(walkerId)
@@ -106,9 +105,7 @@ router.patch('/setWalker/:postId', authenticateUser, async (req, res) => {
       },
     });
     return res.status(201).end();
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send(err);
-  }
+  } catch (err) { return res.status(500).send(err); }
 });
+
 module.exports = router;
