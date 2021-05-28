@@ -39,24 +39,20 @@ class UserProfile extends Component {
       },
     })
     .then((data) => {
-      console.log(data)
       this.setState({ user: data.data });
       if (data.data.user_type) {
-        console.log(data.data.id)
         axios.get(`/api/bid/${data.data.id}`, {
           headers: {
             'Authorization': this.props.token
           },
         })
         .then((data) => {
-          console.log(data.data)
           var posts = []
           data.data.forEach((bidPost) => {
             if (bidPost.post) {
               posts.push(bidPost.post)
             }
           })
-          console.log('posts', posts)
           this.setState({ posts: posts });
           calendar();
           this.updateCalendar();
@@ -76,7 +72,7 @@ class UserProfile extends Component {
           this.getNextWalk();
         })
         .then(() => {
-          
+
         })
         .catch(() => {});
       }
@@ -294,7 +290,7 @@ class UserProfile extends Component {
               <div className="auction-posts">
                 {
                   this.state.posts.map((post, k) => {
-                    return <BidPost key={k} post={post} page={this.state.user.user_type} />
+                    return <BidPost key={k} user={this.state.user.id} token={this.props.token} post={post} page={this.state.user.user_type} />
                   })
                 }
               </div>

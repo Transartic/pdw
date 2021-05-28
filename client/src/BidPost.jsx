@@ -1,7 +1,7 @@
 import React from 'react';
 import ViewBidsModal from './ViewBidsModal.jsx';
 
-const BidPost = ({ post, page }) => {
+const BidPost = ({ post, page, token }) => {
   let profilePost;
   let dateString = post.dateTime;
   const options = { year: "numeric", month: "long", day: "numeric", weekday: "short"};
@@ -12,8 +12,7 @@ const BidPost = ({ post, page }) => {
     profilePost = (
       <div className="post-body">
         <div className="post-date-time">
-          <div className="post-date">Date {newDate}</div>
-          <div className="post-time">Time {post.dateTime}</div>
+          <div className="post-date">Date {post.dateTime}</div>
         </div>
         <div className="post-details">
           {/* <div className="post-username">Username</div> */}
@@ -29,7 +28,7 @@ const BidPost = ({ post, page }) => {
           </div>
         </div>
         <div className="post-button owner">
-          <ViewBidsModal bids={post.bids} />
+          <ViewBidsModal postId={post.id} token={token} bids={post.bids} />
         </div>
       </div>
     );
@@ -59,8 +58,10 @@ const BidPost = ({ post, page }) => {
       </div>
     );
   }
+  var hide = {"visibility": "hidden"}
+  var show = {"visibility": "visible"}
   return (
-    <div className="post">
+    <div className="post" style={post.assignedWalker ? hide : show}>
       {profilePost}
     </div>
   );

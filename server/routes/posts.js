@@ -96,6 +96,7 @@ router.post('/', authenticateUser, checkNewPostInput, (req, res) => {
 router.patch('/setWalker/:postId', authenticateUser, async (req, res) => {
   const { postId } = req.params;
   const { walkerId } = req.body.data;
+  console.log(walkerId)
 
   try {
     await Post.update({ assignedWalker: walkerId }, {
