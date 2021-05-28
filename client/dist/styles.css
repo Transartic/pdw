@@ -323,29 +323,48 @@ html, body {
 }
 
 .non-user-dogwalker-profile {
-  border: solid;
+  border-top: solid;
 }
 
 .nudp-profile-picture {
-  display: block;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  /* margin: auto; */
   border: solid;
   border-radius: 50%;
   height: 200px;
   width: 200px;
-  text-align: center;
+  /* text-align: center; */
   line-height: 200px;
-  margin-bottom: 30px;
-  margin-top: 15px;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nudp-nav {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
+  margin-right: 155px;
 }
 
 .nudp-nav-select {
-  border: solid;
+  display: flex;
+  justify-content: center;
+  margin-left: 200px;
+
+  font-size: 20px;
+  border: none;
+  height: 30px;
+  width: 125px;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 100px;
+}
+.nudp-nav-rate {
+  font-size: 20px;
+  border: none;
   height: 30px;
   width: 125px;
   text-align: center;
@@ -355,18 +374,32 @@ html, body {
 .nudp-meta-data {
   display: flex;
   justify-content: space-around;
+
+
 }
 
-.nudp-specifics, .nudp-reviews {
-  border: solid;
-  height: 300px;
+.nudp-specifics {
+  margin-top: 10px;
+  background-color: #e1e5f2;
+  padding: 10px;
   width: 300px;
-  margin-top: 30px;
-  margin: 30px;
+  height:300px;
+  border-radius: 10px;
+  margin-left: 20px;
+
+  box-shadow: 5px 10px #022b3a;
 }
 
 .nudp-reviews {
-  width: 900px;
+  margin-top: 10px;
+  background-color: #e1e5f2;
+  padding: 10px;
+  width: 500px;
+  height:300px;
+  border-radius: 10px;
+  margin-left: 20px;
+
+  box-shadow: 5px 10px #022b3a;
 }
 
 /* LANDING PAGE  */
@@ -436,7 +469,7 @@ html, body {
 }
 
 .dogwalker-review-name {
-  margin-top: 20px;
+  margin-top: 30px;
   font-weight: bold;
   font-size: 15px;
 }
