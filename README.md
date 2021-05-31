@@ -16,13 +16,13 @@ Pucci uses a number of open source projects to work properly:
 - [markdown-it] - Markdown parser done right. Fast and easy to extend.
 - [Semantic-UI] - User Interface is the language of the web
 
-## Team
-- Alex Zinn
-- Cody Gonzalez
-- Jake Nalls
-- Joseph McFatridge
-- Raju Gharti
-- Tish Vo
+## Team - Role
+- Alex Zinn - Backend
+- Cody Gonzalez - Front End 
+- Jake Nalls - Front End
+- Joseph McFatridge - Front End
+- Raju Gharti - Backend 
+- Tish Vo - Front End
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
