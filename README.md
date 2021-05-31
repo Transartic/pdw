@@ -12,7 +12,7 @@ Pucci uses a number of open source projects to work properly:
 - [Express] - HTML enhanced for web apps!
 - [React] - Frontend Framework
 - [Sequelize] - Database ORM
-- [PostgreSQL] - Database
+- [PostreSQL] - Database
 - [markdown-it] - Markdown parser done right. Fast and easy to extend.
 - [Semantic-UI] - User Interface is the language of the web
 
